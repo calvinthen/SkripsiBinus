@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
+//google route
+Route::get('/sign-in/google','Auth\LoginController@google');
+Route::get('/sign-in/google/redirect','Auth\LoginController@googleRedirect');

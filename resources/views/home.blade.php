@@ -15,7 +15,18 @@
                     @endif
 
                     @if(!Auth::guest())
-                        Welcome to home dashboard
+                        @if(Auth::user()->email_verified_at == NULL)
+                            Please Verified first
+
+                            <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                                @csrf
+                                <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                            </form>
+
+                        @else
+                            Welcome to home dashboard
+                        @endif
+
                     @else
                         You are not login or registered yet
                     @endif
