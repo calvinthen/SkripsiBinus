@@ -9,6 +9,9 @@ use Auth;
 use Illuminate\Support\Facades\Hash;
 use Socialite;
 use App\User;
+use Illuminate\Routing\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Str;
 
@@ -45,6 +48,15 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+
+    protected function redirectTo()
+      {
+          if(Route::getRoutes()->match(Request::create(\URL::previous()))->getName() == "cong.reg") {
+              return (Request::create(\URL::previous())->getRequestUri());
+          }
+          return $this->redirectTo;
+      }
+
     public function google()
     {
         return Socialite::driver('google')->redirect();
@@ -58,6 +70,7 @@ class LoginController extends Controller
     public function googleRedirect()
     {
         $user = Socialite::driver('google')->user();
+        $findUser = User::where('email', $user->email)->first();
 
         // $user = User::create([
         //     ['email' => $user->email],
@@ -66,16 +79,24 @@ class LoginController extends Controller
 
         // ]);
 
-        $inserUser = new User;
-        $inserUser->name = $user->name;
-        $inserUser->email = $user->email;
-        $inserUser->password = Hash::make(Str::random(14));
-        $inserUser->role = 'user';
-        $inserUser->remember_token = NULL;
-        $inserUser->email_verified_at = now();
-        $inserUser->save();
+        if($findUser)
+        {
+            Auth::login($findUser);
+        }
+        else
+        {
+            $inserUser = new User;
+            $inserUser->name = $user->name;
+            $inserUser->email = $user->email;
+            $inserUser->password = bcrypt($user->name);
+            $inserUser->role = 'user';
+            $inserUser->remember_token = NULL;
+            $inserUser->email_verified_at = now();
+            $inserUser->save();
 
-        Auth::login($user,true);
+            Auth::login($inserUser);
+        }
+
 
         return redirect('/');
 
