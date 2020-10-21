@@ -28,4 +28,10 @@ class HomeController extends Controller
 
         return view('home');
     }
+
+    public function view_profile($id)
+    {
+
+        return view('auth.profile');
+    }
 }
