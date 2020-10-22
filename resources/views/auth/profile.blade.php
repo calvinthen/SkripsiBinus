@@ -8,6 +8,11 @@
                 <div class="card-header">Profile</div>
 
                 <div class="card-body">
+                    @foreach ($user as $users)
+                        {{$users->name}}<br>
+                        {{$users->email}}<br>
+                        {{$users->role}}<br>
+                    @endforeach
 
                 </div>
             </div>

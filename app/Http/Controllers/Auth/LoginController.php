@@ -72,13 +72,6 @@ class LoginController extends Controller
         $user = Socialite::driver('google')->user();
         $findUser = User::where('email', $user->email)->first();
 
-        // $user = User::create([
-        //     ['email' => $user->email],
-        //     ['name' => $user->name],
-        //     ['password' => Hash::make(Str::random(12))],
-
-        // ]);
-
         if($findUser)
         {
             Auth::login($findUser);
@@ -92,6 +85,7 @@ class LoginController extends Controller
             $inserUser->role = 'user';
             $inserUser->remember_token = NULL;
             $inserUser->email_verified_at = now();
+            $inserUser->unique_id = Str::random(20);
             $inserUser->save();
 
             Auth::login($inserUser);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,8 @@ class HomeController extends Controller
 
     public function view_profile($id)
     {
+        $user = DB::select(DB::raw("select * from users where unique_id like '$id'"));
 
-        return view('auth.profile');
+        return view('auth.profile')->with('user',$user);
     }
 }
