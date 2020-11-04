@@ -33,7 +33,15 @@ class HomeController extends Controller
     public function view_profile($id)
     {
         $user = DB::select(DB::raw("select * from users where unique_id like '$id'"));
+        $team = DB::table('users')->where('unique_id' , 'LIKE' , $id)->value('team');
 
-        return view('auth.profile')->with('user',$user);
+        // return dd($team);
+        return view('auth.profile')->with('user',$user)->with('team',$team);
     }
+
+    function edit_user_profile()
+    {
+        return View('auth.profileUser.edit');
+    }
+
 }

@@ -49,14 +49,6 @@ class LoginController extends Controller
     }
 
 
-    protected function redirectTo()
-      {
-          if(Route::getRoutes()->match(Request::create(\URL::previous()))->getName() == "cong.reg") {
-              return (Request::create(\URL::previous())->getRequestUri());
-          }
-          return $this->redirectTo;
-      }
-
     public function google()
     {
         return Socialite::driver('google')->redirect();
@@ -94,7 +86,6 @@ class LoginController extends Controller
 
         return redirect('/');
 
-        // $user->token;
     }
 
 }

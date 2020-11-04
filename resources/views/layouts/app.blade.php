@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +19,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app2.css') }}" rel="stylesheet">
+
+    <!-- style Dari luar -->
+    <link href="{{ asset('css/util.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -74,7 +81,7 @@
 
 
                                     @if($userRole == 'admin')
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{route('admin.index')}}">
                                             Admin web controller
                                         </a>
                                     @endif
