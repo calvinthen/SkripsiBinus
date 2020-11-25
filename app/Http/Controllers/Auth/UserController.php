@@ -17,6 +17,14 @@ use Symfony\Component\Console\Input\Input;
 
 class UserController extends Controller
 {
+    function delete_user($id)
+    {
+        $user = DB::table('users')->where('id' , 'LIKe', $id)->delete();
+
+        return redirect()->back();
+    }
+
+
     function edit_profile(Request $request,$id)
     {
 

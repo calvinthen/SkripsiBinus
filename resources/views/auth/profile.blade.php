@@ -33,7 +33,7 @@
 
                 <!-- DESIGN BUTTON ANIMATION -->
                 <div style="text-align: center">
-                    <a href="" class="buttonAnimationProfileFindTeam" style="text-decoration: none">
+                    <a href="{{route('user.find_team')}}" class="buttonAnimationProfileFindTeam" style="text-decoration: none">
                         <span></span>
                         <span></span>
                         <span></span>

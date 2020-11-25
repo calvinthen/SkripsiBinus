@@ -37,3 +37,18 @@ Route::post('/profile/{id}/edit/database_insert','Auth\UserController@edit_profi
 
 //masuk ke index admin
 Route::get('admin/index','Auth\AdminController@index')->name('admin.index');
+
+//masuk ke admin ngeliat seluruh user (user view)
+Route::get('admin/index/view_user','Auth\AdminController@view_user')->name('admin.view_user');
+
+//hapus User
+Route::get('admin/index/view_user/{id}/delete_user','Auth\UserController@delete_user')->name('admin.delete_user_now');
+
+//user nyari team arahin ke team index
+Route::get('user/find_team','TeamController@index')->name('user.find_team');
+
+//masuk ke index create team
+Route::get('user/team/create_team','TeamController@create_team_index')->name('team.create_team_index');
+
+//submit create team
+Route::POST('user/team/submit_team','TeamController@create')->name('team.create_team');

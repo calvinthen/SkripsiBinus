@@ -1,150 +1,92 @@
-@extends('layouts.app')
-
-
-
-<!-- style Dari luar -->
-<link href="{{ asset('css/util.css') }}" rel="stylesheet">
-<link href="{{ asset('css/main.css') }}" rel="stylesheet">
-<link href="{{ asset('vendor/animate/animate.css') }}" rel="stylesheet">
-
-
+@extends('layouts.adminLayouts')
 
 @section('content')
+<!--/. NAV TOP  -->
+<nav class="navbar-default navbar-side" role="navigation">
+    <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
 
-<div class="limiter">
-    <div class="container-table100">
-        <div class="wrap-table100">
-            <div class="table100">
-                <table>
-                    <thead>
-                        <tr class="table100-head">
-                            <th class="column1">Date</th>
-                            <th class="column2">Order ID</th>
-                            <th class="column3">Name</th>
-                            <th class="column4">Price</th>
-                            <th class="column5">Quantity</th>
-                            <th class="column6">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr>
-                                <td class="column1">2017-09-29 01:22</td>
-                                <td class="column2">200398</td>
-                                <td class="column3">iPhone X 64Gb Grey</td>
-                                <td class="column4">$999.00</td>
-                                <td class="column5">1</td>
-                                <td class="column6">$999.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-28 05:57</td>
-                                <td class="column2">200397</td>
-                                <td class="column3">Samsung S8 Black</td>
-                                <td class="column4">$756.00</td>
-                                <td class="column5">1</td>
-                                <td class="column6">$756.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-26 05:57</td>
-                                <td class="column2">200396</td>
-                                <td class="column3">Game Console Controller</td>
-                                <td class="column4">$22.00</td>
-                                <td class="column5">2</td>
-                                <td class="column6">$44.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-25 23:06</td>
-                                <td class="column2">200392</td>
-                                <td class="column3">USB 3.0 Cable</td>
-                                <td class="column4">$10.00</td>
-                                <td class="column5">3</td>
-                                <td class="column6">$30.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-24 05:57</td>
-                                <td class="column2">200391</td>
-                                <td class="column3">Smartwatch 4.0 LTE Wifi</td>
-                                <td class="column4">$199.00</td>
-                                <td class="column5">6</td>
-                                <td class="column6">$1494.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-23 05:57</td>
-                                <td class="column2">200390</td>
-                                <td class="column3">Camera C430W 4k</td>
-                                <td class="column4">$699.00</td>
-                                <td class="column5">1</td>
-                                <td class="column6">$699.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-22 05:57</td>
-                                <td class="column2">200389</td>
-                                <td class="column3">Macbook Pro Retina 2017</td>
-                                <td class="column4">$2199.00</td>
-                                <td class="column5">1</td>
-                                <td class="column6">$2199.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-21 05:57</td>
-                                <td class="column2">200388</td>
-                                <td class="column3">Game Console Controller</td>
-                                <td class="column4">$999.00</td>
-                                <td class="column5">1</td>
-                                <td class="column6">$999.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-19 05:57</td>
-                                <td class="column2">200387</td>
-                                <td class="column3">iPhone X 64Gb Grey</td>
-                                <td class="column4">$999.00</td>
-                                <td class="column5">1</td>
-                                <td class="column6">$999.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-18 05:57</td>
-                                <td class="column2">200386</td>
-                                <td class="column3">iPhone X 64Gb Grey</td>
-                                <td class="column4">$999.00</td>
-                                <td class="column5">1</td>
-                                <td class="column6">$999.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-22 05:57</td>
-                                <td class="column2">200389</td>
-                                <td class="column3">Macbook Pro Retina 2017</td>
-                                <td class="column4">$2199.00</td>
-                                <td class="column5">1</td>
-                                <td class="column6">$2199.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-21 05:57</td>
-                                <td class="column2">200388</td>
-                                <td class="column3">Game Console Controller</td>
-                                <td class="column4">$999.00</td>
-                                <td class="column5">1</td>
-                                <td class="column6">$999.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-19 05:57</td>
-                                <td class="column2">200387</td>
-                                <td class="column3">iPhone X 64Gb Grey</td>
-                                <td class="column4">$999.00</td>
-                                <td class="column5">1</td>
-                                <td class="column6">$999.00</td>
-                            </tr>
-                            <tr>
-                                <td class="column1">2017-09-18 05:57</td>
-                                <td class="column2">200386</td>
-                                <td class="column3">iPhone X 64Gb Grey</td>
-                                <td class="column4">$999.00</td>
-                                <td class="column5">1</td>
-                                <td class="column6">$999.00</td>
-                            </tr>
+                <li>
+                    <a class="active-menu" href="{{route('admin.index')}}" id="dashboardMenuSideBar"><i class="fa fa-dashboard"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="{{route('admin.view_user')}}" id="userMenuSideBar" onclick="highlight_user_menu()"><i class="fa fa-user"></i> View User</a>
+                </li>
+                <li>
+                    <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
+                </li>
+                <li>
+                    <a href="tab-panel.html"><i class="fa fa-qrcode"></i> Tabs & Panels</a>
+                </li>
 
-                    </tbody>
-                </table>
+                <li>
+                    <a href="table.html"><i class="fa fa-table"></i> Responsive Tables</a>
+                </li>
+                <li>
+                    <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
+                </li>
+
+
+                <li>
+                    <a href="#"><i class="fa fa-sitemap"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">Second Level Link</a>
+                        </li>
+                        <li>
+                            <a href="#">Second Level Link</a>
+                        </li>
+                        <li>
+                            <a href="#">Second Level Link<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a href="#">Third Level Link</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Link</a>
+                                </li>
+                                <li>
+                                    <a href="#">Third Level Link</a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
+                </li>
+            </ul>
+
+        </div>
+
+    </nav>
+     <!-- /. NAV SIDE  -->
+
+ <div id="page-wrapper">
+    <div id="page-inner">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="page-header">
+                    Admin Dashboard <small>Summary of your App</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Library</a></li>
+                    <li class="active">Data</li>
+                </ol>
             </div>
         </div>
+
+
+        <!-- /. ROW  -->
     </div>
+    <!-- /. PAGE INNER  -->
 </div>
+<!-- /. PAGE WRAPPER  -->
 
 @endsection

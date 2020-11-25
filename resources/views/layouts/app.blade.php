@@ -76,6 +76,10 @@
                                         Profile
                                     </a>
 
+                                    <a href="{{route('user.find_team')}}" class="dropdown-item">
+                                        Team
+                                    </a>
+
 
                                     @if($userRole == 'admin')
                                         <a class="dropdown-item" href="{{route('admin.index')}}">
