@@ -17,10 +17,10 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->name;
+        $user = DB::table('users')->where('unique_id', 'LIKE', Auth::user()->unique_id)->first();
+        $team = DB::table('teams')->get();
 
-
-        return view('auth.team.index')->with('user',$user);
+        return view('auth.team.index')->with('user',$user)->with('team',$team);
     }
 
     public function create_team_index()
@@ -38,10 +38,12 @@ class TeamController extends Controller
     {
         $team_name = $request->input("team_name");
         $id = Str::random(16);
+        $unique_id = Auth::user()->unique_id;
 
         $nama = Auth::user()->name;
-        $user = DB::table('users')->where('name','LIKE',$nama)->update(['team' => $team_name]);
+        $user = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $team_name]);
 
+        $user2 = DB::table('users')->where('unique_id', 'LIKE', Auth::user()->unique_id)->first();
         $team_photo = time() . '-' . $id . '.' . request()->file('uploadFoto')->getClientOriginalExtension();
         request()->uploadFoto->move(public_path('images'), $team_photo);
 
@@ -49,12 +51,55 @@ class TeamController extends Controller
             'team_name' =>  $team_name,
             'rank' => "0",
             'photo_team' => $team_photo,
-
+            'user_id' => Auth::user()->id,
+            'leader_id' => Auth::user()->unique_id,
         ]);
 
+        $team = DB::table('teams')->get();
 
 
-        return view('auth.team.index')->with('user',$nama);
+
+        return view('auth.team.index')->with('user',$user2)->with('team',$team);
+    }
+
+    public function find_member_index()
+    {
+        $user = DB::table('users')->where('team','=', NULL)->get();
+
+        return view('auth.team.list_user_to_invite')->with('user',$user);
+    }
+
+    public function user_team_index()
+    {
+
+        $user = DB::table('users')->where('id','LIKE',Auth::user()->id)->first();
+        $totalMemberKosong = 0;
+        $userTeam = $user->team;
+
+
+        $team = DB::table('teams')->where('team_name','LIKE',$userTeam)->first();
+
+        if($team->first_member_id == NULL)
+        {
+            $totalMemberKosong++;
+        }
+
+        if($team->second_member_id == NULL)
+        {
+            $totalMemberKosong++;
+        }
+
+        if($team->third_member_id == NULL)
+        {
+            $totalMemberKosong++;
+        }
+
+        if($team->forth_member_id == NULL)
+        {
+            $totalMemberKosong++;
+        }
+
+        return view('auth.team.user_team_index')->with('team',$team)->with('totalMemberKosong',$totalMemberKosong);
     }
 
     /**
@@ -68,6 +113,45 @@ class TeamController extends Controller
         //
     }
 
+
+    public function user_accept_team_invitation($id,$mailId)
+    {
+        $unique_id = Auth::user()->unique_id;
+        $sender_id = $id;
+
+        $mail = DB::table('inboxes')->where('id','LIKE',$mailId);
+
+        $teamPengirim  = DB::table('teams')->where('leader_id','LIKE',$sender_id)->first();
+        $teamname = $teamPengirim->team_name;
+
+        $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->first();
+        if($teamPengirim->first_member_id == NULL)
+        {
+             DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['first_member_id' => $userPenerima->unique_id]);
+             $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
+             DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
+        }
+        else if($teamPengirim->second_member_id == NULL)
+        {
+             DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['second_member_id' => $userPenerima->unique_id]);
+             $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
+             DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
+        }
+        else if($teamPengirim->third_member_id == NULL)
+        {
+             DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['third_member_id' => $userPenerima->unique_id]);
+             $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
+             DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
+        }
+        else if($teamPengirim->forth_member_id == NULL)
+        {
+             DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['forth_member_id' => $userPenerima->unique_id]);
+             $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
+             DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
+        }
+
+        return redirect()->back();
+    }
     /**
      * Display the specified resource.
      *

@@ -52,3 +52,18 @@ Route::get('user/team/create_team','TeamController@create_team_index')->name('te
 
 //submit create team
 Route::POST('user/team/submit_team','TeamController@create')->name('team.create_team');
+
+//user check profile team dia sendiri
+Route::get('user/team/user_team_index','TeamController@user_team_index')->name('team.user_team_index');
+
+//halaman list user buat diinvite ke team
+Route::get('user/team/find_member','TeamController@find_member_index')->name('team.find_member');
+
+//bikin pesan buat invite team ke user yang dituju
+Route::get('user/team/{id}/invite_player','InboxController@create_invitation_team')->name('inbox.create_invitation_team');
+
+//isi inbox user
+Route::get('user/inbox','InboxController@index')->name('user.inbox');
+
+//user nerima tawaran team button , terus langsung dia masuk ke Teamnya
+Route::get('user/inbox/accept_team_invitation/{id}/{mailId}','TeamController@user_accept_team_invitation')->name('user.confirm_team_invitation');

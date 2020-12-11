@@ -11,26 +11,35 @@
                 </div>
 
                 <div class="card-body">
-                    test
+                    @foreach ($team as $teams)
+                        {{$teams->team_name}}<br>
+                    @endforeach
                 </div>
 
             </div>
 
             @php
-                $user = DB::table('users')->where('name','LIKE', $user)->get();
+
+                $team = DB::table('teams')->where('leader_id','LIKE', $user->unique_id)->orWhere('first_member_id','LIKE',$user->unique_id)
+                ->orWhere('second_member_id','LIKE',$user->unique_id)->orWhere('third_member_id','LIKE',$user->unique_id)
+                ->orWhere('forth_member_id','LIKE',$user->unique_id)->first();
             @endphp
 
-            @foreach ($user as $users)
-                @if ($users->team != NULL)
-                    ada team<br>
-                @endif
-            @endforeach
+            <br>
 
-
-            doesn't find any team best for you ? why dont create a new one !
+            @if ($user->team == NULL)
+                doesn't find any team best for you ? why dont create a new one !
                 <a href="{{route('team.create_team_index')}}" class="btn btn-primary">
                     Create Team
                 </a>
+
+            @elseif($user->team != NULL)
+                Your Current Team : <strong>{{$team->team_name}}</strong><br>
+                <img src="{{url('./images/' . $team->photo_team)}}" width="150px" height="150px">
+            @endif
+
+
+
         </div>
     </div>
 </div>

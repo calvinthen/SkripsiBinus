@@ -24,7 +24,11 @@
                             </form>
 
                         @else
-                            Welcome to home dashboard
+
+                        <a href="{{route('user.find_team')}}" class="btn btn-primary">
+                            Find Team
+                        </a>
+
                         @endif
 
                     @else

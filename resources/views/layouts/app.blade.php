@@ -7,7 +7,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- BUAT ICON TITLE -->
+    <link rel="icon" href="{{ URL::asset('/images/user.jpg') }}" type="image/x-icon"/>
+    <!-- -->
+
+    <title> Playmaker</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -41,7 +46,7 @@
                 @endphp
 
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.aplicationName', 'Playmaker') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -76,8 +81,16 @@
                                         Profile
                                     </a>
 
-                                    <a href="{{route('user.find_team')}}" class="dropdown-item">
+                                    @if (Auth::user()->team == NULL)
+
+                                    @else
+                                    <a href="{{route('team.user_team_index')}}" class="dropdown-item">
                                         Team
+                                    </a>
+                                    @endif
+
+                                    <a class="dropdown-item" href="{{route('user.inbox')}}">
+                                        Inbox
                                     </a>
 
 
