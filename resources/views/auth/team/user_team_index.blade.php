@@ -7,6 +7,8 @@
     @php
         $leader = DB::table('users')->where('unique_id','LIKE',$team->leader_id)->first();
 
+        $member = DB::table('users')->where('team_id','LIKE',$team->id)->get();
+
         if($team->first_member_id != NULL)
         {
             $first_member = DB::table('users')->where('unique_id','LIKE',$team->first_member_id)->first();
@@ -43,25 +45,17 @@
                     Leader : {{$leader->name}}
                     <br>
 
-                    <strong>Member</strong><br><br>
-                    @if ($team->first_member_id != NULL)
-                        {{$first_member->name}}
-                    @endif
-                    <br>
-                    @if ($team->second_member_id != NULL)
-                        {{$second_member->name}}
-                    @endif
-                    <br>
-                    @if ($team->third_member_id != NULL)
-                        {{$third_member->name}}
-                    @endif
-                    <br>
-                    @if ($team->forth_member_id != NULL)
-                        {{$forth_member->name}}
-                    @endif
+                    <strong>Member</strong><br>
+
+                    @foreach ($member as $members)
+
+                        @if ($members->name == $leader->name)
+                            @continue
+                        @endif
+                        {{$members->name}}<br>
+                    @endforeach
 
 
-                    <br>
                     @if( Auth::user()->name == $leader->name)
                         @if ($totalMemberKosong == 4)
                             You don't have any member yet ! <br>

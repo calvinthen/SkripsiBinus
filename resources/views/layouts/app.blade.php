@@ -89,6 +89,10 @@
                                     </a>
                                     @endif
 
+                                    <a class="dropdown-item" href="{{route('user.friendlist')}}">
+                                        Friend
+                                    </a>
+
                                     <a class="dropdown-item" href="{{route('user.inbox')}}">
                                         Inbox
                                     </a>

@@ -8,11 +8,13 @@ use App\User;
 class Team extends Model
 {
     use HasFactory;
+    protected $table = "teams";
     protected $fillable = ['team_name','rank','photo_team','user_id','leader_id', 'first_member_id', 'second_member_id', 'third_member_id',
     'forth_member_id'];
 
     public function User()
     {
-        return $this->belongsTo('App\User');
+
+        return $this->hasMany(User::class);
     }
 }

@@ -28,6 +28,16 @@
                         <a href="{{route('user.find_team')}}" class="btn btn-primary">
                             Find Team
                         </a>
+                        <br><br>
+
+                        <a href="{{route('user.list_user')}}" class="btn btn-primary">
+                            Find Player
+                        </a>
+                        <br><br>
+
+                        <a href="" class="btn btn-primary">
+                            Leaderboard
+                        </a>
 
                         @endif
 

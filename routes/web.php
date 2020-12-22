@@ -67,3 +67,27 @@ Route::get('user/inbox','InboxController@index')->name('user.inbox');
 
 //user nerima tawaran team button , terus langsung dia masuk ke Teamnya
 Route::get('user/inbox/accept_team_invitation/{id}/{mailId}','TeamController@user_accept_team_invitation')->name('user.confirm_team_invitation');
+
+
+//user ke halaman team yang dia pilih
+Route::get('user/team/{id}/detail','TeamController@detail_index')->name('user.view_selected_team');
+
+
+//user kirim inbox ke leader team buat request mau masuk teamnya
+Route::get('user/team/{id}/request_join','InboxController@request_join_team')->name('user.request_join_team');
+
+//list kumpulan semua user
+Route::get('home/user/list','HomeController@list_user')->name('user.list_user');
+
+//halaman detail user yang dipilih
+Route::get('home/user/list/{id}/detail','HomeController@user_detail_page')->name('user.detail');
+
+//user kirim inbox friend request ke id yang di tuju
+Route::get('home/user/list/{id}/request_friend','InboxController@request_friend')->name('user.send_friend_request');
+
+//accept user as friend
+Route::get('user/inbox/accept/friend/{id}/{idMail}','FriendController@create')->name('user.accept_friend_request');
+
+
+//isi friendlist user
+Route::get('user/profile/friendlist/','FriendController@index')->name('user.friendlist');

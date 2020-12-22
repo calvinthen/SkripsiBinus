@@ -44,4 +44,17 @@ class HomeController extends Controller
         return View('auth.profileUser.edit');
     }
 
+    public function list_user()
+    {
+        $allUser = DB::table('users')->get();
+
+        return view('list_user')->with('allUser',$allUser);
+    }
+
+    public function user_detail_page($id)
+    {
+        $user = DB::table('users')->where('id','LIKE',$id)->first();
+        return view('auth.detail_user')->with('user',$user);
+    }
+
 }

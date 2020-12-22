@@ -9,5 +9,5 @@ class Inbox extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['body','sender_unique_id','receiver_unique_id'];
+    protected $fillable = ['body','sender_unique_id','receiver_unique_id','mail_type'];
 }

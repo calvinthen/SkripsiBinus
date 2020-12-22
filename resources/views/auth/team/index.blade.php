@@ -12,7 +12,10 @@
 
                 <div class="card-body">
                     @foreach ($team as $teams)
-                        {{$teams->team_name}}<br>
+                        <a href="{{route('user.view_selected_team',$teams->id)}}" style="color: black">
+                            {{$teams->team_name}}
+                        </a>
+                        <br>
                     @endforeach
                 </div>
 

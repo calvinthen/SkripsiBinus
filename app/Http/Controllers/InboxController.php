@@ -28,10 +28,41 @@ class InboxController extends Controller
             'body' =>  "Hi ! i want to invite you to our teams please click button 'JOIN TEAM' in the below to become ours member !",
             'sender_unique_id' => Auth::user()->unique_id,
             'receiver_unique_id' => $id,
+            'mail_type' => "invite_team",
 
         ]);
 
         return redirect('/');
+    }
+
+    public function request_join_team($id)
+    {
+        $teamToRequest = DB::table('teams')->where('id','LIKE',$id)->first();
+        $teamLeaderID = $teamToRequest->leader_id;
+
+        Inbox::create([
+            'body' =>  "Hi! i want to join your team , can you maybe accept me as a member ?",
+            'sender_unique_id' => Auth::user()->unique_id,
+            'receiver_unique_id' => $teamLeaderID,
+            'mail_type' => "request_team",
+        ]);
+
+        return redirect('/');
+    }
+
+    public function request_friend($id)
+    {
+        $user_unique_id_receiver = DB::table('users')->where('id','LIKE',$id)->first();
+
+        $unique_id = $user_unique_id_receiver->unique_id;
+        Inbox::create([
+            'body' =>  "I want to be your friend ! please accept me",
+            'sender_unique_id' => Auth::user()->unique_id,
+            'receiver_unique_id' => $unique_id,
+            'mail_type' => "request_friend",
+        ]);
+
+        return redirect()->back()->with('status','your friend request has been sent!');
     }
 
     /**

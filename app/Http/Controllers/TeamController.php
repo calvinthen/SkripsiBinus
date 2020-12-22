@@ -29,6 +29,12 @@ class TeamController extends Controller
         return view('auth.team.create_index');
     }
 
+    public function detail_index($id)
+    {
+        $team = DB::table('teams')->where('id','LIKE',$id)->first();
+
+        return view('auth.team.detail_selected_team')->with('team',$team);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -37,9 +43,27 @@ class TeamController extends Controller
     public function create(Request $request)
     {
         $team_name = $request->input("team_name");
+        $flagNamaTeamSama = 0;
+
+        $allTeams = DB::table('teams')->get();
+
+        foreach($allTeams as $allTeam)
+        {
+            if($allTeam->team_name == $team_name)
+            {
+                $flagNamaTeamSama++;
+            }
+        }
+
         $id = Str::random(16);
         $unique_id = Auth::user()->unique_id;
 
+        if($flagNamaTeamSama >= 1)
+        {
+            return redirect()->back()->with('status', 'Nama Team Sudah ada! silahkan gunakan nama lain');
+        }
+        else if($flagNamaTeamSama == 0)
+        {
         $nama = Auth::user()->name;
         $user = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $team_name]);
 
@@ -47,19 +71,19 @@ class TeamController extends Controller
         $team_photo = time() . '-' . $id . '.' . request()->file('uploadFoto')->getClientOriginalExtension();
         request()->uploadFoto->move(public_path('images'), $team_photo);
 
-        Team::create([
+        $newTeam = Team::create([
             'team_name' =>  $team_name,
             'rank' => "0",
             'photo_team' => $team_photo,
-            'user_id' => Auth::user()->id,
+            // 'user_id' => Auth::user()->id,
             'leader_id' => Auth::user()->unique_id,
         ]);
 
+        DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team_id' => $newTeam->id]);
+
         $team = DB::table('teams')->get();
-
-
-
         return view('auth.team.index')->with('user',$user2)->with('team',$team);
+    }
     }
 
     public function find_member_index()
@@ -119,36 +143,73 @@ class TeamController extends Controller
         $unique_id = Auth::user()->unique_id;
         $sender_id = $id;
 
-        $mail = DB::table('inboxes')->where('id','LIKE',$mailId);
+        $mail = DB::table('inboxes')->where('id','LIKE',$mailId)->first();
 
-        $teamPengirim  = DB::table('teams')->where('leader_id','LIKE',$sender_id)->first();
-        $teamname = $teamPengirim->team_name;
+        // $teamPengirim  = DB::table('teams')->where('leader_id','LIKE',$sender_id)->first();
+        // $teamname = $teamPengirim->team_name;
+        // $teamID = $teamPengirim->id;
 
-        $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->first();
-        if($teamPengirim->first_member_id == NULL)
+        // $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->first();
+
+        if($mail->mail_type == "request_team")
         {
-             DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['first_member_id' => $userPenerima->unique_id]);
-             $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
-             DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
+            $userYangMauMasukTeam = DB::table('users')->where('unique_id','LIKE',$sender_id)->first();
+
+            $leaderTeamnya = DB::table('users')->where('unique_id','LIKE',$unique_id)->first();
+
+            DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
+            DB::table('users')->where('unique_id','LIKE',$sender_id)->update(['team_id' => $leaderTeamnya->team_id, 'team' => $leaderTeamnya->team]);
+
+            return redirect()->back();
         }
-        else if($teamPengirim->second_member_id == NULL)
+
+
+        if($mail->mail_type == "invite_team")
         {
-             DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['second_member_id' => $userPenerima->unique_id]);
-             $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
-             DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
+            $teamPengirim  = DB::table('teams')->where('leader_id','LIKE',$sender_id)->first();
+            $teamname = $teamPengirim->team_name;
+            $teamID = $teamPengirim->id;
+
+            $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->first();
+            if($userPenerima->team != NULL)
+            {
+                return redirect()->back()->with('status_team_user','You already in a team! cannot join any team anymore.');
+            }
+            else
+            {
+                DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team_id' => $teamID]);
+                if($teamPengirim->first_member_id == NULL)
+                {
+                    DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['first_member_id' => $userPenerima->unique_id]);
+                    $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
+                    DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
+                }
+                else if($teamPengirim->second_member_id == NULL)
+                {
+                    DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['second_member_id' => $userPenerima->unique_id]);
+                    $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
+                    DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
+                }
+                else if($teamPengirim->third_member_id == NULL)
+                {
+                    DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['third_member_id' => $userPenerima->unique_id]);
+                    $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
+                    DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
+                }
+                else if($teamPengirim->forth_member_id == NULL)
+                {
+                    DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['forth_member_id' => $userPenerima->unique_id]);
+                    $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
+                    DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
+                }
+                else
+                {
+                    return redirect()->back()->with('status','Sorry teams that you want to join is already in full roster!');
+                }
+            }
         }
-        else if($teamPengirim->third_member_id == NULL)
-        {
-             DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['third_member_id' => $userPenerima->unique_id]);
-             $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
-             DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
-        }
-        else if($teamPengirim->forth_member_id == NULL)
-        {
-             DB::table('teams')->where('leader_id','LIKE',$sender_id)->update(['forth_member_id' => $userPenerima->unique_id]);
-             $userPenerima = DB::table('users')->where('unique_id','LIKE',$unique_id)->update(['team' => $teamname]);
-             DB::table('inboxes')->where('id','LIKE',$mailId)->update(['mail_readed' => 'readed']);
-        }
+
+
 
         return redirect()->back();
     }

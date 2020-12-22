@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Team;
 
+
+
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
@@ -40,7 +42,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function Team()
     {
-        return $this->hasOne('App\Team');
+        return $this->belongsTo(Team::class,'team_id','id');
+    }
+
+
+    public function Friend()
+    {
+        return $this->hasOne(Friend::class);
     }
 
 }
