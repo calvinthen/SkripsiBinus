@@ -24,7 +24,6 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-
     function edit_profile(Request $request,$id)
     {
 
@@ -38,24 +37,71 @@ class UserController extends Controller
             $imageName = time() . '-' . $id . '.' . request()->file('uploadFoto')->getClientOriginalExtension();
             request()->uploadFoto->move(public_path('images'), $imageName);
 
-            DB::table('users')->where('unique_id','LIKE',$id)->update(['photo_profile' => $imageName]);
+            DB::table('users')->where('id','LIKE',$id)->update(['photo_profile' => $imageName]);
             $flagDataChanges++;
         }
 
         //BUAT GANTI NAMA
         if($request->input($request->input('changeName')) != NULL)
         {
-            DB::table('users')->where('unique_id','LIKE',$id)->update(['name' => $currentName]);
+            DB::table('users')->where('id','LIKE',$id)->update(['name' => $currentName]);
         }
         else if($request->input($request->input('changeName')) == NULL)
         {
-            DB::table('users')->where('unique_id','LIKE',$id)->update(['name' => $changeName]);
+            DB::table('users')->where('id','LIKE',$id)->update(['name' => $changeName]);
             $flagDataChanges++;
         }
 
-        $user = DB::select(DB::raw("select * from users where unique_id like '$id'"));
-        $team = DB::table('users')->where('unique_id' , 'LIKE' , $id)->value('team');
+        $user = DB::select(DB::raw("select * from users where id like '$id'"));
+        $team = DB::table('users')->where('id' , 'LIKE' , $id)->value('team');
+
+        if($request->input('game_prefer') != NULL)
+        {
+            DB::table('users')->where('id','LIKE',Auth::user()->id)->update(['game_prefer' => $request->input('game_prefer')]);
+        }
+
+        if($request->input('role_game') != NULL)
+        {
+            DB::table('users')->where('id','LIKE',Auth::user()->id)->update(['role_game' => $request->input('role_game')]);
+        }
+
+        if($request->input('ingame_id') != NULL)
+        {
+            DB::table('users')->where('id','LIKE',Auth::user()->id)->update(['ingame_id' => $request->input('ingame_id')]);
+        }
 
         return view('auth.profile')->with('user',$user)->with('team',$team);
+    }
+
+    public function search_player(Request $request)
+    {
+        $searchName = $request->input('searchName');
+
+        $user = DB::table('users')->where('name','LIKE' , '%' . $searchName . '%')->get();
+
+
+        return view('search.index')->with('searchName',$searchName)->with('user',$user);
+    }
+
+    public function chat_friend_index($id)
+    {
+        $user = DB::table('users')->where('id','LIKE',$id)->first();
+
+        $chat = DB::table('chats')->where([
+            'sender_id' => Auth::user()->id ,'receiver_id' => $id
+            ])->get();
+
+            $chat2 = DB::table('chats')->where(function ($query) use($id) {
+                $query->where('sender_id' ,'LIKE', Auth::user()->id)
+                    ->where('receiver_id' , 'LIKE', $id);
+            })->orWhere(function($query)
+            use($id)
+            {
+                $query->where('sender_id' ,'LIKE', $id)
+                    ->where('receiver_id' ,'LIKE', Auth::user()->id);
+            })->get();
+
+
+        return view('chat.index')->with('user',$user)->with('chat',$chat2);
     }
 }

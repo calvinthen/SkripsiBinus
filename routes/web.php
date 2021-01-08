@@ -88,6 +88,56 @@ Route::get('home/user/list/{id}/request_friend','InboxController@request_friend'
 //accept user as friend
 Route::get('user/inbox/accept/friend/{id}/{idMail}','FriendController@create')->name('user.accept_friend_request');
 
-
 //isi friendlist user
 Route::get('user/profile/friendlist/','FriendController@index')->name('user.friendlist');
+
+//ngecheck detail dari member team
+Route::get('home/team/member/{id}/detail','TeamController@member_team_detail')->name('team.member_team_detail');
+
+//store review user ke user lain kedalam DB
+Route::post('home/team/member/{id}/detail/submit/review','ReviewController@store')->name('review.store');
+
+//user harus complete informasi data mereka apabila ada data yang terlewati saat melakukan login melalui google atau register
+Route::get('home/complete_information','HomeController@complete_information')->name('complete_information');
+
+//store data information user ke database
+Route::get('home/complete_information/store','HomeController@store_complete_information')->name('user.complete_information_store');
+
+//pengguna keluar dari team
+Route::get('home/team/quit','TeamController@quit_team')->name('user.quit_team');
+
+//Decline user as friend
+Route::get('home/user/list/friend/{id}/decline','FriendController@decline_friend')->name('user.decline_friend');
+
+//Remove from friendlist
+Route::get('/home/user/list/{id}/detail/remove','FriendController@remove_friend')->name('user.remove_friend');
+
+//Home to leaderboard page
+Route::get('home/leaderboard','HomeController@leaderboard_index')->name('home.leaderboard');
+
+//page hasil search player
+Route::get('home/user/list/search','Auth\UserController@search_player')->name('user.search_player');
+
+//user report player
+Route::get('home/user/list/detail/{id}/report','ReportController@store')->name('user.report_player');
+
+//masuk ke menu chat temen
+Route::get('home/user/friendlist/{id}/chat','Auth\UserController@chat_friend_index')->name('user.chat_friend_index');
+
+//kirim chat
+Route::get('home/user/friendlist/{id}/chat/send','ChatController@store')->name('user.send_chat');
+
+//masuk ke menu chat team
+Route::get('home/user/team/{id}/chat','TeamController@team_chat')->name('team.chat_index');
+
+// kirim team chat
+Route::get('home/user/team/{id}/chat/send','ChatController@store_team')->name('team.send_chat');
+
+//admin masuk halaman report
+Route::get('home/admin/index/report','Auth\AdminController@report')->name('admin.report');
+
+//admin confirm report
+Route::get('home/admin/index/report/id={id}/confirm','Auth\AdminController@confirm_report')->name('admin.confirm_report');
+
+//admin ban days submit to user
+Route::get('home/admin/index/user/{id}/banned','Auth\AdminController@banned_user')->name('admin.banned_user');

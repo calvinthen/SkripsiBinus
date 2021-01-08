@@ -7,6 +7,12 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+.chat-overflow
+{
+    height:500px;
+    overflow-y: scroll;
+}
+
 :root {
   --blue: #3490dc;
   --indigo: #6574cd;

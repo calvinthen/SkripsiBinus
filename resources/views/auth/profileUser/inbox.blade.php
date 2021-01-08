@@ -13,7 +13,7 @@
                           <tr>
                             <th scope="col">Inboxes ID</th>
                             <th scope="col">From</th>
-                            <th scope="col">To</th>
+                            <th scope="col">Subject</th>
                             <th scope="col">Action</th>
                           </tr>
                         </thead>
@@ -21,13 +21,24 @@
                             @foreach ($mail as $mails)
 
                               @php
-                                  $sender_name = DB::table('users')->where('unique_id','LIKE',$mails->sender_unique_id)->first();
+                                  $sender_name = DB::table('users')->where('id','LIKE',$mails->sender_id)->first();
                               @endphp
 
                               <tr>
                                 <th scope="row">{{$mails->id}}</th>
                                 <td>{{$sender_name->name}}</td>
-                                <td>{{$mails->receiver_unique_id}}</td>
+
+                                @if ($mails->mail_type == "invite_team")
+                                    <td>Team Invitation</td>
+
+                                @elseif($mails->mail_type == "request_team")
+                                    <td>Request Team</td>
+
+                                @elseif($mails->mail_type == "request_friend")
+                                    <td>Request Friend</td>
+                                @endif
+
+
                                 <td>
                                     <button class="btn btn-primary" data-toggle="modal" data-target="#readMailModal{{$mails->id}}">
                                         Read
@@ -40,7 +51,15 @@
                                     <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                        <h5 class="modal-title" id="readMailModal{{$mails->id}}">Mail title</h5>
+                                        <h5 class="modal-title" id="readMailModal{{$mails->id}}">
+                                            @if ($mails->mail_type == "invite_team")
+                                                <h5>Team Invitation</h5>
+                                            @elseif($mails->mail_type == "request_team")
+                                                <h5>Request team</h5>
+                                            @elseif($mails->mail_type == "request_friend")
+                                                <h5>Request Friend</h5>
+                                            @endif
+                                        </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -51,20 +70,32 @@
                                         </div>
 
                                         <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
 
                                         @if ($mails->mail_type == "request_friend")
-                                            <a href="{{url('user/inbox/accept/friend/' . $mails->sender_unique_id . '/' . $mails->id)}}" class="btn btn-primary">
-                                                Accept Friend
+                                            <a href="{{url('user/inbox/accept/friend/' . $mails->sender_id . '/' . $mails->id)}}" class="btn btn-primary">
+                                                Accept as Friend
+                                            </a>
+
+                                            <a href="{{route('user.decline_friend',$mails->id)}}" class="btn btn-danger">
+                                                Decline user
                                             </a>
 
                                         @elseif($mails->mail_type == "request_team")
-                                            <a href="{{url('user/inbox/accept_team_invitation/' . $mails->sender_unique_id . '/' . $mails->id)}}" class="btn btn-primary">
+                                            <a href="{{url('user/inbox/accept_team_invitation/' . $mails->sender_id . '/' . $mails->id)}}" class="btn btn-primary">
                                                 Accept as member
                                             </a>
+
+                                            <a href="" class="btn btn-danger">
+                                                Decline user
+                                            </a>
                                         @else
-                                            <a href="{{url('user/inbox/accept_team_invitation/' . $mails->sender_unique_id . '/' . $mails->id)}}" class="btn btn-primary">
+                                            <a href="{{url('user/inbox/accept_team_invitation/' . $mails->sender_id . '/' . $mails->id)}}" class="btn btn-primary">
                                                 Join Team
+                                            </a>
+
+                                            <a href="" class="btn btn-danger">
+                                                Decline Team
                                             </a>
                                         @endif
 
@@ -96,6 +127,12 @@
                         @if (session('status'))
                             <div class="alert alert-danger">
                                 {{ session('status') }}
+                            </div>
+                        @endif
+
+                        @if (session('status_decline_friend'))
+                            <div class="alert alert-danger">
+                                {{ session('status_decline_friend') }}
                             </div>
                         @endif
                 </div>

@@ -42,7 +42,15 @@
                     else
                     {
                         $userRole = Auth::user()->role;
+
+                        $user_id = Auth::user()->id;
+                        $not_readed = 'not_readed';
+                        $mail = DB::select(DB::raw("select * from inboxes where receiver_id LIKE '$user_id' and  mail_readed LIKE '$not_readed'"));
+                        $totalEmail = count($mail);
                     }
+
+
+
                 @endphp
 
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -77,7 +85,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href={{route('profile.index',Auth::user()->unique_id)}}>
+                                    <a class="dropdown-item" href={{route('profile.index',Auth::user()->id)}}>
                                         Profile
                                     </a>
 
@@ -93,8 +101,11 @@
                                         Friend
                                     </a>
 
-                                    <a class="dropdown-item" href="{{route('user.inbox')}}">
+                                    <a class="dropdown-item notification" href="{{route('user.inbox')}}">
                                         Inbox
+                                        @if ($mail != NULL)
+                                        <span class="badge" style="background: red"> {{$totalEmail}}</span>
+                                        @endif
                                     </a>
 
 
@@ -128,4 +139,6 @@
 </body>
 </html>
 
+@section('css_notif_design')
 
+@endsection

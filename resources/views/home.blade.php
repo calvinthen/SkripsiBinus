@@ -25,19 +25,28 @@
 
                         @else
 
-                        <a href="{{route('user.find_team')}}" class="btn btn-primary">
-                            Find Team
-                        </a>
-                        <br><br>
+                        @if (Auth::user()->game_prefer == "" || Auth::user()->role_game == "" || Auth::user()->ingame_id == "")
+                            its seems you still have missing information! <br>
+                            Please complete it by clicking this button !<br><br>
 
-                        <a href="{{route('user.list_user')}}" class="btn btn-primary">
-                            Find Player
-                        </a>
-                        <br><br>
+                            <a href="{{route('complete_information')}}" class="btn btn-primary">
+                                Submit missing information
+                            </a>
+                        @else
+                            <a href="{{route('user.find_team')}}" class="btn btn-primary">
+                                Find Team
+                            </a>
+                            <br><br>
 
-                        <a href="" class="btn btn-primary">
-                            Leaderboard
-                        </a>
+                            <a href="{{route('user.list_user')}}" class="btn btn-primary">
+                                Find Player
+                            </a>
+                            <br><br>
+
+                            <a href="{{route('home.leaderboard')}}" class="btn btn-primary">
+                                Leaderboard
+                            </a>
+                        @endif
 
                         @endif
 

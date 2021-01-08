@@ -30,15 +30,14 @@
                          <!-- BUAT EDIT FOTO PROFILE -->
                          <div class="form-group {{ $errors->has('uploadFoto') ? ' has-error' : '' }}">
                             <label for="uploadFoto"><strong>Upload Foto : </strong></label>
-                            <input type="file" id="uploadFoto" name="uploadFoto" class="form-control" class="form-control" value="{{ old('uploadFoto') }}" required autofocus >
+                            <input type="file" id="uploadFoto" name="uploadFoto" class="form-control" value="{{ old('uploadFoto') }}" required autofocus >
                                 @if ($errors->has('uploadFoto'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('uploadFoto') }}</strong>
                                     </span>
                                 @endif
                         </div>
-
-
+                        <br>
 
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary">
@@ -46,6 +45,7 @@
                             </button>
                         </div>
                         <br>
+
                         @if (session('status'))
                             <div class="alert alert-danger">
                                 {{ session('status') }}

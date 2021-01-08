@@ -22,10 +22,12 @@ class CreateTeamsTable extends Migration
             $table->string('leader_id');
             $table->string('team_name');
 
-            $table->string('first_member_id')->nullable();
-            $table->string('second_member_id')->nullable();
-            $table->string('third_member_id')->nullable();
-            $table->string('forth_member_id')->nullable();
+            // $table->string('first_member_id')->nullable();
+            // $table->string('second_member_id')->nullable();
+            // $table->string('third_member_id')->nullable();
+            // $table->string('forth_member_id')->nullable();
+
+            $table->string('game_prefer');
 
             $table->string('photo_team')->nullable();
             $table->integer('rank');

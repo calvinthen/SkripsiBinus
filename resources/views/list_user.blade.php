@@ -11,6 +11,25 @@
                 </div>
 
                 <div class="card-body">
+
+                    <form action="{{route('user.search_player')}}" method="GET">
+                        <!-- Search form -->
+                        <div class="md-form active-cyan-2 mb-3">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <input class="form-control" type="text" name="searchName" id="searchName" placeholder="Search player name here" aria-label="Search">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary" type="submit">
+                                        Search
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+
                     @foreach ($allUser as $user)
 
                         @if ($user->name == Auth::user()->name)

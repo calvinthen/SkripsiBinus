@@ -22,10 +22,19 @@ class CreateUsersTable extends Migration
             $table->bigInteger('team_id')->nullable()->unsigned();
 
             $table->string('team')->nullable();
+
+            $table->string('game_prefer');
+            $table->string('role_game');
+            $table->string('ingame_id')->unique();
+
+            $table->integer('point')->default(0);
+
             $table->string('photo_profile')->default('user.jpg');
+
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('banned_until')->nullable();
             $table->string('password');
-            $table->string('unique_id')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
 

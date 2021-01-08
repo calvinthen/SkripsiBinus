@@ -71,6 +71,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'role' => 'user',
             'unique_id' => $random_id,
+            'game_prefer' => $data['game_prefer'],
+            'role_game' => $data['role_game'],
+            'ingame_id' => $data['ingame_id'],
         ]);
     }
 }

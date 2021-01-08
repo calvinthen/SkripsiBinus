@@ -15,9 +15,9 @@ class InboxController extends Controller
      */
     public function index()
     {
-        $user_unique_id = Auth::user()->unique_id;
+        $user_id = Auth::user()->id;
         $not_readed = 'not_readed';
-        $mail = DB::select(DB::raw("select * from inboxes where receiver_unique_id LIKE '$user_unique_id' and  mail_readed LIKE '$not_readed'"));
+        $mail = DB::select(DB::raw("select * from inboxes where receiver_id LIKE '$user_id' and  mail_readed LIKE '$not_readed'"));
 
         return view('auth.profileUser.inbox')->with('mail',$mail);
     }
@@ -26,13 +26,13 @@ class InboxController extends Controller
     {
         Inbox::create([
             'body' =>  "Hi ! i want to invite you to our teams please click button 'JOIN TEAM' in the below to become ours member !",
-            'sender_unique_id' => Auth::user()->unique_id,
-            'receiver_unique_id' => $id,
+            'sender_id' => Auth::user()->id,
+            'receiver_id' => $id,
             'mail_type' => "invite_team",
 
         ]);
 
-        return redirect('/');
+        return redirect()->back()->with('status','Invitation has been Sent !');
     }
 
     public function request_join_team($id)
@@ -42,23 +42,23 @@ class InboxController extends Controller
 
         Inbox::create([
             'body' =>  "Hi! i want to join your team , can you maybe accept me as a member ?",
-            'sender_unique_id' => Auth::user()->unique_id,
-            'receiver_unique_id' => $teamLeaderID,
+            'sender_id' => Auth::user()->id,
+            'receiver_id' => $teamLeaderID,
             'mail_type' => "request_team",
         ]);
 
-        return redirect('/');
+        return redirect()->back()->with('status','Request to this team has been sent !');
     }
 
     public function request_friend($id)
     {
         $user_unique_id_receiver = DB::table('users')->where('id','LIKE',$id)->first();
 
-        $unique_id = $user_unique_id_receiver->unique_id;
+        $unique_id = $user_unique_id_receiver->id;
         Inbox::create([
             'body' =>  "I want to be your friend ! please accept me",
-            'sender_unique_id' => Auth::user()->unique_id,
-            'receiver_unique_id' => $unique_id,
+            'sender_id' => Auth::user()->id,
+            'receiver_id' => $id,
             'mail_type' => "request_friend",
         ]);
 

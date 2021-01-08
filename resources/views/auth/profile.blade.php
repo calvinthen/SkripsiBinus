@@ -46,6 +46,11 @@
 
             @endif
 
+                        @if (session('status_team'))
+                            <div class="alert alert-success">
+                                {{ session('status_team_user') }}
+                            </div>
+                        @endif
         </div>
     </div>
 </div>

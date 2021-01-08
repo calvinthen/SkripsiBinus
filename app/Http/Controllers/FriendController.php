@@ -19,7 +19,6 @@ class FriendController extends Controller
         $friend = DB::table('friends')->where('id_user','LIKE',Auth::user()->id)->orWhere('id_user2','LIKE',Auth::user()->id)->get();
 
 
-
         return view('auth.profileUser.friendlist')->with('friend',$friend);
     }
 
@@ -30,7 +29,7 @@ class FriendController extends Controller
      */
     public function create($id,$mailID)
     {
-        $user = DB::table('users')->where('unique_id','LIKE',$id)->first();
+        $user = DB::table('users')->where('id','LIKE',$id)->first();
 
         $userID = $user->id;
         $friend = Friend::create([
@@ -47,6 +46,21 @@ class FriendController extends Controller
         return redirect()->back()->with('status_friend_accepted','You both has been add to friendlist database');
     }
 
+    public function decline_friend($id)
+    {
+        DB::table('inboxes')->where('id','LIKE',$id)->update(['mail_readed' => "readed"]);
+
+        return redirect()->back()->with('status_decline_friend','You has been decline a user to become your friendlist !');
+    }
+
+
+    public function remove_friend($id)
+    {
+        $friendlist = DB::table('friends')->where(['id_user' => Auth::user()->id , 'id_user2' => $id])->delete();
+        $friendlist2 = DB::table('friends')->where(['id_user' => $id , 'id_user2' => Auth::user()->id])->delete();
+
+        return redirect()->back()->with('status_friendlist','User has been removed from friendlist !');
+    }
     /**
      * Store a newly created resource in storage.
      *
