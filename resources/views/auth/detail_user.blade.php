@@ -24,15 +24,17 @@
     @endphp
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" style="background: #8C949D">
                 <div class="card-header" style="text-align: center">
                     <h2><strong> Detail User : {{$user->name}}</strong></h2>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="background: #C4CAD0">
 
                     <img src="{{url('./images/' . $user->photo_profile)}}" alt="" width="150px" height="150px"><br><br>
 
                     <strong>Team : </strong> {{$user->team}}<br>
+
+                    <strong>Role : </strong> {{$user->role_game}}<br>
 
                     <strong>Total Reviewer : </strong> {{$totalReviewer}}<br>
 
@@ -61,7 +63,7 @@
                                 <br>
                                 <br>
 
-                                <a href="{{route('user.remove_friend',$user->id)}}" class="btn btn-warning">
+                                <a class="btn btn-warning" data-toggle="modal" data-target="#removeFriendModal">
                                     Remove Friend
                                 </a>
 
@@ -70,6 +72,29 @@
                                 </button>
 
                             @endif
+
+                            <!-- Modal REMOVE FRIEND-->
+                            <div class="modal fade" id="removeFriendModal" tabindex="-1" role="dialog" aria-labelledby="removeFriendModal" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="removeFriendModal">Remove Friend {{$user->name}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    Are you sure want to delete <strong>{{$user->name}}</strong> from your friendlist?  <br> <br>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+                                        <a href="{{route('user.remove_friend',$user->id)}}" class="btn btn-danger">
+                                            Remove Friend
+                                        </a>
+                                    </div>
+
+                                </div>
+                                </div>
+                            </div>
 
                             <form action="{{route('user.report_player',$user->id)}}" method="GET">
                                 <!-- Modal -->

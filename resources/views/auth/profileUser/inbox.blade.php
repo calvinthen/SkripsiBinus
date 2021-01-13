@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" style="background: #8C949D">
                 <div class="card-header" style="text-align: center"><Strong><h2>INBOX</h2></Strong></div>
 
-                <div class="card-body">
+                <div class="card-body" style="background: #C4CAD0">
                     <table class="table table-striped">
                         <thead>
                           <tr>
@@ -86,7 +86,7 @@
                                                 Accept as member
                                             </a>
 
-                                            <a href="" class="btn btn-danger">
+                                            <a href="{{route('user.decline_request_team',$mails->id)}}" class="btn btn-danger">
                                                 Decline user
                                             </a>
                                         @else
@@ -94,12 +94,10 @@
                                                 Join Team
                                             </a>
 
-                                            <a href="" class="btn btn-danger">
+                                            <a href="{{route('user.decline_invitation_team',$mails->id)}}" class="btn btn-danger">
                                                 Decline Team
                                             </a>
                                         @endif
-
-
 
 
                                         </div>
@@ -121,6 +119,18 @@
                         @if (session('status_friend_accepted'))
                             <div class="alert alert-success">
                                 {{ session('status_friend_accepted') }}
+                            </div>
+                        @endif
+
+                        @if (session('status_decline_invitation_team'))
+                            <div class="alert alert-danger">
+                                {{ session('status_decline_invitation_team') }}
+                            </div>
+                        @endif
+
+                        @if (session('status_decline_user_as_member'))
+                            <div class="alert alert-danger">
+                                {{ session('status_decline_user_as_member') }}
                             </div>
                         @endif
 

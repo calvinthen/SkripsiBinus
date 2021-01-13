@@ -104,4 +104,13 @@ class UserController extends Controller
 
         return view('chat.index')->with('user',$user)->with('chat',$chat2);
     }
+
+    public function search_player_by_role(Request $request)
+    {
+        $role = $request->input('role');
+
+        $user = DB::table('users')->where('role_game','LIKE',$role)->get();
+
+        return view('search.search_by_role')->with('role',$role)->with('user',$user);
+    }
 }

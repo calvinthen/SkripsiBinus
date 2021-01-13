@@ -141,3 +141,18 @@ Route::get('home/admin/index/report/id={id}/confirm','Auth\AdminController@confi
 
 //admin ban days submit to user
 Route::get('home/admin/index/user/{id}/banned','Auth\AdminController@banned_user')->name('admin.banned_user');
+
+//user menolak invitation team
+Route::get('home/user/inbox/team/{id}/decline','TeamController@user_decline_team_invitation')->name('user.decline_invitation_team');
+
+//user nolak request team
+Route::get('home/user/inbox/request/team/{id}/decline','TeamController@user_decline_request_team')->name('user.decline_request_team');
+
+//dari home ke halaman about us
+Route::get('home/about','HomeController@about')->name('home.about');
+
+//user search player by role
+Route::get('home/list/user/search_by_role','Auth\UserController@search_player_by_role')->name('user.search_player_by_role');
+
+//admin masuk ke halaman banned user
+Route::get('home/admin/index/banned','Auth\AdminController@banned_index')->name('admin.banned_index');

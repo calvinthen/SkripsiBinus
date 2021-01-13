@@ -1,16 +1,18 @@
 @extends('layouts.app')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 @section('content')
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" style="background: #8C949D">
                 <div class="card-header" style="text-align: center"> <h3><strong>Edit profile</strong></h3></div>
 
                 <form method="post" action="{{route('profile.confirm_edit',Auth::user()->id)}}" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div class="card-body">
+                    <div class="card-body" style="background: #C4CAD0">
                         <div class="row">
 
                             <!-- BUAT EDIT FOTO PROFILE -->
@@ -21,12 +23,12 @@
                             <br>
 
                             <div class="form-group col-md-12">
-                                <label for="changeName"><strong>Input nickname : </strong></label>
+                                <label for="changeName"><strong>Change name : </strong></label>
                                 <input type="text" id="changeName" name="changeName" class="form-control">
                             </div>
 
                             <div class="form-group row">
-                                <label for="game_prefer" class="col-md-4 col-form-label text-md-right">{{ __('Game prefered') }}</label>
+                                <label for="game_prefer" class="col-md-4 col-form-label text-md-right"><strong>{{ __('Game prefered') }}</strong> </label>
 
                                 <div class="col-md-6">
                                     <select name="game_prefer" id="game_prefer" class="form-control">
@@ -38,22 +40,17 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="role_game" class="col-md-4 col-form-label text-md-right">{{ __('Role in game') }}</label>
+                                <label for="role_game" class="col-md-4 col-form-label text-md-right"> <strong>{{ __('Role in game') }}</strong></label>
 
                                 <div class="col-md-8">
                                     <select name="role_game" id="role_game" class="form-control">
                                         <option value="">- Select -</option>
-                                        <option value="midlaner">Midlaner</option>
-                                        <option value="carry">Carry</option>
-                                        <option value="offlaner">Offlaner</option>
-                                        <option value="support">Support</option>
-                                        <option value="hard support">Hard Support</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="ingame_id" class="col-md-4 col-form-label text-md-right">{{ __('Game ID') }}</label>
+                                <label for="ingame_id" class="col-md-4 col-form-label text-md-right"><strong>{{ __('Game ID') }}</strong></label>
 
                                 <div class="col-md-8">
                                     <input id="ingame_id" type="text" class="form-control" name="ingame_id" value="{{ old('ingame_id') }}" autofocus>
@@ -79,6 +76,26 @@
 
 
 @endsection
+
+<script>
+    $(document).ready(function() {
+
+    $("#game_prefer").change(function() {
+        var val = $(this).val();
+        if (val == "csgo")
+        {
+            $("#role_game").html("<option value='entry fragger'> Entry Fragger </option> <option value='support csgo'> Support </option> <option value='lurker'> Lurker </option> <option value='riflers'> Riflers </option> <option value='leader'> Leader </option>");
+        }
+        else if (val == "dota")
+        {
+            $("#role_game").html("<option value='carry'> Carry </option> <option value='Midlaner'>Midlaner</option> <option value='offlaner'> Offlaner </option> <option value='support'> Support </option> <option value='hard support'> Hard Support </option>");
+
+        }
+    });
+
+    });
+</script>
+
 
 @section('script')
 

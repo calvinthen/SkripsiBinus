@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+            <div class="card" style="background: #8C949D">
+                <div class="card-header" style="text-align: center"><h3> <strong>Dashboard</strong> </h3></div>
 
-                <div class="card-body">
+                <div class="card-body" style="background: #C4CAD0">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -33,19 +33,34 @@
                                 Submit missing information
                             </a>
                         @else
-                            <a href="{{route('user.find_team')}}" class="btn btn-primary">
-                                Find Team
-                            </a>
-                            <br><br>
 
-                            <a href="{{route('user.list_user')}}" class="btn btn-primary">
-                                Find Player
-                            </a>
-                            <br><br>
+                            <div class="row">
+                                <div class="col-md-6" style="text-align: center">
+                                    <a href="{{route('user.find_team')}}" class="btn btn-primary">
+                                        Find Team
+                                    </a>
+                                </div>
 
-                            <a href="{{route('home.leaderboard')}}" class="btn btn-primary">
-                                Leaderboard
-                            </a>
+                                <div class="col-md-6" style="text-align: center">
+                                    <a href="{{route('user.list_user')}}" class="btn btn-primary">
+                                        Find Player
+                                    </a>
+                                </div>
+                                <br><br><br>
+
+                                <div class="col-md-6" style="text-align: center">
+                                    <a href="{{route('home.leaderboard')}}" class="btn btn-primary">
+                                        Leaderboard
+                                    </a>
+                                </div>
+
+                                <div class="col-md-6" style="text-align: center">
+                                    <a href="{{route('home.about')}}" class="btn btn-primary">
+                                        About Us
+                                    </a>
+                                </div>
+                            </div>
+
                         @endif
 
                         @endif

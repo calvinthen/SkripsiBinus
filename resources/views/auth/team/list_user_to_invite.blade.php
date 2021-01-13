@@ -5,12 +5,12 @@
 
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card" style="background: #8C949D">
                 <div class="card-header" style="text-align: center">
                         <strong> <h2> List user with no team</h2></strong>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body" style="background: #C4CAD0">
                     <table class="table table-striped">
                         <thead>
                           <tr>

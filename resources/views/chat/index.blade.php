@@ -7,9 +7,9 @@
         <div class="col-md-8">
             <div class="card">
 
-                <div class="card-header">Halaman chat with : <strong>{{$user->name}}</strong> </div>
+                <div class="card-header"> Halaman chat with :  <strong>{{$user->name}}</strong> </div>
 
-                <div class="card-body chat-overflow">
+                <div class="card-body chat-overflow" id="chat">
 
                     <div>
                         <ul>
@@ -53,6 +53,7 @@
         </div>
     </div>
 </div>
+
 
 
 @endsection

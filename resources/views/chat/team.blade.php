@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Chat Team : <strong> {{$team->team_name}}</strong> </div>
 
-                <div class="card-body chat-overflow">
+                <div class="card-body chat-overflow" id ="chat">
 
                     <div>
                         <ul>
@@ -40,12 +40,17 @@
                             <input type="text" class="form-control" name="chat" id="chat" placeholder="Send your chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="submit">Send</button>
+                                {{-- <button class="btn btn-outline-secondary" onclick="x()" type="button">x</button> --}}
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+
+
+
 @endsection

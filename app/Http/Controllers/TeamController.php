@@ -226,6 +226,22 @@ class TeamController extends Controller
         return redirect()->back();
     }
 
+    public function user_decline_team_invitation($id)
+    {
+        DB::table('inboxes')->where('id','LIKE',$id)->update(['mail_readed' => "readed"]);
+
+
+        return redirect()->back()->with('status_decline_invitation_team','you has been decline team invitation !');
+    }
+
+    public function user_decline_request_team($id)
+    {
+        DB::table('inboxes')->where('id','LIKE',$id)->update(['mail_readed' => "readed"]);
+
+
+        return redirect()->back()->with('status_decline_user_as_member','you has been decline player to become your member!');
+    }
+
     public function quit_team()
     {
         DB::table('users')->where('id','LIKE',Auth::user()->id)->update(['team_id' => NULL , 'team' => NULL]);

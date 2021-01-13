@@ -1,16 +1,18 @@
 @extends('layouts.app')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Complete your information profile</div>
+            <div class="card" style="background: #8C949D">
+                <div class="card-header" style="text-align: center"><strong><h3>{{ __('Complete your information profile') }}</h3></strong></div>
 
                 <form action="{{route('user.complete_information_store')}}" method="GET">
                     @csrf
 
-                    <div class="card-body">
+                    <div class="card-body" style="background: #C4CAD0">
                      <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
@@ -39,7 +41,7 @@
 
                             <div class="col-md-6">
                                 <select name="game_prefer" id="game_prefer" class="form-control">
-                                    <option value="">- Select -</option>
+                                    <option value="0">- Select -</option>
                                     <option value="csgo">Counter Strike: Global Offensive</option>
                                     <option value="dota">DotA 2</option>
                                 </select>
@@ -52,11 +54,6 @@
                             <div class="col-md-6">
                                 <select name="role_game" id="role_game" class="form-control">
                                     <option value="">- Select -</option>
-                                    <option value="midlaner">Midlaner</option>
-                                    <option value="carry">Carry</option>
-                                    <option value="offlaner">Offlaner</option>
-                                    <option value="support">Support</option>
-                                    <option value="hard support">Hard Support</option>
                                 </select>
                             </div>
                         </div>
@@ -100,3 +97,22 @@
     </div>
 </div>
 @endsection
+
+<script>
+    $(document).ready(function() {
+
+    $("#game_prefer").change(function() {
+        var val = $(this).val();
+        if (val == "csgo")
+        {
+            $("#role_game").html("<option value='entry fragger'> Entry Fragger </option> <option value='support csgo'> Support </option> <option value='lurker'> Lurker </option> <option value='riflers'> Riflers </option> <option value='leader'> Leader </option>");
+        }
+        else if (val == "dota")
+        {
+            $("#role_game").html("<option value='carry'> Carry </option> <option value='Midlaner'>Midlaner</option> <option value='offlaner'> Offlaner </option> <option value='support'> Support </option> <option value='hard support'> Hard Support </option>");
+
+        }
+    });
+
+    });
+</script>

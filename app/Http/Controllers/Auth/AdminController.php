@@ -52,4 +52,10 @@ class AdminController extends Controller
 
         return redirect()->back()->with('banned_status', 'you has been banned ' . $user->name . ' for ' . $hari . 'Days');
     }
+
+    public function banned_index()
+    {
+
+        return view('auth.admin.unban');
+    }
 }

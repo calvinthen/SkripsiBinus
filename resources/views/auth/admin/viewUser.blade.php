@@ -24,6 +24,10 @@
                 </li>
 
                 <li>
+                    <a href="{{route('admin.banned_index')}}"> <i class="fa fa-ban"> </i> Banned User</a>
+                </li>
+
+                <li>
                     <a href="{{route('admin.report')}}"><i class="fa fa-edit"></i> Review Report</a>
                 </li>
 

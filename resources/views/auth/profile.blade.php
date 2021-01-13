@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Profile</div>
+            <div class="card" style="background: #8C949D">
+                <div class="card-header" style="text-align: center"> <h3><strong>Profile</strong></h3></div>
 
-                <div class="card-body">
+                <div class="card-body" style="background: #C4CAD0">
                     @foreach ($user as $users)
                         <img src="{{url('./images/' . $users->photo_profile)}}" alt="" width="150px" height="150px"><br>
                         {{$users->name}}<br>
@@ -26,7 +26,7 @@
 
             </div>
 
-            @if ($team == NULL)
+            {{-- @if ($team == NULL)
                 it seems you dont have any team registered yet, wanna find or create a team for yours ?
                 <br>
                 <br><br>
@@ -44,7 +44,7 @@
 
 
 
-            @endif
+            @endif --}}
 
                         @if (session('status_team'))
                             <div class="alert alert-success">

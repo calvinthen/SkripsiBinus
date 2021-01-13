@@ -4,14 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+            <div class="card" style="background: #8C949D">
+                <div class="card-header" style="text-align: center"> <strong><h3>{{ __('Login') }}</h3></strong>  </div>
 
                 @if (session('message'))
                     <div class="alert alert-danger">{{ session('message') }}</div>
                 @endif
 
-                <div class="card-body">
+                <div class="card-body" style="background: #C4CAD0">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

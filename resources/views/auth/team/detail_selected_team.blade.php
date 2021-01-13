@@ -4,18 +4,28 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card" style="background: #8C949D">
+
+                @php
+                    $leader = DB::table('users')->where('id','LIKE',$team->leader_id)->first();
+
+                    $member = DB::table('users')->where('team_id','LIKE',$team->id)->get();
+                @endphp
 
                 <div class="card-header" style="text-align: center">
                     <h2><strong>Team Detail: {{$team->team_name}}</strong></h2>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body"  style="background: #C4CAD0">
 
-                    <img src="{{url('./images/' . $team->photo_team)}}" width="150px" height="150px">
+                    <img src="{{url('./images/' . $team->photo_team)}}" width="150px" height="150px"><br>
 
-                    Leader ID : {{$team->leader_id}}
+                    <strong>Leader : </strong> {{$leader->name}}
                     <br><br>
+                    <strong>Member</strong><br>
+                    @foreach ($member as $members)
+                        {{$members->name}}<br>
+                    @endforeach
 
 
                     @if (Auth::user()->team_id == NULL)

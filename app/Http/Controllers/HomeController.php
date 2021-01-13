@@ -31,6 +31,12 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function about()
+    {
+
+        return view('aboutus');
+    }
+
     public function view_profile($id)
     {
         $user = DB::select(DB::raw("select * from users where id like '$id'"));

@@ -11,7 +11,10 @@
 {
     height:500px;
     overflow-y: scroll;
+
 }
+
+
 
 :root {
   --blue: #3490dc;
@@ -4407,6 +4410,7 @@ input[type=button].btn-block {
 
 .nav {
   display: flex;
+
   flex-wrap: wrap;
   padding-left: 0;
   margin-bottom: 0;

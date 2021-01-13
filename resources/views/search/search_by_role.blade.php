@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <div class="card" style="background: #8C949D">
                 <div class="card-header" style="text-align: center">
-                    <h2><strong> List User</strong></h2>
+                    <h2><strong> Search by role : {{$role}}</strong></h2>
                 </div>
 
                 <div class="card-body"  style="background: #C4CAD0">
@@ -16,13 +16,13 @@
                         <!-- Search form -->
                         <div class="md-form active-cyan-2 mb-3">
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-10">
                                     <input class="form-control" type="text" name="searchName" id="searchName" placeholder="Search player name here" aria-label="Search">
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <button class="btn btn-primary" type="submit">
-                                        Search by Name
+                                        Search
                                     </button>
                                 </div>
 
@@ -33,7 +33,7 @@
                     <form action="{{route('user.search_player_by_role')}}" method="GET">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-10">
                                     <select class="form-control" id="role" name="role">
                                         <option>Search player by Role :</option>
                                         <option value="midlaner">Midlaner</option>
@@ -44,9 +44,9 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <Button class="btn btn-primary" type="submit">
-                                        Search by Role
+                                        Search
                                     </Button>
                                 </div>
 
@@ -56,20 +56,19 @@
                     </form>
 
 
+                    @foreach ($user as $users)
 
-                    @foreach ($allUser as $user)
-
-                        @if ($user->name == Auth::user()->name)
+                        @if ($users->name == Auth::user()->name)
                             @continue
                         @endif
-                        <a href="{{route('user.detail',$user->id)}}" style="color: black">
+                        <a href="{{route('user.detail',$users->id)}}" style="color: black">
                             <div class="row">
                                 <div class="col-md-1">
-                                    <img src="{{url('./images/' . $user->photo_profile)}}" alt="" width="50px" height="50px">
+                                    <img src="{{url('./images/' . $users->photo_profile)}}" alt="" width="50px" height="50px">
                                 </div>
 
                                 <div class="col-md-4">
-                                    {{$user->name}} : Role {{$user->role_game}}
+                                    {{$users->name}} : Role {{$users->role_game}}
                                 </div>
 
                             </div>
@@ -77,6 +76,8 @@
 
                         <br>
                     @endforeach
+
+
 
                 </div>
             </div>
