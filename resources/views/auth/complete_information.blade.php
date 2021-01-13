@@ -41,7 +41,7 @@
 
                             <div class="col-md-6">
                                 <select name="game_prefer" id="game_prefer" class="form-control">
-                                    <option value="0">- Select -</option>
+                                    <option value="">- Select -</option>
                                     <option value="csgo">Counter Strike: Global Offensive</option>
                                     <option value="dota">DotA 2</option>
                                 </select>

@@ -66,11 +66,12 @@
                         @endif
 
                     @else
-                        You are not login or registered yet
+
                     @endif
 
                 </div>
             </div>
+
         </div>
     </div>
 </div>

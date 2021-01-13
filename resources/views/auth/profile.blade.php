@@ -9,17 +9,16 @@
 
                 <div class="card-body" style="background: #C4CAD0">
                     @foreach ($user as $users)
-                        <img src="{{url('./images/' . $users->photo_profile)}}" alt="" width="150px" height="150px"><br>
-                        {{$users->name}}<br>
+                        <img src="{{url('./images/' . $users->photo_profile)}}" alt="" width="150px" height="150px"><br><br>
+                        <input name="namaProfile" id="namaProfile" type="text" value="{{$users->name}}" readonly class="form-control">
                         {{$users->email}}<br>
                         {{$users->role}}<br>
                         <br>
                     @endforeach
 
                     <div style="text-align: center">
-                        <a href="{{route('profile.edit')}}" class="btn btn-primary">
-                            Edit profile
-                        </a>
+
+                        <a href="{{route('profile.edit')}}"> <i class="fa fa-cog" style="font-size: 50px;color: black" ></i> </a>
                     </div>
 
                 </div>
