@@ -125,7 +125,7 @@ Route::get('home/user/list/detail/{id}/report','ReportController@store')->name('
 Route::get('home/user/friendlist/{id}/chat','Auth\UserController@chat_friend_index')->name('user.chat_friend_index');
 
 //kirim chat
-Route::get('home/user/friendlist/{id}/chat/send','ChatController@store')->name('user.send_chat');
+Route::post('home/user/friendlist/{id}/chat/send','ChatController@store')->name('user.send_chat');
 
 //masuk ke menu chat team
 Route::get('home/user/team/{id}/chat','TeamController@team_chat')->name('team.chat_index');

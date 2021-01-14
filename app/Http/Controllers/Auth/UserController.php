@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 
 use Symfony\Component\Console\Input\Input;
 
@@ -68,6 +69,10 @@ class UserController extends Controller
         if($request->input('ingame_id') != NULL)
         {
             DB::table('users')->where('id','LIKE',Auth::user()->id)->update(['ingame_id' => $request->input('ingame_id')]);
+        }
+        if($request->input('password') != NULL)
+        {
+            DB::table('users')->where('id','LIKE',Auth::user()->id)->update(['password' => Hash::make($request->input('password'))]);
         }
 
         return view('auth.profile')->with('user',$user)->with('team',$team);

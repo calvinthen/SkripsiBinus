@@ -52,8 +52,6 @@
                         $totalEmail = count($mail);
                     }
 
-
-
                 @endphp
 
                 <a class="navbar-brand" href="{{ url('/') }}" style="color: white">

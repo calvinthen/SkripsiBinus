@@ -86,10 +86,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="ingame_id" class="col-md-4 col-form-label text-md-right">{{ __('Game ID') }}</label>
+                            <label for="ingame_id" id="ingame_id_label" class="col-md-4 col-form-label text-md-right">{{ __('Game ID') }}</label>
 
                             <div class="col-md-6">
-                                <input id="ingame_id" type="text" class="form-control @error('ingame_id') is-invalid @enderror" name="ingame_id" value="{{ old('ingame_id') }}" required autocomplete="ingame_id" autofocus>
+                                <input id="ingame_id" type="text" class="form-control @error('ingame_id') is-invalid @enderror" name="ingame_id" value="{{ old('ingame_id') }}" autocomplete="ingame_id" autofocus>
 
                                 @error('ingame_id')
                                     <span class="invalid-feedback" role="alert">
@@ -123,11 +123,12 @@ $("#game_prefer").change(function() {
     if (val == "csgo")
     {
         $("#role_game").html("<option value='entry fragger'> Entry Fragger </option> <option value='support csgo'> Support </option> <option value='lurker'> Lurker </option> <option value='riflers'> Riflers </option> <option value='leader'> Leader </option>");
+        document.getElementById('ingame_id_label').innerHTML = 'CSGO Game ID';
     }
     else if (val == "dota")
     {
         $("#role_game").html("<option value='carry'> Carry </option> <option value='Midlaner'>Midlaner</option> <option value='offlaner'> Offlaner </option> <option value='support'> Support </option> <option value='hard support'> Hard Support </option>");
-
+        document.getElementById('ingame_id_label').innerHTML = 'DotA Game ID';
     }
 });
 

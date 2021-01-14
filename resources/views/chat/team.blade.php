@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -37,10 +39,10 @@
                         @csrf
 
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="chat" id="chat" placeholder="Send your chat" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control" name="chat" id="chat" placeholder="Send your chat" aria-label="Recipient's username" aria-describedby="basic-addon2" onkeyup="validate(this)">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="submit">Send</button>
-                                {{-- <button class="btn btn-outline-secondary" onclick="x()" type="button">x</button> --}}
+                                <button class="btn btn-outline-secondary" type="submit" id="send-chat" name="send-chat" disabled>Send</button>
+
                             </div>
                         </div>
                     </form>
@@ -51,6 +53,16 @@
     </div>
 </div>
 
-
-
 @endsection
+
+<script>
+
+function validate(obj) {
+    if (obj.value.length > 0) {
+        document.getElementById("send-chat").disabled = false;
+    } else {
+        document.getElementById("send-chat").disabled = true;
+    }
+}
+
+</script>

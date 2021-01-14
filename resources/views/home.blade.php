@@ -1,78 +1,104 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card" style="background: #8C949D">
-                <div class="card-header" style="text-align: center"><h3> <strong>Dashboard</strong> </h3></div>
+@php
+    $leaderboard = DB::table('leaderboards')
+@endphp
+<div class="row">
 
-                <div class="card-body" style="background: #C4CAD0">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <div class="col-sm-1">
 
-                    @if(!Auth::guest())
-                        @if(Auth::user()->email_verified_at == NULL)
-                            Please Verified first
+    </div>
+    <div class="col-sm-3">
 
-                            <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                                @csrf
-                                <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                            </form>
+        <div class="row">
+            <div class="card" style="width: 18rem;height: 300px;border-radius: 30px">
+                <div class="card-body">
+                  <h3 class="card-title" style="text-align: center">
+                      <strong>Leaderboard</strong>
+                  </h3>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" style="color: orange"> <u>See More</u> </a>
+                </div>
+              </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="card" style="width: 18rem;height: 300px;border-radius: 30px">
+                <div class="card-body">
+                    <h3 class="card-title" style="text-align: center">
+                        <strong>Recent Review</strong>
+                    </h3>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 
-                        @else
+                </div>
+            </div>
+        </div>
 
-                        @if (Auth::user()->game_prefer == "" || Auth::user()->role_game == "" || Auth::user()->ingame_id == "")
-                            its seems you still have missing information! <br>
-                            Please complete it by clicking this button !<br><br>
+    </div>
 
-                            <a href="{{route('complete_information')}}" class="btn btn-primary">
-                                Submit missing information
-                            </a>
-                        @else
+    <div class="col-sm-5">
+        <div class="row">
+            <div class="col-sm-12" style="text-align: center">
+                <h3 style="color: white">
+                    <strong> <u>Latest Notification</u></strong>
+                </h3>
+            </div>
 
-                            <div class="row">
-                                <div class="col-md-6" style="text-align: center">
-                                    <a href="{{route('user.find_team')}}" class="btn btn-primary">
-                                        Find Team
-                                    </a>
-                                </div>
+        </div>
+        <br>
 
-                                <div class="col-md-6" style="text-align: center">
-                                    <a href="{{route('user.list_user')}}" class="btn btn-primary">
-                                        Find Player
-                                    </a>
-                                </div>
-                                <br><br><br>
+        <div class="row">
+            <div class="col-sm-12" style="text-align: center">
+                <div class="card" style="width: 500px;height: 100px;border-radius: 50px">
+                    <div class="card-body">
 
-                                <div class="col-md-6" style="text-align: center">
-                                    <a href="{{route('home.leaderboard')}}" class="btn btn-primary">
-                                        Leaderboard
-                                    </a>
-                                </div>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 
-                                <div class="col-md-6" style="text-align: center">
-                                    <a href="{{route('home.about')}}" class="btn btn-primary">
-                                        About Us
-                                    </a>
-                                </div>
-                            </div>
-
-                        @endif
-
-                        @endif
-
-                    @else
-
-                    @endif
-
+                    </div>
                 </div>
             </div>
 
         </div>
+
     </div>
+
+    <div class="col-sm-2">
+        <div class="row">
+            <div class="row">
+                <div class="card" style="width: 240px;height: 300px;border-radius: 30px">
+                    <div class="card-body">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row"style="text-align: center">
+            <h3 style="color: white" >
+                <strong> <u>Player we suggest !</u></strong>
+            </h3>
+
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-sm-3">
+                photo
+            </div>
+
+            <div class="col-sm-4">
+                isi
+            </div>
+
+            <div class="col-sm-2">
+                <i class="fa fa-plus" style="color: orange;font-size: 25px"></i>
+            </div>
+        </div>
+
+
+    </div>
+
 </div>
 @endsection

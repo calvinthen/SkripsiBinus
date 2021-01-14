@@ -40,13 +40,14 @@ class ChatController extends Controller
         $isiChat = $request->input('chat');
 
 
-        Chat::create([
+        $chat = Chat::create([
             'chat' => $isiChat,
             'sender_id' => Auth::user()->id,
             'receiver_id' => $id,
             'chat_read_or_not' => "not_readed",
         ]);
 
+        // return response()->json(['result' => $chat]);
         return redirect()->back();
     }
 
