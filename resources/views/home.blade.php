@@ -2,7 +2,12 @@
 
 @section('content')
 @php
-    $leaderboard = DB::table('leaderboards')
+    $recentReview = DB::table('reviews')->orderByDesc('created_at')->take(3)->get();
+    $notifikasi = DB::table('inboxes')->orderByDesc('created_at')->take(4)->get();
+
+    $suggestedPlayer = DB::table('users')->where('id','NOT LIKE', Auth::user()->id)->inRandomOrder()->take(3)->get();
+
+
 @endphp
 <div class="row">
 
@@ -18,7 +23,7 @@
                       <strong>Leaderboard</strong>
                   </h3>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" style="color: orange"> <u>See More</u> </a>
+                  <a href="{{route('home.leaderboard')}}"  id="see-more-leaderboard" style="color: orange" class="see-more-leaderboard"> <u>See More</u> </a>
                 </div>
               </div>
         </div>
@@ -29,7 +34,36 @@
                     <h3 class="card-title" style="text-align: center">
                         <strong>Recent Review</strong>
                     </h3>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                    @foreach ($recentReview as $recentReviews)
+                        @php
+                            $orangYangDireview = DB::table('users')->where('id','LIKE',$recentReviews->receiver_id)->first();
+                            $orangYangReview = DB::table('users')->where('id','LIKE',$recentReviews->reviewer_id)->first();
+                        @endphp
+                        <div class="card" style="width: 245px;height: 60px;border-radius: 50px;background: gray">
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <img src="{{url('./images/' . $orangYangDireview->photo_profile)}}" width="30px" height="30px">
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                        <strong style="color: black">{{$orangYangDireview->name}}</strong><br>
+                                        <small style="color: black">By <strong>{{$orangYangReview->name}}</strong> </small>
+
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <strong style="color: orange"> {{$recentReviews->score}}/10</strong>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                        </div>
+                        <br>
+                    @endforeach
 
                 </div>
             </div>
@@ -48,18 +82,37 @@
         </div>
         <br>
 
-        <div class="row">
-            <div class="col-sm-12" style="text-align: center">
-                <div class="card" style="width: 500px;height: 100px;border-radius: 50px">
-                    <div class="card-body">
+        @foreach ($notifikasi as $notifikasis)
+            @php
+                $pengirim = DB::table('users')->where('id','LIKE',$notifikasis->sender_id)->first();
+            @endphp
+            <div class="row">
+                <div class="col-sm-12" style="text-align: center">
+                    <div class="card" style="width: 500px;height: 92px;border-radius: 50px">
+                        <div class="card-body">
+                            <strong><u>{{$pengirim->name}}</u></strong>
+                            @if ($notifikasis->mail_type == "request_friend")
+                                Sent you a friend request
+                            @elseif ($notifikasis->mail_type == "request_team")
+                                Sent you a team request
 
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            @elseif ($notifikasis->mail_type == "invite_team")
+                                Sent you team invitation
+                            @endif
+                            <br><br>
+
+                            <small style="text-align: right">{{ \Carbon\Carbon::parse($notifikasis->created_at)->format('d/m/Y H:i')}}</small>
+
+                        </div>
 
                     </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
+            <br>
+
+        @endforeach
+
 
     </div>
 
@@ -83,18 +136,29 @@
         </div>
         <br>
 
-        <div class="row">
-            <div class="col-sm-3">
-                photo
-            </div>
+        <div class="row" >
+            @foreach ($suggestedPlayer as $suggestedPlayers)
 
-            <div class="col-sm-4">
-                isi
-            </div>
+                <div class="col-sm-4">
+                    photo
+                </div>
 
-            <div class="col-sm-2">
-                <i class="fa fa-plus" style="color: orange;font-size: 25px"></i>
-            </div>
+                <div class="col-sm-5">
+                   <strong style="color: white">{{$suggestedPlayers->name}}</strong><br>
+                   @if ($suggestedPlayers->role_game == "entry fragger")
+                   <strong style="color: white">Role: Entry</strong>
+                   @else
+                   <strong style="color: white">Role: {{$suggestedPlayers->role_game}}</strong>
+                   @endif
+
+                </div>
+
+                <div class="col-sm-3">
+                    <i class="fa fa-plus" style="color: orange;font-size: 25px"></i>
+                </div>
+                <br><br><br>
+            @endforeach
+
         </div>
 
 

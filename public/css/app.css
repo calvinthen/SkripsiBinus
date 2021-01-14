@@ -14,7 +14,10 @@
 
 }
 
-
+#see-more-leaderboard:hover
+{
+    color: cornflowerblue;
+}
 
 :root {
   --blue: #3490dc;
