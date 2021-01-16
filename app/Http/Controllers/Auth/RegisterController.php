@@ -53,6 +53,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'game_prefer' => ['required', 'nullable'],
+            'ingame_id' => ['required' , 'unique:users'],
         ]);
     }
 
@@ -70,7 +72,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => 'user',
-            'unique_id' => $random_id,
             'game_prefer' => $data['game_prefer'],
             'role_game' => $data['role_game'],
             'ingame_id' => $data['ingame_id'],

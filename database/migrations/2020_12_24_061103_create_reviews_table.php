@@ -17,9 +17,10 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->bigInteger('reviewer_id')->nullable()->unsigned();
             $table->bigInteger('receiver_id')->nullable()->unsigned();
-            $table->integer('score');
+            $table->float('score');
+            $table->string('like_or_dislike');
+            $table->bigInteger('vote_id');
             $table->string('body');
-            $table->string('approval');
             $table->timestamps();
         });
     }

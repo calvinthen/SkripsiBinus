@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -72,6 +73,7 @@ class HomeController extends Controller
 
     public function store_complete_information(Request $request)
     {
+
         DB::table('users')->where('id','LIKE',Auth::user()->id)->update(
             ['password' => Hash::make($request->input('password')),
              'game_prefer' => $request->input('game_prefer'),

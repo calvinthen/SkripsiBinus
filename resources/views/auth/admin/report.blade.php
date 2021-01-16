@@ -101,7 +101,8 @@
                                         <h3 class="modal-title" id="ReportModal{{$reports->id}}Label"> Report ID : <strong>{{$reports->id}}</strong></h3>
                                     </div>
                                     <div class="modal-body">
-                                        <strong> Reason : </strong>{{$reports->report}}
+                                        <strong> Reason : </strong>{{$reports->report}}<br>
+                                        <strong>Detail :</strong>{{$reports->detail}}
 
                                         <br><br>
                                         <strong>Status :</strong>

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Report;
+use App\report_reason;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class ReportController extends Controller
+class ReportReasonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,28 +33,18 @@ class ReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(Request $request)
     {
-        $isiReport = $request->input('isiReport');
-        $detail = $request->input('detail');
-        Report::create([
-            'reporter_id' => Auth::user()->id,
-            'receiver_id' => $id,
-            'report' => $isiReport,
-            'validation' => 'not_checked',
-            'detail' => $detail,
-        ]);
-
-        return redirect()->back()->with('status_report','Report has been sent to admin ! thanks for make our community better !');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Report  $report
+     * @param  \App\report_reason  $report_reason
      * @return \Illuminate\Http\Response
      */
-    public function show(Report $report)
+    public function show(report_reason $report_reason)
     {
         //
     }
@@ -63,10 +52,10 @@ class ReportController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Report  $report
+     * @param  \App\report_reason  $report_reason
      * @return \Illuminate\Http\Response
      */
-    public function edit(Report $report)
+    public function edit(report_reason $report_reason)
     {
         //
     }
@@ -75,10 +64,10 @@ class ReportController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Report  $report
+     * @param  \App\report_reason  $report_reason
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Report $report)
+    public function update(Request $request, report_reason $report_reason)
     {
         //
     }
@@ -86,10 +75,10 @@ class ReportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Report  $report
+     * @param  \App\report_reason  $report_reason
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Report $report)
+    public function destroy(report_reason $report_reason)
     {
         //
     }

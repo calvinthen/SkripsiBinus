@@ -23,7 +23,10 @@
                 <img src="{{url('./images/' . $team->photo_team)}}" alt="" width="100px" height="100px">
                 <br>
 
-                    Leader : {{$leader->name}}
+                    Leader :
+                    <a href="{{route('team.member_team_detail',$leader->id)}}" style="color: black">
+                        {{$leader->name}}
+                    </a>
                     <br>
 
                     <strong>Member</strong><br>

@@ -48,6 +48,7 @@
                             </div>
                         </div>
 
+
                         <div class="form-group row">
                             <label for="role_game" class="col-md-4 col-form-label text-md-right">{{ __('Role in game') }}</label>
 
@@ -57,6 +58,7 @@
                                 </select>
                             </div>
                         </div>
+
 
                         <div class="form-group row">
                             <label for="ingame_id" class="col-md-4 col-form-label text-md-right">{{ __('Game ID') }}</label>
@@ -72,6 +74,7 @@
                             </div>
                         </div>
 
+
                         <div class="row">
                             <div class="col-md-12" style="text-align: center">
                                 <button class="btn btn-primary" type="submit">
@@ -83,14 +86,14 @@
                     </div>
                 </form>
 
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                                <a href="/">
-                                    Click here to go to Homepage !
-                                </a>
-                            </div>
-                        @endif
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                            <a href="/">
+                                Click here to go to Homepage !
+                            </a>
+                        </div>
+                    @endif
 
             </div>
         </div>

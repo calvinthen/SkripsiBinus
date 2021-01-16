@@ -56,11 +56,16 @@
                                 </div>
                                 <div class="modal-body" style="text-align: center">
 
-                                    <strong>Score</strong> <br> <input type="number" id="score" name="score" min="1" max="10"><br>
+                                    <strong>Review Player</strong><br>
+                                    <textarea name="reviewText" id="reviewText" cols="50" rows="5" required></textarea>
                                     <br>
 
-                                    <strong>Review Player</strong><br>
-                                    <textarea name="reviewText" id="reviewText" cols="50" rows="5"></textarea>
+                                    <label class="radio-inline">
+                                        <i class="fa fa-thumbs-up" style="font-size: 20px;color: greenyellow"></i> <input type="radio" name="optradio" id="optradio" value="like" checked>
+                                    </label>
+                                    <label class="radio-inline">
+                                        <i class="fa fa-thumbs-down" style="font-size: 20px;color: red"></i><input type="radio" name="optradio" id="optradio" value="dislike">
+                                    </label>
 
                                 </div>
                                 <div class="modal-footer">
@@ -69,6 +74,7 @@
                                     <button class="btn btn-primary" type="submit">
                                         Submit
                                     </button>
+
                                 </div>
                             </div>
                             </div>

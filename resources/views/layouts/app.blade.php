@@ -28,7 +28,27 @@
     <link rel="stylesheet" href="{{url('css/style.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <style>
+        body {margin:0;}
 
+        main{
+            padding: 16px;
+            margin-top: 70px;
+        }
+
+        .navbar {
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 5;
+        }
+
+        .dropdown-menu{
+            z-index: 5;
+        }
+
+    </style>
 </head>
 
 <body style="background-color: #044691" onload="runScriptOnload()">
@@ -85,7 +105,7 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background: #C4CAD0">
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background: #C4CAD0;">
                                     <a class="dropdown-item" href={{route('profile.index',Auth::user()->id)}}>
                                         Profile
                                     </a>

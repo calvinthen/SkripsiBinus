@@ -67,11 +67,17 @@
                             <label for="game_prefer" class="col-md-4 col-form-label text-md-right">{{ __('Game prefered') }}</label>
 
                             <div class="col-md-6">
-                                <select name="game_prefer" id="game_prefer" class="form-control">
-                                    <option value="">- Select -</option>
+                                <select name="game_prefer" id="game_prefer" class="form-control @error('game_prefer') is-invalid @enderror" name="game_prefer" value="{{ old('game_prefer') }}" >
+                                    <option>- Select -</option>
                                     <option value="csgo">Counter Strike: Global Offensive</option>
                                     <option value="dota">DotA 2</option>
                                 </select>
+
+                                @error('game_prefer')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

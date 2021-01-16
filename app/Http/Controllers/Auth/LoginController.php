@@ -68,6 +68,11 @@ class LoginController extends Controller
         if($findUser)
         {
             Auth::login($findUser);
+            if($findUser->game_prefer == "")
+        {
+            return view('auth.complete_information');
+        }
+
         }
         else
         {
@@ -77,12 +82,20 @@ class LoginController extends Controller
             $inserUser->password = bcrypt($user->name);
             $inserUser->role = 'user';
             $inserUser->remember_token = NULL;
+            $inserUser->game_prefer = "";
             $inserUser->email_verified_at = now();
             $inserUser->save();
 
 
             Auth::login($inserUser);
+            if($inserUser->game_prefer == "")
+        {
+            return view('auth.complete_information');
         }
+
+        }
+
+
 
 
 

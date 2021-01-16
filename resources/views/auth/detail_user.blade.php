@@ -11,7 +11,7 @@
 
         $scoreRatingUser = 0;
 
-        foreach ($ratingTable as $ratingTables) {
+        foreach ($ratingTable as $ratingTables){
             $scoreRatingUser += $ratingTables->score;
         }
 
@@ -19,6 +19,8 @@
         {
             $averageScoreRating = $scoreRatingUser / $totalReviewer;
         }
+
+        $review = DB::table('reviews')->where('receiver_id','LIKE',$user->id)->paginate(5);
 
 
     @endphp
@@ -38,7 +40,7 @@
 
                     <strong>Total Reviewer : </strong> {{$totalReviewer}}<br>
 
-                    <strong>Rating : </strong> {{$scoreRatingUser}} <br>
+                    <strong>Point : </strong> {{$user->point}} <br>
 
                     @if ($totalReviewer != 0)
                         <strong>Average Rating : </strong> {{$averageScoreRating}}
@@ -110,14 +112,24 @@
                                         <div class="modal-body">
                                         <strong>Choose your reason :</strong>
                                         <br>
+                                            @php
+                                                $report_reason = DB::table('report_reasons')->get();
+                                            @endphp
 
                                             <div class="form-group">
                                                 <select class="form-control" id="isiReport" name="isiReport">
-                                                    <option value="Tidak bermain sesuai dengan role">Tidak bermain sesuai dengan role</option>
-                                                    <option value="Bersikap toxic atau tidak sopan">Bersikap toxic atau tidak sopan</option>
-                                                    <option value="Melakukan tindakan terlarang seperti cheating">Melakukan tindakan terlarang seperti cheating</option>
+                                                    @foreach ($report_reason as $report_reasons)
+                                                        <option value="{{$report_reasons->reason}}">{{$report_reasons->reason}}</option>
+                                                    @endforeach
+
                                                 </select>
                                             </div>
+
+                                            <strong> Detail reason :</strong>
+                                            <br>
+
+                                            <textarea name="detail" id="detail" cols="50" rows="5" placeholder="Input your report detail" required></textarea>
+
 
                                         </div>
                                         <div class="modal-footer">
@@ -154,6 +166,62 @@
                         @endif
                 </div>
             </div>
+            <br>
+
+            @foreach ($review as $reviews)
+                @php
+                    $orangYangReview = DB::table('users')->where('id','LIKE',$reviews->reviewer_id)->first();
+                    $totalUpvote = DB::table('review_votes')->where(['review_id'=>$reviews->id, 'upvote' => 1])->count();
+                    $totalDownvote = DB::table('review_votes')->where(['review_id'=>$reviews->id, 'downvote' => 1])->count();
+
+                    $voting = DB::table('review_votes')->where('review_id','LIKE',$reviews->id)->get();
+                    $pernahVoting = 0;
+                    foreach($voting as $votings)
+                    {
+                        if(Auth::user()->id == $votings->user_id)
+                        {
+                            $pernahVoting = 1;
+                        }
+                    }
+                @endphp
+                <div class="card">
+                    <div class="card-header">
+                        {{$orangYangReview->name}} Just review {{$user->name}}
+                        <br>
+                        {{$reviews->body}}
+                        <br>
+
+                        @if ($reviews->like_or_dislike == "like")
+                            <i class="fa fa-thumbs-up" style="font-size: 30px;color: greenyellow"></i>
+                        @elseif($reviews->like_or_dislike == "dislike")
+                            <i class="fa fa-thumbs-down" style="font-size: 30px;color: red"></i>
+                        @endif
+                        <br>
+                        Total Upvote : {{$totalUpvote}}
+                        Total Downvote : {{$totalDownvote}}
+                    </div>
+                    <div class="card-body">
+                        @if( $flagFriendlistOrNot == 0 && $flagFriendlistOrNot2 == 0)
+
+                        @elseif ($pernahVoting == 1 )
+                            <strong>You already vote for this review !</strong>
+                        @else
+                            <a href="{{route('review.upvote',$reviews->id)}}" class="btn btn-success">
+                                Up Vote
+                            </a>
+
+                            <a href="{{route('review.downvote',$reviews->id)}}" class="btn btn-danger">
+                                Down Vote
+                            </a>
+                        @endif
+
+                    </div>
+                </div>
+                <br>
+
+            @endforeach
+
+
         </div>
     </div>
 </div>

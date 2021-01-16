@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     if(Auth::guest())
     {
-        return view('auth.login');
+        return view('halamanUtama');
     }
     else
     {
@@ -164,3 +164,9 @@ Route::get('home/list/user/search_by_role','Auth\UserController@search_player_by
 
 //admin masuk ke halaman banned user
 Route::get('home/admin/index/banned','Auth\AdminController@banned_index')->name('admin.banned_index');
+
+//user upvote reviews
+Route::get('home/list/user/review/{id}/upvote','ReviewController@upvote_store')->name('review.upvote');
+
+//user downvote reviews
+Route::get('home/list/user/review/{id}/downvote','ReviewController@downvote_store')->name('review.downvote');

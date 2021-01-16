@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('role_game');
             $table->string('ingame_id')->unique();
 
-            $table->integer('point')->default(0);
+            $table->float('point')->default(0);
 
             $table->string('photo_profile')->default('user.jpg');
 
