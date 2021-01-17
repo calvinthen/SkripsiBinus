@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use DateTime;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
@@ -57,5 +57,12 @@ class AdminController extends Controller
     {
 
         return view('auth.admin.unban');
+    }
+
+    public function unban_user($id)
+    {
+        DB::table('users')->where('id','LIKE',$id)->update(['banned_until' => NULL]);
+
+        return redirect()->back();
     }
 }

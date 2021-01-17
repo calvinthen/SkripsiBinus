@@ -170,3 +170,6 @@ Route::get('home/list/user/review/{id}/upvote','ReviewController@upvote_store')-
 
 //user downvote reviews
 Route::get('home/list/user/review/{id}/downvote','ReviewController@downvote_store')->name('review.downvote');
+
+//admin unban user
+Route::get('home/admin/index/unban/{id}/user','Auth\AdminController@unban_user')->name('admin.unban');

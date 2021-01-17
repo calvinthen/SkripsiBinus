@@ -18,15 +18,18 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app2.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{url('css/style.css')}}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{{ asset('css/css_halaman_utama/custom.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/css_halaman_utama/custom.scss')}}" rel="stylesheet">
 
     <style>
         body {margin:0;}
@@ -36,14 +39,6 @@
             margin-top: 70px;
         }
 
-        .navbar {
-            background-color: #333;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 5;
-        }
-
         .dropdown-menu{
             z-index: 5;
         }
@@ -51,9 +46,10 @@
     </style>
 </head>
 
-<body style="background-color: #044691" onload="runScriptOnload()">
+<body style="background-color: #222831" onload="runScriptOnload()">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background: #03346D;">
+          <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+
             <div class="container">
 
                 {{-- INITIALIAZE VARIABLE --}}
@@ -75,7 +71,7 @@
                 @endphp
 
                 <a class="navbar-brand" href="{{ url('/') }}" style="color: white">
-                    {{ config('app.aplicationName', 'Playmaker') }}
+                    <img class ="rounded mx-auto d-block" src="{{ asset('images/asset/logo.png')}}" alt="" height="35px">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -92,11 +88,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a style="color: white" class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Log in') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a style="color: white" class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a  class="nav-link" href="{{ route('register') }}">{{ __('Create an account') }}</a>
                                 </li>
                             @endif
                         @else

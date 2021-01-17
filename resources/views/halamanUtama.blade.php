@@ -41,10 +41,10 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('register') }}">Sign Up</a>
+            <a class="nav-link" href="{{ route('login') }}">Log In</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">Log In</a>
+            <a class="nav-link" href="{{ route('register') }}">Create an Account</a>
           </li>
         </ul>
       </div>
@@ -61,10 +61,8 @@
           <div class="container">
             <h1 class="masthead-heading mb-0">
               <!-- INPUT LOGO HERE, BUAT DI HEADER-->
+              <img class="img-fluid" src="images/asset/logo big.png" alt="">
             </h1>
-            <h2 class="masthead-subheading mb-0">
-               PLAYMAKER
-            </h2>
             <h4>
               Your gaming friends finding platform
             </h4>
@@ -77,30 +75,34 @@
       <br>
       <!-- GARIS PUTIH DI HEADER -->
       <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-10">
-          <div class="line"></div>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3">
+          <div class="col-sm-12 positionBtn">
+            <a href="{{ route('register') }}">
+              <div class="parallelogram">
+                <h2 class="buttonWords">
+                  Create an Account
+                </h2>
+              </div>
+            </a>
+          </div>
         </div>
-        <div class="col-sm-1"></div>
+        <div class="col-sm-3">
+          <div class="col-sm-12 positionBtn">
+            <a href="{{ route('login') }}">
+              <div class="parallelogram3">
+                <h2 class="buttonWords">
+                  Login
+                </h2>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-sm-3"></div>
       </div>
 
-      <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3">
-          <!-- REGISTER -->
-          <a href="{{ route('register') }}" class="btn btn-customWhite btn-xl rounded-pill mt-5">
-            Sign Up
-          </a>
-        </div>
-        <div class="col-sm-3">
-          <!-- LOGIN -->
-          <a href="{{ route('login') }}" class="btn btn-customBlack btn-xl rounded-pill mt-5">
-            Login
-          </a>
-        </div>
-        <div class="col-sm-3"></div>
-      </div>
-    </div>
+      <br>
   </header>
 
   <section id="sect1" style="background: #222831; color: #eeeeee">
@@ -108,7 +110,7 @@
       <div class="row align-items-center">
         <div class="col-lg-6 order-lg-2">
           <div class="p-5">
-            <img class="rounded mx-auto d-block" src="images/asset/add-friend.png" alt="">
+            <img class="img-fluid" src="images/asset/add-friend.png" alt="">
           </div>
         </div>
         <div class="col-lg-6 order-lg-1">
@@ -126,7 +128,7 @@
       <div class="row align-items-center">
         <div class="col-lg-6">
           <div class="p-5">
-            <img class="rounded mx-auto d-block" src="images/asset/users-group.png" alt="">
+            <img class="img-fluid" src="images/asset/users-group.png" alt="">
           </div>
         </div>
         <div class="col-lg-6">
@@ -145,7 +147,7 @@
       <div class="row align-items-center">
         <div class="col-lg-6 order-lg-2">
           <div class="p-5">
-            <img class="rounded mx-auto d-block" src="images/asset/trophy.png" alt="">
+            <img class="img-fluid" src="images/asset/trophy.png" alt="">
           </div>
         </div>
         <div class="col-lg-6 order-lg-1">

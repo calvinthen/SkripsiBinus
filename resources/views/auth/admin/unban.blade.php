@@ -70,12 +70,35 @@
                             </td>
 
                             <td>
-                                <button class="btn btn-warning">
+                                <button class="btn btn-warning" data-toggle="modal" data-target="#exampleModal{{$userBanneds->id}}">
                                     Unban
                                 </button>
                             </td>
                         </tr>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal{{$userBanneds->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{$userBanneds->id}}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel{{$userBanneds->id}}">Unbanned User : {{$userBanneds->name}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    Report Record
+                                </div>
+                                <div class="modal-footer" style="text-align: center">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 
+                                <a href="{{route('admin.unban',$userBanneds->id)}}" type="button" class="btn btn-danger">
+                                    Unban
+                                </a>
+
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                             @php
                                 $number++;
                             @endphp
