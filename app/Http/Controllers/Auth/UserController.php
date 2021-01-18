@@ -118,4 +118,10 @@ class UserController extends Controller
 
         return view('search.search_by_role')->with('role',$role)->with('user',$user);
     }
+
+    public function create_post_index()
+    {
+
+        return view('index_post');
+    }
 }

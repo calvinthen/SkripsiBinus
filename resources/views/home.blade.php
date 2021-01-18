@@ -4,6 +4,7 @@
 @php
     $recentReview = DB::table('reviews')->orderByDesc('created_at')->take(3)->get();
     $notifikasi = DB::table('inboxes')->where('receiver_id','LIKE',Auth::user()->id)->orderByDesc('created_at')->take(4)->get();
+    $posting = DB::table('posts')->orderByDesc('created_at')->take(4)->get();
 
     $suggestedPlayer = DB::table('users')->where('id','NOT LIKE', Auth::user()->id)->inRandomOrder()->take(3)->get();
 
@@ -95,6 +96,19 @@
 
         </div>
         <br>
+
+        <a href="{{route('user.post')}}" class="btn btn-primary">
+            Create Post
+        </a>
+
+        @foreach ($posting as $postings)
+            <a href="{{route('post.detail',$postings->id)}}">
+                <p style="color: white">{{$postings->post}}</p>
+
+                <img src="{{url('./images/' . $postings->thumbnail)}}" alt="" width="150px" height="150px">
+            </a>
+
+        @endforeach
 
         @foreach ($notifikasi as $notifikasis)
             @php

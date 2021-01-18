@@ -173,3 +173,15 @@ Route::get('home/list/user/review/{id}/downvote','ReviewController@downvote_stor
 
 //admin unban user
 Route::get('home/admin/index/unban/{id}/user','Auth\AdminController@unban_user')->name('admin.unban');
+
+//user ke halaman bikin post
+Route::get('home/user/create/post','Auth\UserController@create_post_index')->name('user.post');
+
+//post store ke database
+Route::post('home/user/post/store','PostController@store')->name('post.store');
+
+//post detail
+Route::get('home/post/{id}/detail','PostController@index')->name('post.detail');
+
+//user comment ke post
+Route::post('home/post/{id}/detail/comment/store','PostCommentController@store')->name('comment.store');

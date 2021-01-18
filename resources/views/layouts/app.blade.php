@@ -128,7 +128,7 @@
 
                                     @if($userRole == 'admin')
                                         <a class="dropdown-item" href="{{route('admin.index')}}">
-                                            Admin web controller
+                                            Admin tools
                                         </a>
                                     @endif
 
