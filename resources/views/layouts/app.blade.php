@@ -17,7 +17,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -43,13 +43,22 @@
             z-index: 5;
         }
 
+        #profileID:hover{
+            color:#222831;
+        }
+        #adminID:hover{
+            color:#222831;
+        }
+        #logoutID:hover{
+            color:#222831;
+        }
+
     </style>
 </head>
 
 <body style="background-color: #222831" onload="runScriptOnload()">
     <div id="app">
           <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-
             <div class="container">
 
                 {{-- INITIALIAZE VARIABLE --}}
@@ -78,11 +87,6 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -92,49 +96,49 @@
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a  class="nav-link" href="{{ route('register') }}">{{ __('Create an account') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Create an account') }}</a>
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('user.friendlist')}}" style="transition:0.5s;">
+                                    Friend
+                                </a>
+                            </li>
+                            @if (Auth::user()->team != NULL)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('team.user_team_index')}}" style="transition:0.5s;">
+                                    Team
+                                </a>
+                            </li>
+                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link notification" href="{{route('user.inbox')}}" style="transition:0.5s;">
+                                    Inbox
+                                    @if ($mail != NULL)
+                                        <span class="badge" style="background: red"> {{$totalEmail}}</span>
+                                    @endif
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: white">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background: #C4CAD0;">
-                                    <a class="dropdown-item" href={{route('profile.index',Auth::user()->id)}}>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="background: rgba(15, 15, 15, 0.7); opacity: 90%">
+                                    <a id="profileID" class="dropdown-item nav-link" href={{route('profile.index',Auth::user()->id)}} style="transition:0.5s;">
                                         Profile
                                     </a>
 
-                                    @if (Auth::user()->team == NULL)
-
-                                    @else
-                                    <a href="{{route('team.user_team_index')}}" class="dropdown-item">
-                                        Team
-                                    </a>
-                                    @endif
-
-                                    <a class="dropdown-item" href="{{route('user.friendlist')}}">
-                                        Friend
-                                    </a>
-
-                                    <a class="dropdown-item notification" href="{{route('user.inbox')}}">
-                                        Inbox
-                                        @if ($mail != NULL)
-                                        <span class="badge" style="background: red"> {{$totalEmail}}</span>
-                                        @endif
-                                    </a>
-
-
                                     @if($userRole == 'admin')
-                                        <a class="dropdown-item" href="{{route('admin.index')}}">
-                                            Admin tools
+                                        <a id="adminID" class="dropdown-item nav-link" href="{{route('admin.index')}}" style="transition:0.5s;">
+                                            Admin web controller
                                         </a>
                                     @endif
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a id="logoutID" class="dropdown-item nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();" style="transition:0.5s;">
                                         {{ __('Logout') }}
                                     </a>
 

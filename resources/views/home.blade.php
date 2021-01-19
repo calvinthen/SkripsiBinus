@@ -169,7 +169,7 @@
     </div>
 
     @php
-        $post = DB::table('posts')->take(5)->get();
+        $post = DB::table('posts')->orderByDesc('created_at')->take(5)->get();
     @endphp
     <div id="midColID" class="col-sm-5">
         <div class="row">

@@ -41,7 +41,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'post' => ['required', 'min:50', 'max:255'],
+            'post' => ['required', 'min:20', 'max:500'],
         ]);
 
         if($request->hasFile('pict'))
