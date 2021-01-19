@@ -44,11 +44,11 @@ class PostController extends Controller
             'post' => ['required', 'min:50', 'max:255'],
         ]);
 
-        if($request->hasFile('photo'))
+        if($request->hasFile('pict'))
         {
             $random = Str::random(10);
-            $imageName = time() . '-' . $random . '.' . request()->file('photo')->getClientOriginalExtension();
-            request()->photo->move(public_path('images'), $imageName);
+            $imageName = time() . '-' . $random . '.' . request()->file('pict')->getClientOriginalExtension();
+            request()->pict->move(public_path('images'), $imageName);
         }
         else
         {

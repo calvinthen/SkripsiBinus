@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="background: #8C949D">
+            <div class="card" style="width:100%; background: #292e36; color: #eeeeee; margin-top:5px;">
                 <div class="card-header" style="text-align: center"> <h3><strong>Profile</strong></h3></div>
 
                 <div class="card-body" style="background: #C4CAD0">
@@ -25,25 +25,6 @@
 
             </div>
 
-            {{-- @if ($team == NULL)
-                it seems you dont have any team registered yet, wanna find or create a team for yours ?
-                <br>
-                <br><br>
-
-                <!-- DESIGN BUTTON ANIMATION -->
-                <div style="text-align: center">
-                    <a href="{{route('user.find_team')}}" class="buttonAnimationProfileFindTeam" style="text-decoration: none">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        Find Here !
-                    </a>
-                </div>
-
-
-
-            @endif --}}
 
                         @if (session('status_team'))
                             <div class="alert alert-success">
@@ -52,6 +33,7 @@
                         @endif
         </div>
     </div>
+
 </div>
 
 
