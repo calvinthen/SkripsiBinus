@@ -4,13 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="background: #8C949D">
+            <div class="card" >
                 <div class="card-header" style="text-align: center"><Strong><h2>INBOX</h2></Strong></div>
 
-                <div class="card-body" style="background: #C4CAD0">
+                <div class="card-body" >
                     <table class="table table-striped">
                         <thead>
-                          <tr>
+                          <tr style="color: white">
                             <th scope="col">Inboxes ID</th>
                             <th scope="col">From</th>
                             <th scope="col">Subject</th>
@@ -24,7 +24,7 @@
                                   $sender_name = DB::table('users')->where('id','LIKE',$mails->sender_id)->first();
                               @endphp
 
-                              <tr>
+                              <tr style="color: white">
                                 <th scope="row">{{$mails->id}}</th>
                                 <td>{{$sender_name->name}}</td>
 
@@ -47,7 +47,7 @@
                               </tr>
 
                               <!-- Modal -->
-                                <div class="modal fade" id="readMailModal{{$mails->id}}" tabindex="-1" role="dialog" aria-labelledby="readMailModal{{$mails->id}}" aria-hidden="true">
+                                <div class="modal fade" id="readMailModal{{$mails->id}}" tabindex="-1" role="dialog" aria-labelledby="readMailModal{{$mails->id}}" aria-hidden="true" style="color: black">
                                     <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">

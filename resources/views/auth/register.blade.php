@@ -76,8 +76,8 @@
                             <label for="game_prefer" class="col-md-4 col-form-label text-md-right">{{ __('Game prefered') }}</label>
 
                             <div class="col-md-6">
-                                <select name="game_prefer" id="game_prefer" class="input @error('game_prefer') is-invalid @enderror" name="game_prefer" value="{{ old('game_prefer') }}" >
-                                    <option>- Select -</option>
+                                <select name="game_prefer" id="game_prefer" class="input @error('game_prefer') is-invalid @enderror" name="game_prefer" value="{{ old('game_prefer') }}" autocomplete="game_prefer" autofocus required>
+                                    <option value="">- Select -</option>
                                     <option value="csgo">Counter Strike: Global Offensive</option>
                                     <option value="dota">DotA 2</option>
                                 </select>
@@ -104,7 +104,7 @@
                             <label for="ingame_id" id="ingame_id_label" class="col-md-4 col-form-label text-md-right">{{ __('Game ID') }}</label>
 
                             <div class="col-md-6">
-                                <input id="ingame_id" type="text" class="input @error('ingame_id') is-invalid @enderror" name="ingame_id" value="{{ old('ingame_id') }}" autocomplete="ingame_id" autofocus>
+                                <input id="ingame_id" type="text" class="input @error('ingame_id') is-invalid @enderror" name="ingame_id" value="{{ old('ingame_id') }}" autocomplete="ingame_id" autofocus placeholder="input your game ID">
 
                                 @error('ingame_id')
                                     <span class="invalid-feedback" role="alert">

@@ -122,6 +122,11 @@
                     </div>
                 </div>
             @endforeach
+            <br>
+            <a href="{{route('home.leaderboard')}}">
+                <h3 style="color: white"> <u>See more</u> </h3>
+            </a>
+
         </div>
 
 
@@ -190,13 +195,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <input type="file" id="pict" name="pict" style="display: none;" />
-                                    <button id="pictButton" class="btn btn-customBlack" style="width:60%" onclick="document.getElementById('pict').click();">Attach Picture</button>
+                                    <input id="pictButton" class="btn btn-customBlack" style="width:60%" type="button" value="Attach Picture" onclick="document.getElementById('pict').click();">
                                 </div>
                                 <div class="col-sm-6">
                                     <button class="btn btn-customBlack float-right" type="submit" style="width:50%">Post</button>
-                                    <button id="pictButtonSmall" class="btn btn-customBlack float-right" style="width:40%;height:37px; margin-right:10px" onclick="document.getElementById('pict').click();">
-                                        <i class="fa fa-picture-o" aria-hidden="true"></i>
-                                    </button>
+                                    <input id="pictButtonSmall" type="button" value="&#xf0f6" class="fa fa-input btn btn-customBlack float-right" style="width:40%;height:37px; margin-right:10px" onclick="document.getElementById('pict').click();">
                                 </div>
                             </div>
                         </div>
@@ -206,7 +209,6 @@
         </div>
 
         <div class="row" style="margin-top: 10px">
-            <div class="row" style="margin-top: 10px">
                 {{-- GUA MASUKIN 1 CONTOH CARD, LU TINGGAL EDIT BIAR PAKE FOREACH --}}
                 @foreach ($post as $posts)
                 @php
@@ -224,7 +226,7 @@
 
                             <div class="col-sm-5">
                                 {{-- GANTI HREF KE PROFILE ORANG YANG POST, SAMA KAYAK ATAS--}}
-                                <a class="reviewed" href="{{route('user.detail',$posts->user_id)}}"><strong style="font-size: 12px"><b></b></strong></a>
+                                <a class="reviewed" href="{{route('user.detail',$posts->user_id)}}">{{$orangYangPosting->name}}<strong><b></b></strong></a>
                                 <br>
                                 {{-- GANTI KE WAKTU, FORMATNYA date("F j, Y, g:i a") resultnya harusnya contoh: March 10, 2001, 5:16 pm --}}
                                 <small>{{ \Carbon\Carbon::parse($posts->created_at)->format('F j, Y, g:i a')}}</small>
@@ -234,19 +236,21 @@
                     {{-- BODYNYA DI HREF KE DETAIL POSTNYA --}}
                     <a href="{{route('post.detail',$posts->id)}}" style="text-decoration: none; color: #eeeeee">
                     <div class="card-body postBody">
-                        <div class="col-sm-8">
-                            {{$posts->post}}
-                        </div>
-                        <div class="col-sm-4">
-                            {{-- FOTO POSTNYA, (jika ada), KALO GA ADA, DIV INI ILANG, TRUS YANG ATAS JADI COL-SM-12 --}}
+                        <div class="row">
+                            <div class="col-sm-8">
+                                {{$posts->post}}
+                            </div>
+                            <div class="col-sm-4">
+                                {{-- FOTO POSTNYA, (jika ada), KALO GA ADA, DIV INI ILANG, TRUS YANG ATAS JADI COL-SM-12 --}}
+                                @if ($posts->thumbnail != "")
+                                    <img class="img-fluid" src="{{url('./images/' . $posts->thumbnail)}}" style="max-width:100%; height:auto">
+                                @endif
+                            </div>
                         </div>
                     </div>
                     </a>
                 </div>
                 @endforeach
-
-            </div>
-
         </div>
     </div>
 
@@ -315,12 +319,15 @@
                     <a href="{{route('team.user_team_index')}}">
                         <img class="float-right" src="{{url('./images/' . $team->photo_team)}}" width="100%" height="90px">
                     </a>
-
                 </div>
             </div>
             </div>
 
             @endif
+
+            <a href="{{route('user.find_team')}}">
+                {{-- Find team --}}
+            </a>
         </div>
 
 

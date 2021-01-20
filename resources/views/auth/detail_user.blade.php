@@ -20,17 +20,17 @@
             $averageScoreRating = $scoreRatingUser / $totalReviewer;
         }
 
-        $review = DB::table('reviews')->where('receiver_id','LIKE',$user->id)->paginate(5);
+        $reviews = DB::table('reviews')->where('receiver_id','LIKE',$user->id)->paginate(5);
 
 
     @endphp
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="background: #8C949D">
+            <div class="card" >
                 <div class="card-header" style="text-align: center">
                     <h2><strong> Detail User : {{$user->name}}</strong></h2>
                 </div>
-                <div class="card-body" style="background: #C4CAD0">
+                <div class="card-body" >
 
                     <img src="{{url('./images/' . $user->photo_profile)}}" alt="" width="150px" height="150px"><br><br>
 
@@ -76,11 +76,11 @@
                             @endif
 
                             <!-- Modal REMOVE FRIEND-->
-                            <div class="modal fade" id="removeFriendModal" tabindex="-1" role="dialog" aria-labelledby="removeFriendModal" aria-hidden="true">
+                            <div class="modal fade" id="removeFriendModal" tabindex="-1" role="dialog" aria-labelledby="removeFriendModal" aria-hidden="true" style="color: black">
                                 <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h5 class="modal-title" id="removeFriendModal">Remove Friend {{$user->name}}</h5>
+                                    <h5 class="modal-title" id="removeFriendModal" >Remove Friend {{$user->name}}</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -100,7 +100,7 @@
 
                             <form action="{{route('user.report_player',$user->id)}}" method="GET">
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: black">
                                     <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -168,58 +168,76 @@
             </div>
             <br>
 
-            @foreach ($review as $reviews)
-                @php
-                    $orangYangReview = DB::table('users')->where('id','LIKE',$reviews->reviewer_id)->first();
-                    $totalUpvote = DB::table('review_votes')->where(['review_id'=>$reviews->id, 'upvote' => 1])->count();
-                    $totalDownvote = DB::table('review_votes')->where(['review_id'=>$reviews->id, 'downvote' => 1])->count();
 
-                    $voting = DB::table('review_votes')->where('review_id','LIKE',$reviews->id)->get();
-                    $pernahVoting = 0;
-                    foreach($voting as $votings)
+            @foreach ($reviews as $review)
+            @php
+                $orangYangReview = DB::table('users')->where('id','LIKE',$review->reviewer_id)->first();
+
+                $totalUpvote = DB::table('review_votes')->where(['review_id'=>$review->id, 'upvote' => 1])->count();
+                $totalDownvote = DB::table('review_votes')->where(['review_id'=>$review->id, 'downvote' => 1])->count();
+
+                $voting = DB::table('review_votes')->where('review_id','LIKE',$review->id)->get();
+                $pernahVoting = 0;
+                foreach($voting as $votings)
+                {
+                    if(Auth::user()->id == $votings->user_id)
                     {
-                        if(Auth::user()->id == $votings->user_id)
-                        {
-                            $pernahVoting = 1;
-                        }
+                        $pernahVoting = 1;
                     }
-                @endphp
-                <div class="card">
-                    <div class="card-header">
-                        {{$orangYangReview->name}} Just review {{$user->name}}
-                        <br>
-                        {{$reviews->body}}
-                        <br>
+                }
+            @endphp
+            <div class="card" style="width:100%; margin-top:5px">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <img class="img-fluid" src="{{url('./images/' . $orangYangReview->photo_profile)}}" style="max-width:50px; height:auto; border: 1px solid #222831; border-radius: 25px;">
+                        </div>
 
-                        @if ($reviews->like_or_dislike == "like")
-                            <i class="fa fa-thumbs-up" style="font-size: 30px;color: greenyellow"></i>
-                        @elseif($reviews->like_or_dislike == "dislike")
-                            <i class="fa fa-thumbs-down" style="font-size: 30px;color: red"></i>
-                        @endif
-                        <br>
-                        Total Upvote : {{$totalUpvote}}
-                        Total Downvote : {{$totalDownvote}}
-                    </div>
-                    <div class="card-body">
-                        @if( $flagFriendlistOrNot == 0 && $flagFriendlistOrNot2 == 0)
+                        <div class="col-sm-5">
+                            {{-- HREF KE ORANG YANG DIREVIEW --}}
+                            <a href="{{route('user.detail',$orangYangReview->id)}}" style="text-decoration:none"><strong><b>{{$orangYangReview->name}}</b></strong></a>
+                        </div>
 
-                        @elseif ($pernahVoting == 1 )
-                            <strong>You already vote for this review !</strong>
-                        @else
-                            <a href="{{route('review.upvote',$reviews->id)}}" class="btn btn-success">
-                                Up Vote
-                            </a>
+                        <div class="col-sm-3">
+                            <div class="row">
+                                @if ($review->like_or_dislike == "like")
+                                    <i class="fa fa-thumbs-up float-right" style="font-size: 30px;color: greenyellow; margin-left:10px"></i>
+                                @elseif($review->like_or_dislike == "dislike")
+                                    <i class="fa fa-thumbs-down float-right" style="font-size: 30px;color: red; margin-left:10px"></i>
+                                @endif
+                            </div>
+                        </div>
 
-                            <a href="{{route('review.downvote',$reviews->id)}}" class="btn btn-danger">
-                                Down Vote
-                            </a>
-                        @endif
+                        <div class="col-sm-3" style="margin-top:10px">
+                            <div class="row">
+                                {{-- TOMBOL UPVOTE DAN DOWNVOTE --}}
+                                {{-- TOLONG DINOTE KALO UDAH PERNAH NGE UPVOTE BERARTI DIA GABISA UPVOTE LAGI, BEGITU JUGA SEBALIKNYA--}}
 
+
+
+                                @if( $flagFriendlistOrNot == 0 && $flagFriendlistOrNot2 == 0)
+
+                                @elseif ($pernahVoting == 1 )
+                                    <strong>You already vote for this review !</strong>
+                                @else
+                                <a href="{{route('review.upvote',$review->id)}}" class="btn btn-customBlack float-right" style="color: lime; width: 40%; margin-left: 10px">
+                                    <i class="fa fa-arrow-up" aria-hidden="true" style="color: lime"></i>
+                                </a>
+
+                                <a href="{{route('review.downvote',$review->id)}}" class="btn btn-customBlack float-right" style="width: 40%; margin-left: 10px">
+                                    <i class="fa fa-arrow-up" aria-hidden="true" style="color: red"></i>
+                                </a>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <br>
-
-            @endforeach
+                <div class="card-footer">
+                    {{$review->body}}
+                </div>
+            </div>
+            <br>
+        @endforeach
 
 
         </div>

@@ -19,10 +19,10 @@
     @endphp
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="background: #8C949D">
+            <div class="card" >
                 <div class="card-header">Leaderboard by points</div>
 
-                <div class="card-body" style="background: #C4CAD0">
+                <div class="card-body" >
                     <div class="row">
 
                         <div class="col-md-6">
@@ -37,7 +37,7 @@
                     </div>
 
                     <!-- Tab buat Dota -->
-                    <ul class="nav nav-tabs tab-buat-dota" id="tab-buat-dota">
+                    <ul class="nav nav-tabs tab-buat-dota" id="tab-buat-dota" >
                         <li class="nav-item">
                             <a href="#carry" class="nav-link active" role="tab" data-toggle="tab" style="color: black">
                                  <strong>Carry</strong>
@@ -103,7 +103,7 @@
                         <div role="tabpanel" class="tab-pane" id="offlaner">
                             @foreach ($offlaner as $offlaners)
 
-                                <a href="{{route('user.detail',$offlaners->id)}}" style="color: black">
+                                <a href="{{route('user.detail',$offlaners->id)}}" style="color: white">
                                     {{$offlaners->name}}
                                 </a>
                                 <strong>{{$offlaners->point}}</strong>

@@ -41,7 +41,7 @@
 
                         <div style="text-align: center">
                             <button type="submit" class="btn btn-primary">
-                                Confirm team
+                                Create team
                             </button>
                         </div>
                         <br>

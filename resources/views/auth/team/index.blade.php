@@ -8,13 +8,13 @@
     @endphp
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="background: #8C949D">
+            <div class="card">
 
                 <div class="card-header" style="text-align: center">
                     <h2><strong>Team Index</strong></h2>
                 </div>
 
-                <div class="card-body"  style="background: #C4CAD0">
+                <div class="card-body" >
 
                     <form action="" method="">
                         <!-- Search form -->
@@ -35,7 +35,7 @@
                     </form>
 
                     @foreach ($team as $teams)
-                        <a href="{{route('user.view_selected_team',$teams->id)}}" style="color: black">
+                        <a href="{{route('user.view_selected_team',$teams->id)}}" style="color: white">
 
 
                             <div class="row">

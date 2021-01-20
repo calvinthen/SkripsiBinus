@@ -136,6 +136,10 @@
                                         </a>
                                     @endif
 
+                                    <a id="profileID" class="dropdown-item nav-link" href="{{route('user.change_password_index')}}" style="transition:0.5s;">
+                                        Change Password
+                                    </a>
+
                                     <a id="logoutID" class="dropdown-item nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();" style="transition:0.5s;">

@@ -5,15 +5,15 @@
 
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card" style="background: #8C949D">
+            <div class="card">
                 <div class="card-header" style="text-align: center">
                         <strong> <h2> List user with no team</h2></strong>
                 </div>
 
-                <div class="card-body" style="background: #C4CAD0">
+                <div class="card-body" >
                     <table class="table table-striped">
                         <thead>
-                          <tr>
+                          <tr style="color: white">
                             <th scope="col">No</th>
                             <th scope="col">Name</th>
                             <th scope="col">Role Game</th>
@@ -43,7 +43,7 @@
                                 }
                             @endphp
 
-                                <tr>
+                                <tr style="color: white">
                                   <th scope="row">{{$users->id}}</th>
                                   <td>{{$users->name}}</td>
                                   <td>{{$users->role_game}}</td>

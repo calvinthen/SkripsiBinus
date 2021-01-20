@@ -5,12 +5,12 @@
 
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="background: #8C949D">
+            <div class="card" >
                 <div class="card-header" style="text-align: center">
                     <h2><strong> List User</strong></h2>
                 </div>
 
-                <div class="card-body"  style="background: #C4CAD0">
+                <div class="card-body">
 
                     <form action="{{route('user.search_player')}}" method="GET">
                         <!-- Search form -->
@@ -62,7 +62,7 @@
                         @if ($user->name == Auth::user()->name)
                             @continue
                         @endif
-                        <a href="{{route('user.detail',$user->id)}}" style="color: black">
+                        <a href="{{route('user.detail',$user->id)}}" style="color: white">
                             <div class="row">
                                 <div class="col-md-1">
                                     <img src="{{url('./images/' . $user->photo_profile)}}" alt="" width="50px" height="50px">

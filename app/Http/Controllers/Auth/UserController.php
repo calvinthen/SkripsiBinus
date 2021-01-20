@@ -124,4 +124,32 @@ class UserController extends Controller
 
         return view('index_post');
     }
+
+    public function store_change_password(Request $request)
+    {
+        $oldPassword = $request->input('oldPassword');
+        if (!(Hash::check($request->get('oldPassword'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()->with("error","Your old password is incorrect");
+        }
+
+        if(strcmp($request->get('oldPassword'), $request->get('password')) == 0)
+        {
+            return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
+        }
+        if(!(strcmp($request->get('password'), $request->get('password_confirmation'))) == 0)
+        {
+            return redirect()->back()->with("error","New Password should be same as your confirmed password. Please retype new password.");
+        }
+
+            DB::table('users')->where('id','LIKE',Auth::user()->id)->update(['password' => Hash::make($request->input('password'))]);
+            return redirect()->back()->with("success","Password changed successfully !");
+
+
+
+        return dd($oldPassword);
+    }
+
+
+
 }

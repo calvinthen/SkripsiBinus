@@ -49,11 +49,12 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'name' => ['required', 'min:1', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'game_prefer' => ['required', 'min:1'],
+            'game_prefer' => ['nullable'],
             'ingame_id' => ['required' , 'unique:users'],
         ]);
     }

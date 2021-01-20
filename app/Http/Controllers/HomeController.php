@@ -73,6 +73,12 @@ class HomeController extends Controller
 
     public function store_complete_information(Request $request)
     {
+        $validatedData = $request->validate([
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'game_prefer' => ['nullable'],
+
+            'ingame_id' => ['required' , 'unique:users'],
+        ]);
 
         DB::table('users')->where('id','LIKE',Auth::user()->id)->update(
             ['password' => Hash::make($request->input('password')),
@@ -91,6 +97,11 @@ class HomeController extends Controller
     {
 
         return view('leaderboard.index');
+    }
+
+    public function change_password_index()
+    {
+        return view('change_password');
     }
 
 

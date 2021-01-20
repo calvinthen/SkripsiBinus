@@ -14,19 +14,34 @@
                     <div>
                         <ul>
                             @foreach ($chat as $chats)
+
                                 @php
                                     $sender = DB::table('users')->where('id','LIKE',$chats->sender_id)->first();
+
                                 @endphp
 
-                                <li>
-                                    <strong>
-                                        {{$sender->name}} Says:
-                                    </strong><br>
+                                @if($sender->name == Auth::user()->name)
+                                    <li style="text-align: right;text-decoration: none">
+                                        <strong>
+                                            {{$sender->name}} <small>{{ \Carbon\Carbon::parse($chats->created_at)->format('d/m/Y H:i')}}</small>
+                                        </strong><br>
 
-                                    {{$chats->chat}}<br>
-                                    Send in {{$chats->created_at}}
-                                    <br><br>
-                                </li>
+                                        {{$chats->chat}}<br>
+
+                                        <br><br>
+                                    </li>
+
+                                @else
+                                    <li>
+                                        <strong>
+                                            {{$sender->name}} <small>{{ \Carbon\Carbon::parse($chats->created_at)->format('d/m/Y H:i')}}</small>
+                                        </strong><br>
+
+                                        {{$chats->chat}}<br>
+
+                                        <br><br>
+                                    </li>
+                                @endif
 
                             @endforeach
                         </ul>

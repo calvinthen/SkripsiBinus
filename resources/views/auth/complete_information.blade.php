@@ -6,13 +6,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="background: #8C949D">
+            <div class="card" >
                 <div class="card-header" style="text-align: center"><strong><h3>{{ __('Complete your information profile') }}</h3></strong></div>
 
                 <form action="{{route('user.complete_information_store')}}" method="GET">
                     @csrf
 
-                    <div class="card-body" style="background: #C4CAD0">
+                    <div class="card-body">
                      <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
@@ -40,7 +40,7 @@
                             <label for="game_prefer" class="col-md-4 col-form-label text-md-right">{{ __('Game prefered') }}</label>
 
                             <div class="col-md-6">
-                                <select name="game_prefer" id="game_prefer" class="form-control">
+                                <select name="game_prefer" id="game_prefer" class="form-control" name="game_prefer" value="{{ old('game_prefer') }}" autocomplete="game_prefer" autofocus required>
                                     <option value="">- Select -</option>
                                     <option value="csgo">Counter Strike: Global Offensive</option>
                                     <option value="dota">DotA 2</option>
@@ -76,10 +76,12 @@
 
 
                         <div class="row">
-                            <div class="col-md-12" style="text-align: center">
-                                <button class="btn btn-primary" type="submit">
-                                    Confirm Information
-                                </button>
+                            <div class="col-sm-12">
+                                <center>
+                                    <button type="submit" class="btn btn-customBlack">
+                                        {{ __('Submit') }}
+                                    </button>
+                                </center>
                             </div>
                         </div>
 

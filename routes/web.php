@@ -185,3 +185,9 @@ Route::get('home/post/{id}/detail','PostController@index')->name('post.detail');
 
 //user comment ke post
 Route::post('home/post/{id}/detail/comment/store','PostCommentController@store')->name('comment.store');
+
+//user ke halaman change password
+Route::get('home/user/change_password','HomeController@change_password_index')->name('user.change_password_index');
+
+//user ganti password
+Route::post('home/user/change_password/store','Auth\UserController@store_change_password')->name('user.store_new_password');

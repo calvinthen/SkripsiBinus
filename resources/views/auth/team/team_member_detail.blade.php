@@ -7,12 +7,12 @@
     @endphp
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card"  style="background: #8C949D">
+            <div class="card"  >
                 <div class="card-header" style="text-align: center">
                     <h2><strong> Team Member : {{$member->name}}</strong></h2>
                 </div>
 
-                <div class="card-body"  style="background: #C4CAD0">
+                <div class="card-body"  >
                     <img src="{{url('./images/' . $member->photo_profile)}}" alt="" width="200px" height="200px">
                     <br><br>
 
@@ -43,7 +43,7 @@
                         @csrf
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: black">
                             <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">

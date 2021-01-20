@@ -13,18 +13,18 @@
 
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card" style="background: #8C949D">
+            <div class="card" >
                 <div class="card-header" style="text-align: center">
                 <h2><strong> Team : {{$team->team_name}}</strong></h2>
                 </div>
 
-                <div class="card-body" style="background: #C4CAD0">
+                <div class="card-body">
 
                 <img src="{{url('./images/' . $team->photo_team)}}" alt="" width="100px" height="100px">
                 <br>
 
                     Leader :
-                    <a href="{{route('team.member_team_detail',$leader->id)}}" style="color: black">
+                    <a href="{{route('team.member_team_detail',$leader->id)}}" style="color: white">
                         {{$leader->name}}
                     </a>
                     <br>
@@ -37,7 +37,7 @@
                             @continue
                         @endif
 
-                        <a href="{{route('team.member_team_detail',$members->id)}}" style="color: black">
+                        <a href="{{route('team.member_team_detail',$members->id)}}" style="color: white">
                             {{$members->name}}
                         </a>
                         <br>
