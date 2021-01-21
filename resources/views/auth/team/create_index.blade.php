@@ -39,10 +39,14 @@
                         </div>
                         <br>
 
-                        <div style="text-align: center">
-                            <button type="submit" class="btn btn-primary">
-                                Create team
-                            </button>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <center>
+                                    <button type="submit" class="btn btn-customBlack">
+                                        {{ __('Create team') }}
+                                    </button>
+                                </center>
+                            </div>
                         </div>
                         <br>
 

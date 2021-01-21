@@ -34,9 +34,15 @@
                         <div class="col-md-12" style="text-align: center">
 
                             <a href="{{route('user.request_join_team',$team->id)}}">
-                                <button class="btn btn-primary">
-                                    Request Join Team
-                                </button>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <center>
+                                            <button type="button" class="btn btn-customBlack">
+                                                {{ __('Request join team') }}
+                                            </button>
+                                        </center>
+                                    </div>
+                                </div>
                             </a>
 
                         </div>

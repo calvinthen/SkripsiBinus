@@ -59,7 +59,7 @@
                                 </a>
                             @else
                                 <a href="{{route('user.chat_friend_index',$user->id)}}" class="btn btn-success">
-                                    Send Chat!
+                                    Send Message!
                                 </a>
 
                                 <br>

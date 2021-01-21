@@ -57,6 +57,9 @@
 
                       <tbody>
                         @foreach ($userBanned as $userBanneds)
+                        @php
+                            $reportMilikUser = DB::table('reports')->where(['receiver_id' => $userBanneds->id],['validation' => 'checked'])->get();
+                        @endphp
                         <tr>
                             <td>{{$number}}</td>
                             <td>{{$userBanneds->id}}</td>
@@ -87,6 +90,14 @@
                                 </div>
                                 <div class="modal-body">
                                     Report Record
+
+                                    @foreach ($reportMilikUser as $reportMilikUsers)
+
+                                                <p style="color: red">
+                                                    {{$reportMilikUsers->report}}
+                                                </p>
+                                                <br>
+                                    @endforeach
                                 </div>
                                 <div class="modal-footer" style="text-align: center">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

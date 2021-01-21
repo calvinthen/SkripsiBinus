@@ -132,7 +132,7 @@
 
                                     @if($userRole == 'admin')
                                         <a id="adminID" class="dropdown-item nav-link" href="{{route('admin.index')}}" style="transition:0.5s;">
-                                            Admin web controller
+                                            Admin tools
                                         </a>
                                     @endif
 

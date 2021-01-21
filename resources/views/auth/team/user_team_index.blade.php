@@ -46,7 +46,7 @@
 
 
                         <a href="{{route('team.chat_index',$team->id)}}" class="btn btn-success">
-                            Team chat
+                            Team Message
                         </a>
 
                     @if(Auth::user()->name  != $leader->name)

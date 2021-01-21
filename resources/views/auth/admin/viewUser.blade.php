@@ -120,6 +120,7 @@
                                         Email : <strong>{{$users->email}}</strong> <br>
                                         Game ID : <strong>{{$users->ingame_id}}</strong><br>
                                         Total Report :  {{$totalReportUserMiliki}}<br>
+                                        Account Created : <strong>{{ \Carbon\Carbon::parse($users->created_at)->format('d/m/Y H:i')}}</strong>
                                     </div>
                                     <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
