@@ -64,6 +64,14 @@
         background-color: #1c2025;
     }
 
+    #seeMore:hover{
+        color: #cccccc !important;
+    }
+
+    #leaderBoardName:hover{
+        color: #cccccc !important;
+    }
+
 
 </style>
 @section('content')
@@ -114,7 +122,7 @@
 
                             <div class="col-sm-8">
                                 {{-- HREF KE ORANG YANG DIREVIEW --}}
-                                <a href="{{route('user.detail',$leaderboard->id)}}">
+                                <a id="leaderBoardName" href="{{route('user.detail',$leaderboard->id)}}" style="text-decoration: none; color:#eeeeee; transition: .5s;">
                                     <h4>{{$leaderboard->name}}</h4>
                                 </a>
                             </div>
@@ -123,8 +131,8 @@
                 </div>
             @endforeach
             <br>
-            <a href="{{route('home.leaderboard')}}">
-                <h3 style="color: white"> <u>See more</u> </h3>
+            <a id="seeMore" href="{{route('home.leaderboard')}}" style="margin-top:5px; transition: .5s; color: #eeeeee">
+                <h3> <u>See more</u> </h3>
             </a>
 
         </div>

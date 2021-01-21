@@ -6,17 +6,8 @@
         <div class="col-md-8">
             <div class="card" >
                 <div class="card-header" style="text-align: center"><Strong><h2>INBOX</h2></Strong></div>
-
                 <div class="card-body" >
-                    <table class="table table-striped">
-                        <thead>
-                          <tr style="color: white">
-                            <th scope="col">Inboxes ID</th>
-                            <th scope="col">From</th>
-                            <th scope="col">Subject</th>
-                            <th scope="col">Action</th>
-                          </tr>
-                        </thead>
+                    <table class="table table-striped" style="border-top: 1px solid #cccccc; background: #292e36">
                         <tbody>
                             @foreach ($mail as $mails)
 
@@ -24,27 +15,28 @@
                                   $sender_name = DB::table('users')->where('id','LIKE',$mails->sender_id)->first();
                               @endphp
 
-                              <tr style="color: white">
-                                <th scope="row">{{$mails->id}}</th>
-                                <td>{{$sender_name->name}}</td>
 
-                                @if ($mails->mail_type == "invite_team")
-                                    <td>Team Invitation</td>
+                                <tr style="color: white">
+                                    {{-- dibikin href ke profile sender --}}
+                                    <td>
+                                        {{$sender_name->name}}
+                                    </td>
 
-                                @elseif($mails->mail_type == "request_team")
-                                    <td>Request Team</td>
+                                    @if ($mails->mail_type == "invite_team")
+                                        <td>Team Invitation</td>
 
-                                @elseif($mails->mail_type == "request_friend")
-                                    <td>Request Friend</td>
-                                @endif
+                                    @elseif($mails->mail_type == "request_team")
+                                        <td>Request Team</td>
 
-
-                                <td>
-                                    <button class="btn btn-primary" data-toggle="modal" data-target="#readMailModal{{$mails->id}}">
-                                        Read
-                                    </button>
-                                </td>
-                              </tr>
+                                    @elseif($mails->mail_type == "request_friend")
+                                        <td>Request Friend</td>
+                                    @endif
+                                    <td>
+                                        <button class="btn btn-customBlack" style="widht:100%" data-toggle="modal" data-target="#readMailModal{{$mails->id}}">
+                                            Read
+                                        </button>
+                                    </td>
+                                </tr>
 
                               <!-- Modal -->
                                 <div class="modal fade" id="readMailModal{{$mails->id}}" tabindex="-1" role="dialog" aria-labelledby="readMailModal{{$mails->id}}" aria-hidden="true" style="color: black">
