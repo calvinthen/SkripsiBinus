@@ -116,6 +116,7 @@ html {
     height: 10px;
     background: #eeeeee;
 
+
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
@@ -127,7 +128,8 @@ html {
       width: 100%;
       height: 10px;
       transform: skew(-20deg);
-    background: #eeeeee;
+    background: url('../../images/asset/Dashboard_Create_Hollow.png') no-repeat !important;
+    /* background: url('../../images/asset/Dashboard_Create.png'); */
     color: #222831;
     transition: 1s;
   }
@@ -153,7 +155,7 @@ html {
       width: 100%;
       height: 10px;
       transform: skew(-20deg);
-    background: #222831;
+    background: url('../../images/asset/Dashboard_Login_Hollow.png') no-repeat !important;
     color:#eeeeee;
     transition: 1s;
   }
@@ -162,7 +164,7 @@ html {
   }
 
   #trapezoidRight {
-    overflow-x: hidden;
+    /* overflow: hidden; */
     position:relative;
     z-index: 0;
     border-bottom: 100px solid #0092ca;
@@ -171,21 +173,22 @@ html {
     width: 130px;
     color: #393e46 !important;
 
+    /* background: url('../../images/asset/Home_Create_Trapesium.png') no-repeat !important; */
     transition-duration: 0.5s;
   }
   #trapezoidLeft {
-    overflow-x: hidden;
-
     position:relative;
 
     z-index: 0;
     right:0;
     border-top: 100px solid #eeeeee;
     border-left: 40px solid transparent;
+    /* transform: skewY(180deg); */
     height: 0;
     width: 130px;
     color: #393e46;
 
+    background: url('../../images/asset/Home_Join_Trapesium.png') no-repeat !important;
     transition-duration: 0.5s;
   }
 

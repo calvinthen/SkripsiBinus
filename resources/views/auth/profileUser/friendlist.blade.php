@@ -12,12 +12,19 @@
 <div class="container">
 
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8">
             <div class="card" >
                 <div class="card-header" style="text-align: center">
                     <h2><strong> Friendlist </strong></h2>
                 </div>
             </div>
+        </div>
+        <div class="col-sm-2">
+            <a href="{{route('user.list_user')}}" class="btn btn-customWhite">
+                Find More !
+            </a>
         </div>
     </div>
 

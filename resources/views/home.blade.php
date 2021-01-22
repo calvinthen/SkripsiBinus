@@ -72,7 +72,38 @@
         color: #cccccc !important;
     }
 
+    .parallelogramHome{
+    overflow: hidden;
+      width: 100%;
+      height: 10px;
+      transform: skew(-20deg);
+    background: #eeeeee !important;
+    /* background: url('../../images/asset/Dashboard_Create.png'); */
+    color: #222831;
+    transition: 1s;
+  }
+  .parallelogramHome:hover{
+    height: 40px;
+  }
 
+  .buttonWords{
+    position:absolute;
+    bottom:0;
+    right:0;
+  }
+
+  .parallelogramHome3 {
+    overflow: hidden;
+      width: 100%;
+      height: 10px;
+      transform: skew(-20deg);
+    background: #1a1f25;
+    color:#eeeeee;
+    transition: 1s;
+  }
+  .parallelogramHome3:hover{
+    height: 40px;
+  }
 </style>
 @section('content')
 @php
@@ -265,24 +296,28 @@
     <div id="rightColID" class="col-sm-2">
         <div class="row">
             @if (Auth::user()->team_id == NULL)
-                <div id="createTeam" style="width:50%">
+                <div class="col-sm-12">
                     {{-- CREATE TEAM --}}
                     <a href="{{route('team.create_team_index')}}" style="text-decoration: none;">
                         {{-- BACKGROUND BELUM SELESAI (TUNGGU RIZKY)--}}
-                        <div id="trapezoidRight">
+                        <div class="parallelogramHome">
+                            <h2>
+                                Create a Team
+                            </h2>
                         </div>
                     </a>
-                </div>
-
-                <div id="joinTeam" style="width:50%">
                     {{-- JOIN TEAM & TOLONG DI HREF KE TEAM LIST--}}
-                    <a href="{{route('user.find_team')}}" style="text-decoration: none; float:right">
+                    <a href="{{route('user.find_team')}}" style="text-decoration: none;">
                         {{-- BACKGROUND BELUM SELESAI (TUNGGU RIZKY) --}}
-                        <div id="trapezoidLeft">
+                        <div class="parallelogramHome3">
+                            <h2 class="float-right">
+                                Join a Team
+                            </h2>
                         </div>
                     </a>
                 </div>
 
+                    
 
             @elseif(Auth::user()->team_id != NULL)
             <div class="row">
@@ -332,14 +367,9 @@
             </div>
 
             @endif
-
-            <a href="{{route('user.find_team')}}">
-                {{-- Find team --}}
-            </a>
         </div>
 
-
-        <div class="row"style="text-align: center; margin-top:80px">
+        <div class="row"style="text-align: center; margin-top:50px">
             <h3 style="color: #eeeeee" >
                 Cool players with the same game as you
             </h3>
@@ -382,24 +412,3 @@
 </div>
 
 @endsection
-
-<script>
-
-$(document).ready(function(){
-  $("#trapezoidRight").hover(function(){
-        $("#trapezoidRight").css("width", "210px");
-        $("#trapezoidLeft").css("width", "20px");
-    }, function(){
-        $("#trapezoidRight").css("width", "130px");
-        $("#trapezoidLeft").css("width", "130px");
-  });
-  $("#trapezoidLeft").hover(function(){
-        $("#trapezoidLeft").css("width", "210px");
-        $("#trapezoidRight").css("width", "20px");
-    }, function(){
-        $("#trapezoidLeft").css("width", "130px");
-        $("#trapezoidRight").css("width", "130px");
-  });
-});
-</script>
-

@@ -1,5 +1,9 @@
 @extends('layouts.app')
-
+<style>
+    .leaderboardUser:hover{
+        transform: scale(1.1);
+    }
+</style>
 @section('content')
 <div class="container">
     @php
@@ -24,11 +28,10 @@
 
                 <div class="card-body" >
                     <div class="row">
-
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Select Game</label>
-                                <select class="form-control" id="selectGame" name="selectGame" onchange="gantiTab()">
+                                <select class="input" id="selectGame" name="selectGame" onchange="gantiTab()" style="background:#292e36">
                                   <option value="dota">Dota 2</option>
                                   <option value="csgo">Counter-Strike: Global Offensive</option>
                                 </select>
@@ -39,31 +42,31 @@
                     <!-- Tab buat Dota -->
                     <ul class="nav nav-tabs tab-buat-dota" id="tab-buat-dota" >
                         <li class="nav-item">
-                            <a href="#carry" class="nav-link active" role="tab" data-toggle="tab" style="color: black">
+                            <a href="#carry" class="nav-link active" role="tab" data-toggle="tab" style="color: #eeeeee">
                                  <strong>Carry</strong>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#midlaner" class="nav-link" role="tab" data-toggle="tab" style="color: black">
+                            <a href="#midlaner" class="nav-link" role="tab" data-toggle="tab" style="color: #eeeeee">
                                 <strong>Midlaner</strong>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#offlaner" class="nav-link" role="tab" data-toggle="tab" style="color: black">
+                            <a href="#offlaner" class="nav-link" role="tab" data-toggle="tab" style="color: #eeeeee">
                                 <strong>Offlaner</strong>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#support" class="nav-link" role="tab" data-toggle="tab" style="color: black">
+                            <a href="#support" class="nav-link" role="tab" data-toggle="tab" style="color: #eeeeee">
                                 <strong>Support</strong>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#hardsupport" class="nav-link" role="tab" data-toggle="tab" style="color: black">
+                            <a href="#hardsupport" class="nav-link" role="tab" data-toggle="tab" style="color: #eeeeee">
                                 <strong>Hard Support</strong>
                             </a>
                         </li>
@@ -75,13 +78,31 @@
                         <br>
                         <div role="tabpanel" class="tab-pane active" id="carry">
                             @foreach ($carry as $carries)
-
-                                <a href="{{route('user.detail',$carries->id)}}" style="color: black">
-                                    {{$carries->name}}
+                            <div class="row">
+                                <a id="leaderBoardName" href="{{route('user.detail',$carries->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                    <div class="card leaderboardUser" style="margin:10px; transition: .5s">
+                                        <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <img class="img-fluid" src="{{url('./images/' . $carries->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <h5>{{$carries->name}}</h5>
+                                                    <strong>Point: {{$carries->point}}</strong>
+                                                    <br>     
+                                                    <strong>
+                                                        @if ($carries->team == "")
+                                                            Team: -
+                                                        @else
+                                                            Team: {{$carries->team}}
+                                                        @endif
+                                                    </strong>         
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </a>
-                                <strong>{{$carries->point}}</strong>
-
-                                <br>
+                                </div>
                             @endforeach
 
                         </div>
@@ -89,53 +110,124 @@
 
                         <div role="tabpanel" class="tab-pane" id="midlaner">
                             @foreach ($midlaner as $midlaners)
-
-                                <a href="{{route('user.detail',$midlaners->id)}}" style="color: black">
-                                    {{$midlaners->name}}
+                                <div class="row">
+                                <a id="leaderBoardName" href="{{route('user.detail',$midlaners->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                    <div class="card leaderboardUser" style="margin:10px; transition: .5s">
+                                        <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <img class="img-fluid" src="{{url('./images/' . $midlaners->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <h5>{{$midlaners->name}}</h5>
+                                                    <strong>Point: {{$midlaners->point}}</strong>
+                                                    <br>     
+                                                    <strong>
+                                                        @if ($midlaners->team == "")
+                                                            Team: -
+                                                        @else
+                                                            Team: {{$midlaners->team}}
+                                                        @endif
+                                                    </strong>         
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </a>
-                                <strong>{{$midlaners->point}}</strong>
-
-                                <br>
+                                </div>
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="offlaner">
                             @foreach ($offlaner as $offlaners)
-
-                                <a href="{{route('user.detail',$offlaners->id)}}" style="color: white">
-                                    {{$offlaners->name}}
+                            <div class="row">
+                                <a id="leaderBoardName" href="{{route('user.detail',$offlaners->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                    <div class="card leaderboardUser" style="margin:10px; transition: .5s">
+                                        <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <img class="img-fluid" src="{{url('./images/' . $offlaners->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <h5>{{$offlaners->name}}</h5>
+                                                    <strong>Point: {{$offlaners->point}}</strong>
+                                                    <br>     
+                                                    <strong>
+                                                        @if ($offlaners->team == "")
+                                                            Team: -
+                                                        @else
+                                                            Team: {{$offlaners->team}}
+                                                        @endif
+                                                    </strong>         
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </a>
-                                <strong>{{$offlaners->point}}</strong>
-
-
-                                <br>
+                            </div>
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="support">
                             @foreach ($support as $supports)
-
-                                <a href="{{route('user.detail',$supports->id)}}" style="color: black">
-                                    {{$supports->name}}
+                            <div class="row">
+                                <a id="leaderBoardName" href="{{route('user.detail',$supports->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                    <div class="card leaderboardUser" style="margin:10px; transition: .5s">
+                                        <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <img class="img-fluid" src="{{url('./images/' . $supports->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <h5>{{$supports->name}}</h5>
+                                                    <strong>Point: {{$supports->point}}</strong>
+                                                    <br>     
+                                                    <strong>
+                                                        @if ($supports->team == "")
+                                                            Team: -
+                                                        @else
+                                                            Team: {{$supports->team}}
+                                                        @endif
+                                                    </strong>         
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </a>
-                                <strong>{{$supports->point}}</strong>
-
-                                <br>
+                            </div>
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="hardsupport">
                             @foreach ($hardsupport as $hardsupports)
-
-                                <a href="{{route('user.detail',$hardsupports->id)}}" style="color: black">
-                                    {{$hardsupports->name}}
+                            <div class="row">
+                                <a id="leaderBoardName" href="{{route('user.detail',$hardsupports->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                    <div class="card leaderboardUser" style="margin:10px; transition: .5s">
+                                        <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <img class="img-fluid" src="{{url('./images/' . $hardsupports->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <h5>{{$hardsupports->name}}</h5>
+                                                    <strong>Point: {{$hardsupports->point}}</strong>
+                                                    <br>     
+                                                    <strong>
+                                                        @if ($hardsupports->team == "")
+                                                            Team: -
+                                                        @else
+                                                            Team: {{$hardsupports->team}}
+                                                        @endif
+                                                    </strong>         
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </a>
-                                <strong>{{$hardsupports->point}}</strong>
-
-                                <br>
+                            </div>
                             @endforeach
                         </div>
 
@@ -145,31 +237,31 @@
                      <!-- Tab buat CSGO -->
                      <ul class="nav nav-tabs tab-buat-csgo" id="tab-buat-csgo" style="display: none">
                         <li class="nav-item">
-                            <a href="#entry" class="nav-link active" role="tab" data-toggle="tab" style="color: black">
+                            <a href="#entry" class="nav-link active" role="tab" data-toggle="tab" style="color: #eeeeee">
                                  <strong>Entry Fragger</strong>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#supportCSGO" class="nav-link" role="tab" data-toggle="tab" style="color: black">
+                            <a href="#supportCSGO" class="nav-link" role="tab" data-toggle="tab" style="color: #eeeeee">
                                 <strong>Support</strong>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#lurker" class="nav-link" role="tab" data-toggle="tab" style="color: black">
+                            <a href="#lurker" class="nav-link" role="tab" data-toggle="tab" style="color: #eeeeee">
                                 <strong>Lurker</strong>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#riflers" class="nav-link" role="tab" data-toggle="tab" style="color: black">
+                            <a href="#riflers" class="nav-link" role="tab" data-toggle="tab" style="color: #eeeeee">
                                 <strong>Riflers</strong>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#leader" class="nav-link" role="tab" data-toggle="tab" style="color: black">
+                            <a href="#leader" class="nav-link" role="tab" data-toggle="tab" style="color: #eeeeee">
                                 <strong>Leader</strong>
                             </a>
                         </li>
@@ -181,66 +273,155 @@
                         <br>
                         <div role="tabpanel" class="tab-pane active" id="entry">
                             @foreach ($entry as $entries)
-
-                                <a href="{{route('user.detail',$entries->id)}}" style="color: black">
-                                    {{$entries->name}}
+                                <div class="row">
+                                <a id="leaderBoardName" href="{{route('user.detail',$entries->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                    <div class="card leaderboardUser" style="margin:10px; transition: .5s">
+                                        <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <img class="img-fluid" src="{{url('./images/' . $entries->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <h5>{{$entries->name}}</h5>
+                                                    <strong>Point: {{$entries->point}}</strong>
+                                                    <br>     
+                                                    <strong>
+                                                        @if ($entries->team == "")
+                                                            Team: -
+                                                        @else
+                                                            Team: {{$entries->team}}
+                                                        @endif
+                                                    </strong>         
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </a>
-                                <strong>{{$entries->point}}</strong>
-
-                                <br>
+                                </div>
                             @endforeach
-
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="supportCSGO">
                             @foreach ($supportCSGO as $supportCSGOs)
-
-                                <a href="{{route('user.detail',$supportCSGOs->id)}}" style="color: black">
-                                    {{$supportCSGOs->name}}
+                            <div class="row">
+                                <a id="leaderBoardName" href="{{route('user.detail',$supportCSGOs->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                    <div class="card leaderboardUser" style="margin:10px; transition: .5s">
+                                        <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <img class="img-fluid" src="{{url('./images/' . $supportCSGOs->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <h5>{{$supportCSGOs->name}}</h5>
+                                                    <strong>Point: {{$supportCSGOs->point}}</strong>
+                                                    <br>     
+                                                    <strong>
+                                                        @if ($supportCSGOs->team == "")
+                                                            Team: -
+                                                        @else
+                                                            Team: {{$supportCSGOs->team}}
+                                                        @endif
+                                                    </strong>         
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </a>
-                                <strong>{{$supportCSGOs->point}}</strong>
-
-                                <br>
+                            </div>
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="lurker">
                             @foreach ($lurker as $lurkers)
-
-                                <a href="{{route('user.detail',$lurkers->id)}}" style="color: black">
-                                    {{$lurkers->name}}
+                            <div class="row">
+                                <a id="leaderBoardName" href="{{route('user.detail',$lurkers->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                    <div class="card leaderboardUser" style="margin:10px; transition: .5s">
+                                        <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <img class="img-fluid" src="{{url('./images/' . $lurkers->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <h5>{{$lurkers->name}}</h5>
+                                                    <strong>Point: {{$lurkers->point}}</strong>
+                                                    <br>     
+                                                    <strong>
+                                                        @if ($lurkers->team == "")
+                                                            Team: -
+                                                        @else
+                                                            Team: {{$lurkers->team}}
+                                                        @endif
+                                                    </strong>         
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </a>
-                                <strong>{{$lurkers->point}}</strong>
-
-                                <br>
+                            </div>
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="riflers">
                             @foreach ($rifler as $riflers)
-
-                                <a href="{{route('user.detail',$riflers->id)}}" style="color: black">
-                                    {{$riflers->name}}
+                            <div class="row">
+                                <a id="leaderBoardName" href="{{route('user.detail',$riflers->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                    <div class="card leaderboardUser" style="margin:10px; transition: .5s">
+                                        <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <img class="img-fluid" src="{{url('./images/' . $riflers->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <h5>{{$riflers->name}}</h5>
+                                                    <strong>Point: {{$riflers->point}}</strong>
+                                                    <br>     
+                                                    <strong>
+                                                        @if ($riflers->team == "")
+                                                            Team: -
+                                                        @else
+                                                            Team: {{$riflers->team}}
+                                                        @endif
+                                                    </strong>         
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </a>
-                                <strong>{{$riflers->point}}</strong>
-
-                                <br>
+                            </div>
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="leader">
                             @foreach ($leader as $leaders)
-
-                                <a href="{{route('user.detail',$leaders->id)}}" style="color: black">
-                                    {{$leaders->name}}
+                            <div class="row">
+                                <a id="leaderBoardName" href="{{route('user.detail',$leaders->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                    <div class="card leaderboardUser" style="margin:10px; transition: .5s">
+                                        <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <img class="img-fluid" src="{{url('./images/' . $leaders->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <h5>{{$leaders->name}}</h5>
+                                                    <strong>Point: {{$leaders->point}}</strong>
+                                                    <br>     
+                                                    <strong>
+                                                        @if ($leaders->team == "")
+                                                            Team: -
+                                                        @else
+                                                            Team: {{$leaders->team}}
+                                                        @endif
+                                                    </strong>         
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
                                 </a>
-                                <strong>{{$leaders->point}}</strong>
-
-                                <br>
+                            </div>
                             @endforeach
                         </div>
 
