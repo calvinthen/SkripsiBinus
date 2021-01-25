@@ -13,11 +13,12 @@
                     @csrf
 
                     <div class="card-body">
-                     <div class="form-group row">
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="input @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Input password with atleast 8 characters">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -27,33 +28,38 @@
                             </div>
                         </div>
 
+
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="input" name="password_confirmation" required autocomplete="new-password" placeholder="Input your confirm password ">
                             </div>
                         </div>
-
 
                         <div class="form-group row">
                             <label for="game_prefer" class="col-md-4 col-form-label text-md-right">{{ __('Game prefered') }}</label>
 
                             <div class="col-md-6">
-                                <select name="game_prefer" id="game_prefer" class="form-control" name="game_prefer" value="{{ old('game_prefer') }}" autocomplete="game_prefer" autofocus required>
+                                <select name="game_prefer" id="game_prefer" class="input @error('game_prefer') is-invalid @enderror" name="game_prefer" value="{{ old('game_prefer') }}" autocomplete="game_prefer" autofocus required>
                                     <option value="">- Select -</option>
                                     <option value="csgo">Counter Strike: Global Offensive</option>
                                     <option value="dota">DotA 2</option>
                                 </select>
+
+                                @error('game_prefer')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
-
 
                         <div class="form-group row">
                             <label for="role_game" class="col-md-4 col-form-label text-md-right">{{ __('Role in game') }}</label>
 
                             <div class="col-md-6">
-                                <select name="role_game" id="role_game" class="form-control">
+                                <select name="role_game" id="role_game" class="input">
                                     <option value="">- Select -</option>
                                 </select>
                             </div>
@@ -61,10 +67,10 @@
 
 
                         <div class="form-group row">
-                            <label for="ingame_id" class="col-md-4 col-form-label text-md-right">{{ __('Game ID') }}</label>
+                            <label for="ingame_id" id="ingame_id_label" class="col-md-4 col-form-label text-md-right">{{ __('Game ID') }}</label>
 
                             <div class="col-md-6">
-                                <input id="ingame_id" type="text" class="form-control @error('ingame_id') is-invalid @enderror" name="ingame_id" value="{{ old('ingame_id') }}" required autocomplete="ingame_id" autofocus>
+                                <input id="ingame_id" type="text" class="input @error('ingame_id') is-invalid @enderror" name="ingame_id" value="{{ old('ingame_id') }}" autocomplete="ingame_id" autofocus placeholder="input your game ID">
 
                                 @error('ingame_id')
                                     <span class="invalid-feedback" role="alert">
@@ -111,13 +117,14 @@
         if (val == "csgo")
         {
             $("#role_game").html("<option value='entry fragger'> Entry Fragger </option> <option value='support csgo'> Support </option> <option value='lurker'> Lurker </option> <option value='riflers'> Riflers </option> <option value='leader'> Leader </option>");
+            document.getElementById('ingame_id_label').innerHTML = 'CSGO Game ID';
         }
         else if (val == "dota")
         {
             $("#role_game").html("<option value='carry'> Carry </option> <option value='Midlaner'>Midlaner</option> <option value='offlaner'> Offlaner </option> <option value='support'> Support </option> <option value='hard support'> Hard Support </option>");
-
+            document.getElementById('ingame_id_label').innerHTML = 'DotA Game ID';
         }
     });
 
     });
-</script>
+    </script>

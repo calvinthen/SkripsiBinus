@@ -27,7 +27,7 @@ class AdminController extends Controller
     public function report()
     {
 
-        $report = DB::table('reports')->get();
+        $report = DB::table('reports')->orderByDesc('created_at')->get();
 
         return view('auth.admin.report')->with('report',$report);
     }

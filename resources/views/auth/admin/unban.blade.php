@@ -19,7 +19,7 @@
                 </li>
 
                 <li>
-                    <a href="{{route('admin.report')}}"><i class="fa fa-edit"></i> Review Report</a>
+                    <a href="{{route('admin.report')}}"><i class="fa fa-edit"></i> User Reports</a>
                 </li>
 
 
@@ -42,7 +42,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="page-header" style="text-align: center">
-                    List User get Banned
+                    List User Banned
                 </h1>
 
                 <table class="table">
@@ -51,7 +51,7 @@
                         <th scope="col">No.</th>
                         <th scope="col">User ID</th>
                         <th scope="col">Username</th>
-                        <th scope="col">Banned Days</th>
+                        <th scope="col">Banned Days Remaining</th>
                         <th scope="col">Action</th>
                       </tr>
 
@@ -59,6 +59,7 @@
                         @foreach ($userBanned as $userBanneds)
                         @php
                             $reportMilikUser = DB::table('reports')->where(['receiver_id' => $userBanneds->id],['validation' => 'checked'])->get();
+                            $sisaHariBanned = Carbon\Carbon::now()->diffInDays(Carbon\Carbon::parse($userBanneds->banned_until));
                         @endphp
                         <tr>
                             <td>{{$number}}</td>
@@ -69,7 +70,7 @@
                             </td>
 
                             <td>
-                                {{$userBanneds->banned_until}}
+                                {{$sisaHariBanned}} Days Left
                             </td>
 
                             <td>
@@ -96,7 +97,7 @@
                                                 <p style="color: red">
                                                     {{$reportMilikUsers->report}}
                                                 </p>
-                                                <br>
+
                                     @endforeach
                                 </div>
                                 <div class="modal-footer" style="text-align: center">

@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Chat Team : <strong> {{$team->team_name}}</strong> </div>
+                <div class="card-header"> Team Message : <strong> {{$team->team_name}}</strong> </div>
 
                 <div class="card-body chat-overflow" id ="chat">
 

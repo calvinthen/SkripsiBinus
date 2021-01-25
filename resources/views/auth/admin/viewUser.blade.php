@@ -28,7 +28,7 @@
                 </li>
 
                 <li>
-                    <a href="{{route('admin.report')}}"><i class="fa fa-edit"></i> Review Report</a>
+                    <a href="{{route('admin.report')}}"><i class="fa fa-edit"></i> User Reports</a>
                 </li>
 
             </ul>

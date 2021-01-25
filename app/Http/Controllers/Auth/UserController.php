@@ -85,7 +85,7 @@ class UserController extends Controller
         $user = DB::table('users')->where('name','LIKE' , '%' . $searchName . '%')->get();
 
 
-        return view('search.index')->with('searchName',$searchName)->with('user',$user);
+        return view('search.index')->with('allUser',$user)->with('orangYangDicari',$searchName);
     }
 
     public function chat_friend_index($id)

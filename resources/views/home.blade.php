@@ -104,6 +104,13 @@
   .parallelogramHome3:hover{
     height: 40px;
   }
+
+  .leaderboardClass{
+      transition: .5s;
+  }
+  .leaderboardClass:hover{
+      transform:scale(1.1);
+  }
 </style>
 @section('content')
 @php
@@ -142,24 +149,39 @@
                 </div>
 
             </div>
-
+            @php
+                $ranking = 1;
+            @endphp
             @foreach ($leaderboardByRole as $leaderboard)
-                <div class="card" style="width:90%; background: #292e36; color: #eeeeee; margin-top:5px;">
+                <div class="card leaderboardClass" style="width:90%; background: #292e36; color: #eeeeee; margin-top:5px;">
+                <a id="leaderBoardName" href="{{route('user.detail',$leaderboard->id)}}" style="text-decoration: none; color:#eeeeee; transition: .5s;">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-2">
                                 <img class="img-fluid" src="{{url('./images/' . $leaderboard->photo_profile)}}" style="max-width:50px; height:auto; border: 1px solid #222831; border-radius: 25px;">
                             </div>
 
-                            <div class="col-sm-8">
+                            <div class="col-sm-7">
                                 {{-- HREF KE ORANG YANG DIREVIEW --}}
-                                <a id="leaderBoardName" href="{{route('user.detail',$leaderboard->id)}}" style="text-decoration: none; color:#eeeeee; transition: .5s;">
                                     <h4>{{$leaderboard->name}}</h4>
-                                </a>
+                            </div>
+                            <div class="col-sm-3">
+                                {{-- HREF KE ORANG YANG DIREVIEW --}}
+                                @if ($ranking == 1)
+                                    <img class="img-fluid" src="{{url('./images/asset/angka 1.png')}}" style="max-width:50px; height:auto;">
+                                @elseif ($ranking == 2)
+                                    <img class="img-fluid" src="{{url('./images/asset/angka 2.png')}}" style="max-width:50px; height:auto;">
+                                @elseif ($ranking == 3)
+                                    <img class="img-fluid" src="{{url('./images/asset/angka 3.png')}}" style="max-width:50px; height:auto;">
+                                @endif
                             </div>
                         </div>
                     </div>
+                </a>
                 </div>
+            @php
+                $ranking = $ranking + 1;
+            @endphp
             @endforeach
             <br>
             <a id="seeMore" href="{{route('home.leaderboard')}}" style="margin-top:5px; transition: .5s; color: #eeeeee">
@@ -294,7 +316,7 @@
     </div>
 
     <div id="rightColID" class="col-sm-2">
-        <div class="row">
+        <div class="row" id="teamCol">
             @if (Auth::user()->team_id == NULL)
                 <div class="col-sm-12">
                     {{-- CREATE TEAM --}}
@@ -317,7 +339,7 @@
                     </a>
                 </div>
 
-                    
+
 
             @elseif(Auth::user()->team_id != NULL)
             <div class="row">

@@ -8,6 +8,13 @@
 
     $reviews = DB::table('reviews')->where('receiver_id', 'LIKE', Auth::user()->id)->get();
 
+    $totalReviewer = DB::table('reviews')->where('receiver_id','LIKE', Auth::user()->id)->count();
+
+    $scoreRatingUser = 0;
+
+    foreach ($reviews as $review){
+        $scoreRatingUser += $review->score;
+    }
 @endphp
 <style>
     #edit{
@@ -61,8 +68,6 @@
         transform: translate(-50%, -50%);
         text-align: center;
     }
-
-
 </style>
 @section('content')
 <div class="container">
@@ -80,9 +85,23 @@
                             <h3>{{$users->name}}</h3>
                             @php
                                 $date = date_create($users->created_at);
+                                $totalReviewBaik = DB::table('reviews')->where(['receiver_id' => Auth::user()->id , 'like_or_dislike' => 'like'])->count();
+                                $totalReviewBuruk = DB::table('reviews')->where(['receiver_id' => Auth::user()->id , 'like_or_dislike' => 'dislike'])->count();
                             @endphp
                             <h5>Joined since {{date_format($date, "F j, Y")}}</h5>
-                            <h5></h5>
+                            <h5>Reviews</h5>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <i class="fa fa-thumbs-up" style="font-size: 30px;color: greenyellow;"></i> <h3> {{$totalReviewBaik}}</h3>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <i class="fa fa-thumbs-down" style="font-size: 30px;color: red;"></i> <h3> {{$totalReviewBuruk}}</h3>
+                                </div>
+                            </div>
+
+
                         </div>
                         <div class="col-sm-2">
                             <a id="edit" class="float-right" href="{{route('profile.edit')}}"> <i class="fa fa-cog" style="font-size: 30px; transition: 0.5s" ></i> </a>
@@ -104,13 +123,13 @@
         <div class="col-sm-8">
             <div class="tab">
                 <button class="tablinks" onclick="openCity(event, 'Overview')">Overview</button>
-                <button class="tablinks" onclick="openCity(event, 'Team')">Team</button>
+                <button class="tablinks" onclick="openCity(event, 'Team')" style="border-left: 1px black solid">Team</button>
             </div>
 
             <div id="Team" class="tabcontent">
                 @if (Auth::user()->team_id == NULL)
                     <h3>You are not in any team</h3>
-                    <a class="btn btn-customWhite" href="{{route('team.create_team_index')}}" style="text-decoration: none;">
+                    <a class="btn btn-customWhite" href="{{route('team.create_team_index')}}" style="text-decoration: none;color: black;">
                         Create Team
                     </a>
                     <a class="btn btn-customBlack" href="{{route('user.find_team')}}" style="text-decoration: none;">
@@ -188,6 +207,19 @@
                     <div class="col-sm-8">
                         <strong>
                             {{Auth::user()->role_game}}
+                        </strong>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h5>Total points</h5>
+                    </div>
+                    <div class="col-sm-1 titik2">
+                        :
+                    </div>
+                    <div class="col-sm-8">
+                        <strong>
+                            {{Auth::user()->point}} of {{$totalReviewer}} review(s)
                         </strong>
                     </div>
                 </div>

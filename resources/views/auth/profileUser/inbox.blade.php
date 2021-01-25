@@ -39,9 +39,9 @@
                                 </tr>
 
                               <!-- Modal -->
-                                <div class="modal fade" id="readMailModal{{$mails->id}}" tabindex="-1" role="dialog" aria-labelledby="readMailModal{{$mails->id}}" aria-hidden="true" style="color: black">
+                                <div class="modal fade" id="readMailModal{{$mails->id}}" tabindex="-1" role="dialog" aria-labelledby="readMailModal{{$mails->id}}" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
+                                    <div class="modal-content" style="background: #292e36; color: #eeeeee">
                                         <div class="modal-header">
                                         <h5 class="modal-title" id="readMailModal{{$mails->id}}">
                                             @if ($mails->mail_type == "invite_team")
@@ -52,7 +52,7 @@
                                                 <h5>Request Friend</h5>
                                             @endif
                                         </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                         </div>

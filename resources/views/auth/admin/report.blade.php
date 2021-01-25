@@ -28,7 +28,7 @@
                 </li>
 
                 <li>
-                    <a href="{{route('admin.report')}}" class="active-menu"><i class="fa fa-edit"></i> Review Report</a>
+                    <a href="{{route('admin.report')}}" class="active-menu"><i class="fa fa-edit"></i>  User Reports</a>
                 </li>
 
             </ul>
@@ -59,6 +59,7 @@
                           <th scope="col">No.</th>
                           <th scope="col">Report ID</th>
                           <th scope="col">User reported</th>
+                          <th scope="col"> Status report </th>
                           <th scope="col">Report by</th>
                           <th scope="col">Action</th>
                         </tr>
@@ -82,6 +83,14 @@
 
                                 <td>
                                     {{$userYangKenaReport->name}}
+                                </td>
+
+                                <td>
+                                    @if ($reports->validation == "not_checked")
+                                    <h5 style="color: red"> Not Confirm</h5>
+                                    @elseif($reports->validation == "checked")
+                                        <h5 style="color: green"> Confirm</h5>
+                                    @endif
                                 </td>
 
                                 <td>

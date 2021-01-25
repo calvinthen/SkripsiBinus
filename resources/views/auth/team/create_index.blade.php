@@ -15,27 +15,31 @@
                     <form method="POST" action="{{route('team.create_team')}}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
-                        <div class="form-group {{ $errors->has('team_name') ? ' has-error' : '' }}">
-                          <label for="team_name"> <strong>Team name</strong> </label>
-                          <input type="text" class="form-control" id="team_name" name="team_name" placeholder="input your team name" value="{{ old('team_name') }}" required autofocus>
 
+                        <div class="form-group {{ $errors->has('team_name') ? ' has-error' : '' }}">
+                            <label for="team_name">{{ __('Team name :') }}</label>
+
+                            <div>
+                                <input id="team_name" type="text" class="input @error('team_name') is-invalid @enderror" name="team_name" value="{{ old('team_name') }}" autocomplete="team_name" placeholder="Input your team name" autofocus>
                                 @if ($errors->has('team_name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('team_name') }}</strong>
-                                    </span>
-                                @endif
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('team_name') }}</strong>
+                                </span>
+                            @endif
+                            </div>
                         </div>
                         <br>
 
-                         <!-- BUAT EDIT FOTO PROFILE -->
-                         <div class="form-group {{ $errors->has('uploadFoto') ? ' has-error' : '' }}">
-                            <label for="uploadFoto"><strong>Upload Foto : </strong></label>
-                            <input type="file" id="uploadFoto" name="uploadFoto" class="form-control" value="{{ old('uploadFoto') }}" required autofocus >
+                        <div class="form-group {{ $errors->has('uploadFoto') ? ' has-error' : '' }}">
+                            <label for="uploadFoto" class="col-form-label">{{ __('Upload Foto :') }}</label>
+                            <div>
+                                <input id="uploadFoto" type="file" class="input @error('uploadFoto') is-invalid @enderror" name="uploadFoto" value="{{ old('uploadFoto') }}" autocomplete="uploadFoto" autofocus>
                                 @if ($errors->has('uploadFoto'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('uploadFoto') }}</strong>
                                     </span>
-                                @endif
+                            @endif
+                            </div>
                         </div>
                         <br>
 

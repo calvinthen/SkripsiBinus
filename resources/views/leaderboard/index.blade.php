@@ -77,157 +77,242 @@
                     <div class="tab-content tab-sub-buat-dota" id="tab-sub-buat-dota">
                         <br>
                         <div role="tabpanel" class="tab-pane active" id="carry">
+                            @php
+                                $ranking = 1;
+                            @endphp
                             @foreach ($carry as $carries)
                             <div class="row">
-                                <a id="leaderBoardName" href="{{route('user.detail',$carries->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                <a id="leaderBoardName" href="{{route('user.detail',$carries->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">
                                     <div class="card leaderboardUser" style="margin:10px; transition: .5s">
                                         <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <img class="img-fluid" src="{{url('./images/' . $carries->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
                                                 </div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-7">
                                                     <h5>{{$carries->name}}</h5>
                                                     <strong>Point: {{$carries->point}}</strong>
-                                                    <br>     
+                                                    <br>
                                                     <strong>
                                                         @if ($carries->team == "")
                                                             Team: -
                                                         @else
                                                             Team: {{$carries->team}}
                                                         @endif
-                                                    </strong>         
+                                                    </strong>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @if ($ranking == 1)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 1.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 2)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 2.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 3)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 3.png')}}" style="max-width:50px; height:auto;">
+                                                    @else
+                                                        <h3 class="float-right">{{$ranking}}</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </a>
                                 </div>
+                            @php
+                                $ranking = $ranking + 1;
+                            @endphp
                             @endforeach
 
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="midlaner">
+                            @php
+                                $ranking = 1;
+                            @endphp
                             @foreach ($midlaner as $midlaners)
                                 <div class="row">
-                                <a id="leaderBoardName" href="{{route('user.detail',$midlaners->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                <a id="leaderBoardName" href="{{route('user.detail',$midlaners->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">
                                     <div class="card leaderboardUser" style="margin:10px; transition: .5s">
                                         <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <img class="img-fluid" src="{{url('./images/' . $midlaners->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
                                                 </div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-7">
                                                     <h5>{{$midlaners->name}}</h5>
                                                     <strong>Point: {{$midlaners->point}}</strong>
-                                                    <br>     
+                                                    <br>
                                                     <strong>
                                                         @if ($midlaners->team == "")
                                                             Team: -
                                                         @else
                                                             Team: {{$midlaners->team}}
                                                         @endif
-                                                    </strong>         
+                                                    </strong>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @if ($ranking == 1)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 1.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 2)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 2.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 3)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 3.png')}}" style="max-width:50px; height:auto;">
+                                                    @else
+                                                        <h3 class="float-right">{{$ranking}}</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </a>
                                 </div>
+                            @php
+                                $ranking = $ranking + 1;
+                            @endphp
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="offlaner">
+                            @php
+                                $ranking = 1;
+                            @endphp
                             @foreach ($offlaner as $offlaners)
                             <div class="row">
-                                <a id="leaderBoardName" href="{{route('user.detail',$offlaners->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                <a id="leaderBoardName" href="{{route('user.detail',$offlaners->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">
                                     <div class="card leaderboardUser" style="margin:10px; transition: .5s">
                                         <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <img class="img-fluid" src="{{url('./images/' . $offlaners->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
                                                 </div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-7">
                                                     <h5>{{$offlaners->name}}</h5>
                                                     <strong>Point: {{$offlaners->point}}</strong>
-                                                    <br>     
+                                                    <br>
                                                     <strong>
                                                         @if ($offlaners->team == "")
                                                             Team: -
                                                         @else
                                                             Team: {{$offlaners->team}}
                                                         @endif
-                                                    </strong>         
+                                                    </strong>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @if ($ranking == 1)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 1.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 2)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 2.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 3)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 3.png')}}" style="max-width:50px; height:auto;">
+                                                    @else
+                                                        <h3 class="float-right">{{$ranking}}</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </a>
                             </div>
+                            @php
+                                $ranking = $ranking + 1;
+                            @endphp
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="support">
+                            @php
+                                $ranking = 1;
+                            @endphp
                             @foreach ($support as $supports)
                             <div class="row">
-                                <a id="leaderBoardName" href="{{route('user.detail',$supports->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                <a id="leaderBoardName" href="{{route('user.detail',$supports->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">
                                     <div class="card leaderboardUser" style="margin:10px; transition: .5s">
                                         <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <img class="img-fluid" src="{{url('./images/' . $supports->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
                                                 </div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-7">
                                                     <h5>{{$supports->name}}</h5>
                                                     <strong>Point: {{$supports->point}}</strong>
-                                                    <br>     
+                                                    <br>
                                                     <strong>
                                                         @if ($supports->team == "")
                                                             Team: -
                                                         @else
                                                             Team: {{$supports->team}}
                                                         @endif
-                                                    </strong>         
+                                                    </strong>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @if ($ranking == 1)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 1.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 2)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 2.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 3)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 3.png')}}" style="max-width:50px; height:auto;">
+                                                    @else
+                                                        <h3 class="float-right">{{$ranking}}</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </a>
                             </div>
+                            @php
+                                $ranking = $ranking + 1;
+                            @endphp
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="hardsupport">
+                            @php
+                                $ranking = 1;
+                            @endphp
                             @foreach ($hardsupport as $hardsupports)
                             <div class="row">
-                                <a id="leaderBoardName" href="{{route('user.detail',$hardsupports->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                <a id="leaderBoardName" href="{{route('user.detail',$hardsupports->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">
                                     <div class="card leaderboardUser" style="margin:10px; transition: .5s">
                                         <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <img class="img-fluid" src="{{url('./images/' . $hardsupports->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
                                                 </div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-7">
                                                     <h5>{{$hardsupports->name}}</h5>
                                                     <strong>Point: {{$hardsupports->point}}</strong>
-                                                    <br>     
+                                                    <br>
                                                     <strong>
                                                         @if ($hardsupports->team == "")
                                                             Team: -
                                                         @else
                                                             Team: {{$hardsupports->team}}
                                                         @endif
-                                                    </strong>         
+                                                    </strong>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @if ($ranking == 1)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 1.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 2)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 2.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 3)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 3.png')}}" style="max-width:50px; height:auto;">
+                                                    @else
+                                                        <h3 class="float-right">{{$ranking}}</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </a>
                             </div>
+                            @php
+                                $ranking = $ranking + 1;
+                            @endphp
                             @endforeach
                         </div>
 
@@ -272,156 +357,241 @@
                     <div class="tab-content tab-sub-buat-csgo" id="tab-sub-buat-csgo" style="display: none">
                         <br>
                         <div role="tabpanel" class="tab-pane active" id="entry">
+                            @php
+                                $ranking = 1;
+                            @endphp
                             @foreach ($entry as $entries)
                                 <div class="row">
-                                <a id="leaderBoardName" href="{{route('user.detail',$entries->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                <a id="leaderBoardName" href="{{route('user.detail',$entries->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">
                                     <div class="card leaderboardUser" style="margin:10px; transition: .5s">
                                         <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <img class="img-fluid" src="{{url('./images/' . $entries->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
                                                 </div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-7">
                                                     <h5>{{$entries->name}}</h5>
                                                     <strong>Point: {{$entries->point}}</strong>
-                                                    <br>     
+                                                    <br>
                                                     <strong>
                                                         @if ($entries->team == "")
                                                             Team: -
                                                         @else
                                                             Team: {{$entries->team}}
                                                         @endif
-                                                    </strong>         
+                                                    </strong>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @if ($ranking == 1)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 1.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 2)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 2.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 3)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 3.png')}}" style="max-width:50px; height:auto;">
+                                                    @else
+                                                        <h3 class="float-right">{{$ranking}}</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </a>
                                 </div>
+                            @php
+                                $ranking++;
+                            @endphp
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="supportCSGO">
+                            @php
+                                $ranking = 1;
+                            @endphp
                             @foreach ($supportCSGO as $supportCSGOs)
                             <div class="row">
-                                <a id="leaderBoardName" href="{{route('user.detail',$supportCSGOs->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                <a id="leaderBoardName" href="{{route('user.detail',$supportCSGOs->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">
                                     <div class="card leaderboardUser" style="margin:10px; transition: .5s">
                                         <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <img class="img-fluid" src="{{url('./images/' . $supportCSGOs->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
                                                 </div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-7">
                                                     <h5>{{$supportCSGOs->name}}</h5>
                                                     <strong>Point: {{$supportCSGOs->point}}</strong>
-                                                    <br>     
+                                                    <br>
                                                     <strong>
                                                         @if ($supportCSGOs->team == "")
                                                             Team: -
                                                         @else
                                                             Team: {{$supportCSGOs->team}}
                                                         @endif
-                                                    </strong>         
+                                                    </strong>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @if ($ranking == 1)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 1.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 2)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 2.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 3)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 3.png')}}" style="max-width:50px; height:auto;">
+                                                    @else
+                                                        <h3 class="float-right">{{$ranking}}</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </a>
                             </div>
+                            @php
+                                $ranking++;
+                            @endphp
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="lurker">
+                            @php
+                                $ranking = 1;
+                            @endphp
                             @foreach ($lurker as $lurkers)
                             <div class="row">
-                                <a id="leaderBoardName" href="{{route('user.detail',$lurkers->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                <a id="leaderBoardName" href="{{route('user.detail',$lurkers->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">
                                     <div class="card leaderboardUser" style="margin:10px; transition: .5s">
                                         <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <img class="img-fluid" src="{{url('./images/' . $lurkers->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
                                                 </div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-7">
                                                     <h5>{{$lurkers->name}}</h5>
                                                     <strong>Point: {{$lurkers->point}}</strong>
-                                                    <br>     
+                                                    <br>
                                                     <strong>
                                                         @if ($lurkers->team == "")
                                                             Team: -
                                                         @else
                                                             Team: {{$lurkers->team}}
                                                         @endif
-                                                    </strong>         
+                                                    </strong>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @if ($ranking == 1)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 1.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 2)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 2.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 3)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 3.png')}}" style="max-width:50px; height:auto;">
+                                                    @else
+                                                        <h3 class="float-right">{{$ranking}}</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </a>
                             </div>
+                            @php
+                                $ranking++;
+                            @endphp
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="riflers">
+                            @php
+                                $ranking = 1;
+                            @endphp
                             @foreach ($rifler as $riflers)
                             <div class="row">
-                                <a id="leaderBoardName" href="{{route('user.detail',$riflers->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                <a id="leaderBoardName" href="{{route('user.detail',$riflers->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">
                                     <div class="card leaderboardUser" style="margin:10px; transition: .5s">
                                         <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <img class="img-fluid" src="{{url('./images/' . $riflers->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
                                                 </div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-7">
                                                     <h5>{{$riflers->name}}</h5>
                                                     <strong>Point: {{$riflers->point}}</strong>
-                                                    <br>     
+                                                    <br>
                                                     <strong>
                                                         @if ($riflers->team == "")
                                                             Team: -
                                                         @else
                                                             Team: {{$riflers->team}}
                                                         @endif
-                                                    </strong>         
+                                                    </strong>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @if ($ranking == 1)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 1.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 2)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 2.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 3)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 3.png')}}" style="max-width:50px; height:auto;">
+                                                    @else
+                                                        <h3 class="float-right">{{$ranking}}</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </a>
                             </div>
+                            @php
+                                $ranking++;
+                            @endphp
                             @endforeach
                         </div>
 
 
                         <div role="tabpanel" class="tab-pane" id="leader">
+                            @php
+                                $ranking = 1;
+                            @endphp
                             @foreach ($leader as $leaders)
                             <div class="row">
-                                <a id="leaderBoardName" href="{{route('user.detail',$leaders->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">   
+                                <a id="leaderBoardName" href="{{route('user.detail',$leaders->id)}}" style="width:100%; text-decoration: none; color:#eeeeee;">
                                     <div class="card leaderboardUser" style="margin:10px; transition: .5s">
                                         <div class="card-body" style="background: #272b31; border: 1px solid #393e46">
                                             <div class="row">
                                                 <div class="col-sm-2">
                                                     <img class="img-fluid" src="{{url('./images/' . $leaders->photo_profile)}}" style="max-width:100px; height:100px; border: 1px solid #222831; border-radius: 50px;">
                                                 </div>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-7">
                                                     <h5>{{$leaders->name}}</h5>
                                                     <strong>Point: {{$leaders->point}}</strong>
-                                                    <br>     
+                                                    <br>
                                                     <strong>
                                                         @if ($leaders->team == "")
                                                             Team: -
                                                         @else
                                                             Team: {{$leaders->team}}
                                                         @endif
-                                                    </strong>         
+                                                    </strong>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    @if ($ranking == 1)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 1.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 2)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 2.png')}}" style="max-width:50px; height:auto;">
+                                                    @elseif ($ranking == 3)
+                                                        <img class="img-fluid float-right" src="{{url('./images/asset/angka 3.png')}}" style="max-width:50px; height:auto;">
+                                                    @else
+                                                        <h3 class="float-right">{{$ranking}}</h3>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </a>
                             </div>
+                            @php
+                                $ranking++;
+                            @endphp
                             @endforeach
                         </div>
 

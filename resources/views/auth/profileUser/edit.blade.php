@@ -16,47 +16,75 @@
                         <div class="row">
 
                             <!-- BUAT EDIT FOTO PROFILE -->
+
                             <div class="form-group col-md-12">
-                                <label for="uploadFoto"><strong>Upload Foto : </strong></label>
-                                <input type="file" id="uploadFoto" name="uploadFoto" class="form-control">
+                                <label for="uploadFoto" class="col-form-label">{{ __('Upload Foto :') }}</label>
+                                <div>
+                                    <input id="uploadFoto" type="file" class="input @error('uploadFoto') is-invalid @enderror" name="uploadFoto" value="{{ old('uploadFoto') }}" autocomplete="uploadFoto" autofocus>
+                                    @error('uploadFoto')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
+
                             <br>
 
+
                             <div class="form-group col-md-12">
-                                <label for="changeName"><strong>Change name : </strong></label>
-                                <input type="text" id="changeName" name="changeName" class="form-control">
+                                <label for="changeName" class="col-form-label">{{ __('Change Name :') }}</label>
+
+                                <div>
+                                    <input id="changeName" type="text" class="input @error('changeName') is-invalid @enderror" name="changeName" value="{{ old('changeName') }}" autocomplete="changeName" placeholder="Input your name" autofocus>
+                                    @error('changeName')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="form-group col-md-12">
-                                <label for="game_prefer" class="col-form-label text-md-right"><strong>{{ __('Game prefered') }}</strong> </label>
+                                <label for="game_prefer">{{ __('Game prefered') }}</label>
 
-                                <div class="">
-                                    <select name="game_prefer" id="game_prefer" class="form-control">
+                                <div>
+                                    <select name="game_prefer" id="game_prefer" class="input @error('game_prefer') is-invalid @enderror" name="game_prefer" value="{{ old('game_prefer') }}" autocomplete="game_prefer" autofocus>
                                         <option value="">- Select -</option>
                                         <option value="csgo">Counter Strike: Global Offensive</option>
                                         <option value="dota">DotA 2</option>
                                     </select>
+
+                                    @error('game_prefer')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="form-group col-md-12">
-                                <label for="role_game" class="col-form-label text-md-right"> <strong>{{ __('Role in game') }}</strong></label>
+                                <label for="role_game" class="">{{ __('Role in game') }}</label>
 
-                                <div class="">
-                                    <select name="role_game" id="role_game" class="form-control">
+                                <div>
+                                    <select name="role_game" id="role_game" class="input">
                                         <option value="">- Select -</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group col-md-12">
-                                <label for="ingame_id" id="ingame_id_label" class="col-form-label text-md-right"><strong>{{ __('Game ID') }}</strong></label>
+                                <label for="ingame_id" id="ingame_id_label">{{ __('Game ID') }}</label>
 
-                                <div class="">
-                                    <input id="ingame_id" type="text" class="form-control" name="ingame_id" value="{{ old('ingame_id') }}" autofocus>
+                                <div >
+                                    <input id="ingame_id" type="text" class="input @error('ingame_id') is-invalid @enderror" name="ingame_id" value="{{ old('ingame_id') }}" autocomplete="ingame_id" autofocus placeholder="input your game ID">
 
+                                    @error('ingame_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
-
                             </div>
 
 

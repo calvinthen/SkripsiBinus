@@ -43,14 +43,14 @@ class FriendController extends Controller
 
         DB::table('inboxes')->where('id','LIKE',$mailID)->update(['mail_readed' => "readed"]);
 
-        return redirect()->back()->with('status_friend_accepted','You both has been add to friendlist database');
+        return redirect()->back()->with('status_friend_accepted','Successfully add new user to your friend list !');
     }
 
     public function decline_friend($id)
     {
         DB::table('inboxes')->where('id','LIKE',$id)->update(['mail_readed' => "readed"]);
 
-        return redirect()->back()->with('status_decline_friend','You has been decline a user to become your friendlist !');
+        return redirect()->back()->with('status_decline_friend','You had been decline a friend request !');
     }
 
 
