@@ -16,16 +16,10 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            // $table->unsignedInteger('user_id');
-            // $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('leader_id');
             $table->string('team_name');
 
-            // $table->string('first_member_id')->nullable();
-            // $table->string('second_member_id')->nullable();
-            // $table->string('third_member_id')->nullable();
-            // $table->string('forth_member_id')->nullable();
 
             $table->string('game_prefer');
 

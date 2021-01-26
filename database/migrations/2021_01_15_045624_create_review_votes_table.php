@@ -15,11 +15,17 @@ class CreateReviewVotesTable extends Migration
     {
         Schema::create('review_votes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('review_id');
-            $table->bigInteger('user_id');
+
+            $table->bigInteger('review_id')->nullable()->unsigned();
+            $table->bigInteger('user_id')->nullable()->unsigned();
+
             $table->integer('upvote')->default(0);
             $table->integer('downvote')->default(0);
             $table->timestamps();
+
+            $table->foreign('review_id')->references('id')->on('reviews');
+            $table->foreign('user_id')->references('id')->on('users');
+
         });
     }
 

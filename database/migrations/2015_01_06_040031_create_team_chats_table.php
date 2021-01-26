@@ -15,10 +15,15 @@ class CreateTeamChatsTable extends Migration
     {
         Schema::create('team_chats', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('team_id');
-            $table->bigInteger('sender_id');
+
+            $table->bigInteger('team_id')->nullable()->unsigned();
+            $table->bigInteger('sender_id')->nullable()->unsigned();
             $table->string('chat');
             $table->timestamps();
+
+
+            $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('sender_id')->references('id')->on('users');
         });
     }
 

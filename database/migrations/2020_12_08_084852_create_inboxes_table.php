@@ -16,11 +16,16 @@ class CreateInboxesTable extends Migration
         Schema::create('inboxes', function (Blueprint $table) {
             $table->id();
             $table->string('body')->nullable();
-            $table->string('sender_id');
-            $table->string('receiver_id');
+
+            $table->bigInteger('sender_id')->nullable()->unsigned();
+            $table->bigInteger('receiver_id')->nullable()->unsigned();
+
             $table->string('mail_type');
             $table->string('mail_readed')->default('not_readed');
             $table->timestamps();
+
+            $table->foreign('sender_id')->references('id')->on('users');
+            $table->foreign('receiver_id')->references('id')->on('users');
         });
     }
 

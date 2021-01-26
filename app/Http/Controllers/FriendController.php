@@ -43,14 +43,14 @@ class FriendController extends Controller
 
         DB::table('inboxes')->where('id','LIKE',$mailID)->update(['mail_readed' => "readed"]);
 
-        return redirect()->back()->with('status_friend_accepted','Successfully add new user to your friend list !');
+        return redirect()->back()->with('status_friend_accepted','Successfully added user to your friend list !');
     }
 
     public function decline_friend($id)
     {
         DB::table('inboxes')->where('id','LIKE',$id)->update(['mail_readed' => "readed"]);
 
-        return redirect()->back()->with('status_decline_friend','You had been decline a friend request !');
+        return redirect()->back()->with('status_decline_friend','You have declined the request!');
     }
 
 
@@ -59,7 +59,7 @@ class FriendController extends Controller
         $friendlist = DB::table('friends')->where(['id_user' => Auth::user()->id , 'id_user2' => $id])->delete();
         $friendlist2 = DB::table('friends')->where(['id_user' => $id , 'id_user2' => Auth::user()->id])->delete();
 
-        return redirect()->back()->with('status_friendlist','User has been removed from friendlist !');
+        return redirect()->back()->with('status_friendlist','User has been removed from your friendlist !');
     }
     /**
      * Store a newly created resource in storage.

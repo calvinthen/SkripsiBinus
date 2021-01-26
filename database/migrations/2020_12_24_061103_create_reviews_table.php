@@ -22,6 +22,9 @@ class CreateReviewsTable extends Migration
             $table->bigInteger('vote_id');
             $table->string('body');
             $table->timestamps();
+
+            $table->foreign('reviewer_id')->references('id')->on('users');
+            $table->foreign('receiver_id')->references('id')->on('users');
         });
     }
 

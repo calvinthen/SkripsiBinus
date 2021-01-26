@@ -50,7 +50,7 @@ class AdminController extends Controller
 
         DB::table('users')->where('id','LIKE',$id)->update(['banned_until' => $dateBanned]);
 
-        return redirect()->back()->with('banned_status', 'you has been banned ' . $user->name . ' for ' . $hari . 'Days');
+        return redirect()->back()->with('banned_status', $user->name . ' has been banned for ' . $hari . 'day(s)');
     }
 
     public function banned_index()

@@ -90,7 +90,7 @@ class HomeController extends Controller
 
         );
 
-        return redirect()->back()->with('status','Successfuly Update the information !');
+        return redirect()->back()->with('status','Successfuly updated your information!');
     }
 
     public function leaderboard_index()

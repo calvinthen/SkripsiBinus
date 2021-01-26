@@ -46,7 +46,7 @@ class ReportController extends Controller
             'detail' => $detail,
         ]);
 
-        return redirect()->back()->with('status_report','Report has been sent to admin ! thanks for make our community better !');
+        return redirect()->back()->with('status_report','Report has been sent! Thank you for improving our community!');
     }
 
     /**

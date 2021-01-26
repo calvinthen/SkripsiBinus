@@ -61,7 +61,7 @@ class TeamController extends Controller
 
         if($flagNamaTeamSama >= 1)
         {
-            return redirect()->back()->with('status', 'Nama Team Sudah ada! silahkan gunakan nama lain');
+            return redirect()->back()->with('status', 'Name exists! Please use another one!');
         }
         else if($flagNamaTeamSama == 0)
         {
@@ -181,7 +181,7 @@ class TeamController extends Controller
             $userPenerima = DB::table('users')->where('id','LIKE',$unique_id)->first();
             if($userPenerima->team != NULL)
             {
-                return redirect()->back()->with('status_team_user','You already in a team! cannot join any team anymore.');
+                return redirect()->back()->with('status_team_user','You\'re already in a team!');
             }
             else
             {
@@ -231,7 +231,7 @@ class TeamController extends Controller
         DB::table('inboxes')->where('id','LIKE',$id)->update(['mail_readed' => "readed"]);
 
 
-        return redirect()->back()->with('status_decline_invitation_team','you has been decline team invitation !');
+        return redirect()->back()->with('status_decline_invitation_team','You have declined the invitation!');
     }
 
     public function user_decline_request_team($id)
@@ -239,7 +239,7 @@ class TeamController extends Controller
         DB::table('inboxes')->where('id','LIKE',$id)->update(['mail_readed' => "readed"]);
 
 
-        return redirect()->back()->with('status_decline_user_as_member','you has been decline player to become your member!');
+        return redirect()->back()->with('status_decline_user_as_member','You have declined the request!');
     }
 
     public function quit_team()

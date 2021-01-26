@@ -25,7 +25,7 @@ class InboxController extends Controller
     public function create_invitation_team($id)
     {
         Inbox::create([
-            'body' =>  "Hi ! i want to invite you to our teams please click button 'JOIN TEAM' in the below to become ours member !",
+            'body' =>  "Hi, I want to invite you to our team! Please click 'JOIN TEAM' below to become our member!",
             'sender_id' => Auth::user()->id,
             'receiver_id' => $id,
             'mail_type' => "invite_team",
@@ -41,13 +41,13 @@ class InboxController extends Controller
         $teamLeaderID = $teamToRequest->leader_id;
 
         Inbox::create([
-            'body' =>  "Hi! i want to join your team , can you maybe accept me as a member ?",
+            'body' =>  "Hi! i want to join your team , can you accept me as a member?",
             'sender_id' => Auth::user()->id,
             'receiver_id' => $teamLeaderID,
             'mail_type' => "request_team",
         ]);
 
-        return redirect()->back()->with('status','Request to this team has been sent !');
+        return redirect()->back()->with('status','Request has been sent !');
     }
 
     public function request_friend($id)
@@ -62,7 +62,7 @@ class InboxController extends Controller
             'mail_type' => "request_friend",
         ]);
 
-        return redirect()->back()->with('status','your friend request has been sent!');
+        return redirect()->back()->with('status','Your friend request has been sent!');
     }
 
     /**

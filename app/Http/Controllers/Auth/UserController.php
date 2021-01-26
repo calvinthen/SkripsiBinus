@@ -135,11 +135,11 @@ class UserController extends Controller
 
         if(strcmp($request->get('oldPassword'), $request->get('password')) == 0)
         {
-            return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different password.");
+            return redirect()->back()->with("error","New Password cannot be same as your current password. Please choose a different one.");
         }
         if(!(strcmp($request->get('password'), $request->get('password_confirmation'))) == 0)
         {
-            return redirect()->back()->with("error","New Password should be same as your confirmed password. Please retype new password.");
+            return redirect()->back()->with("error","New Password should be same as your confirmed password. Please retype the password.");
         }
 
             DB::table('users')->where('id','LIKE',Auth::user()->id)->update(['password' => Hash::make($request->input('password'))]);
