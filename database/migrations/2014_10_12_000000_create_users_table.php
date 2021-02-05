@@ -32,6 +32,8 @@ class CreateUsersTable extends Migration
             $table->string('photo_profile')->default('user.jpg');
 
             $table->timestamp('email_verified_at')->nullable();
+
+            $table->timestamp('banned_started')->nullable();
             $table->timestamp('banned_until')->nullable();
             $table->string('password');
 

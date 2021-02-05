@@ -54,7 +54,7 @@
                         @csrf
 
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="chat" id="chat" placeholder="Send your chat" aria-label="Recipient's username" aria-describedby="basic-addon2" onkeyup="validate(this)">
+                            <input type="text" class="form-control" name="chat" id="chat" placeholder="Send your message" aria-label="Recipient's username" aria-describedby="basic-addon2" onkeyup="validate(this)">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="submit" id="send-chat" name="send-chat" disabled>Send</button>
 

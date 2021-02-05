@@ -42,7 +42,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="page-header" style="text-align: center">
-                    List User Banned
+                    List Banned User
                 </h1>
 
                 <table class="table">
@@ -51,6 +51,7 @@
                         <th scope="col">No.</th>
                         <th scope="col">User ID</th>
                         <th scope="col">Username</th>
+                        <th scope="col">Banned Started</th>
                         <th scope="col">Banned Days Remaining</th>
                         <th scope="col">Action</th>
                       </tr>
@@ -67,6 +68,10 @@
 
                             <td>
                                 {{$userBanneds->name}}
+                            </td>
+
+                            <td>
+                                {{ \Carbon\Carbon::parse($userBanneds->created_at)->format('d/m/Y')}}
                             </td>
 
                             <td>

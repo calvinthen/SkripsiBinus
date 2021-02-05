@@ -111,12 +111,17 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <a class="btn btn-customBlack" data-toggle="modal" data-target="#removeFriendModal" style="color:red; width:45%">
-                                <i class="fa fa-remove" aria-hidden="true"></i>
-                            </a>
-                            <button class="btn btn-customBlack" data-toggle="modal" data-target="#exampleModal" style="color:orange; width:45%">
-                                <i class="fa fa-flag" aria-hidden="true"></i>
-                            </button>
+                            @if($flagFriendlistOrNot == 0 && $flagFriendlistOrNot2 == 0)
+
+                            @else
+                                <a class="btn btn-customBlack" data-toggle="modal" data-target="#removeFriendModal" style="color:red; width:45%">
+                                    <i class="fa fa-remove" aria-hidden="true"></i>
+                                </a>
+                                <button class="btn btn-customBlack" data-toggle="modal" data-target="#exampleModal" style="color:orange; width:45%">
+                                    <i class="fa fa-flag" aria-hidden="true"></i>
+                                </button>
+                            @endif
+
                         </div>
                     </div>
 
@@ -359,6 +364,9 @@
                             $pernahVoting = 1;
                         }
                     }
+
+                    $votingPerLooping = DB::table('review_votes')->where('review_id','LIKE',$review->id)->first();
+
                 @endphp
                 <div class="card" style="width:100%; margin-top:5px">
                     <div class="card-body">
@@ -391,6 +399,14 @@
 
                                     @elseif ($pernahVoting == 1 )
                                         <strong>You already voted for this review !</strong>
+                                        <div class="row">
+                                            <div class="col-sm-6"><i class="fa fa-arrow-up" aria-hidden="true" style="color: lime">{{$votingPerLooping->upvote}}</i></div>
+
+                                            <div class="col-sm-6"><i class="fa fa-arrow-down" aria-hidden="true" style="color: red">{{$votingPerLooping->downvote}}</i></div>
+                                        </div>
+
+
+
                                     @else
                                     <a href="{{route('review.upvote',$review->id)}}" class="btn btn-customBlack float-right" style="color: lime; width: 40%; margin-left: 10px">
                                         <i class="fa fa-arrow-up" aria-hidden="true" style="color: lime"></i>

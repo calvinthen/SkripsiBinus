@@ -57,6 +57,7 @@ class RegisterController extends Controller
             'game_prefer' => ['nullable'],
             'ingame_id' => ['required' , 'unique:users'],
         ]);
+
     }
 
     /**

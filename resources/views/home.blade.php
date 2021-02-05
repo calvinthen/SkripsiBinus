@@ -127,6 +127,10 @@
     $leaderboardByRole = DB::table('users') ->where('game_prefer','LIKE', Auth::user()->game_prefer)
                                             ->where('role_game','LIKE', Auth::user()->role_game)
                                             ->orderByDesc('point')->take(3)->get();
+
+
+    $anggotaTeam = DB::table('users')->where('team_id','LIKE',Auth::user()->team_id)->take(5)->get();
+
 @endphp
 <div class="row">
 
@@ -348,22 +352,50 @@
                     {{-- GET USER DALAM TIM, DIV SQUARENYA GANTI PAKE FOTO TIM MEMBER --}}
                     <center>
                     <div class="row" style="margin-top:20px;">
-                        <div class="col-sm-4">
-                            <div class="square">
-                                <i class="fa fa-plus" style="margin-top:7px" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="square">
-                                <i class="fa fa-plus" style="margin-top:7px" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="square">
-                                <i class="fa fa-plus" style="margin-top:7px" aria-hidden="true"></i>
-                            </div>
-                        </div>
+                        @php
+                            $flagAnggotaTeam = 0;
+                            $kurangAnggota = 5;
+                        @endphp
+                        @foreach ($anggotaTeam as $anggotaTeams)
+                            @php
+                                $flagAnggotaTeam++;
+                                $kurangAnggota--;
+                            @endphp
+
+                            @if ($flagAnggotaTeam <= 3)
+                                <div class="col-sm-4">
+                                    <div class="square">
+                                        <img class="img-fluid" src="{{url('./images/' . $anggotaTeams->photo_profile)}}">
+                                    </div>
+                                </div>
+
+                            @else
+
+                                <div class="col-sm-6" style="margin-top:20px; margin-bottom:20px">
+                                    <div class="square">
+                                        <img class="img-fluid" src="{{url('./images/' . $anggotaTeams->photo_profile)}}">
+                                    </div>
+                                </div>
+
+                                @if ($kurangAnggota == 1)
+                                <div class="col-sm-6"style="margin-top:20px; margin-bottom:20px">
+                                    <div class="square">
+                                        <i class="fa fa-plus" style="margin-top:7px" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+
+                                @endif
+
+
+                            @endif
+
+
+
+
+                        @endforeach
+
                     </div>
+                    @if($kurangAnggota == 2)
                     <div class="row" style="margin-top:20px; margin-bottom:20px">
                         <div class="col-sm-6">
                             <div class="square">
@@ -376,6 +408,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     </center>
                 </div>
             </div>

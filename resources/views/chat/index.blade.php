@@ -60,7 +60,7 @@
                         @csrf
 
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="chat" id="chat" placeholder="Send your chat" aria-label="Recipient's username" aria-describedby="basic-addon2" onkeyup="validate(this)">
+                            <input type="text" class="form-control" name="chat" id="chat" placeholder="Send your message" aria-label="Recipient's username" aria-describedby="basic-addon2" onkeyup="validate(this)">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="submit" name="send-chat" id="send-chat" disabled>Send</button>
                             </div>
@@ -75,27 +75,6 @@
 @endsection
 
 <script>
-    // $(document).ready(function()
-    // {
-    //     $('#send-chat').click(function(e){
-    //         e.preventDefault();
-
-    //         $.ajaxSetup({
-
-    //             headers:
-    //             {
-    //                 'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')
-
-    //             }
-    //         });
-    //         $.ajax({
-
-    //             url: "{{url('home/user/friendlist/{id}/chat/send')}}",
-    //             method: "POST",
-    //             data: {chat: $("#chat").val()},
-    //         })
-    //     });
-    // })
 
     function validate(obj) {
     if (obj.value.length > 0) {

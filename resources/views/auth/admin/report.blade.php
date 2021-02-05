@@ -59,8 +59,8 @@
                           <th scope="col">No.</th>
                           <th scope="col">Report ID</th>
                           <th scope="col">User reported</th>
-                          <th scope="col"> Status report </th>
-                          <th scope="col">Report by</th>
+                          <th scope="col"> Status reported </th>
+                          <th scope="col">Reported by</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -87,9 +87,9 @@
 
                                 <td>
                                     @if ($reports->validation == "not_checked")
-                                    <h5 style="color: red"> Not Confirm</h5>
+                                    <h5 style="color: red"> Not Confirmed</h5>
                                     @elseif($reports->validation == "checked")
-                                        <h5 style="color: green"> Confirm</h5>
+                                        <h5 style="color: green"> Confirmed</h5>
                                     @endif
                                 </td>
 
@@ -117,11 +117,11 @@
                                         <strong>Status :</strong>
                                         @if ($reports->validation == "not_checked")
                                             <p style="color: red">
-                                                Not Confirm
+                                                Not Confirmed
                                             </p>
                                         @elseif($reports->validation == "checked")
                                             <p style="color: green">
-                                                Confirm
+                                                Confirmed
                                             </p>
                                         @endif
                                     </div>

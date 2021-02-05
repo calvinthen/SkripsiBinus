@@ -97,14 +97,19 @@
                     </div>
 
                     @if ($pernahReviewBelum == 0)
-                        <div class="row">
-                            <div class="col-md-12" style="text-align: center">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-customBlack float-right" data-toggle="modal" data-target="#exampleModal">
-                                    Review Player !
-                                </button>
+                        @if ($member->id == Auth::user()->id)
+
+                        @else
+                            <div class="row">
+                                <div class="col-md-12" style="text-align: center">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-customBlack float-right" data-toggle="modal" data-target="#exampleModal">
+                                        Review Player !
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        @endif
+
                     @else
 
                     <div class="row">
