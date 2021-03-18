@@ -12,8 +12,11 @@ class Friend extends Model
 
     protected $fillable = ['user_id','user_id2'];
 
+
     public function Friend()
     {
         return $this->belongsToMany(User::class,'user_id','id');
     }
+
+
 }

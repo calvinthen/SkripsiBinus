@@ -71,7 +71,7 @@
                             </td>
 
                             <td>
-                                {{ \Carbon\Carbon::parse($userBanneds->created_at)->format('d/m/Y')}}
+                                {{ \Carbon\Carbon::parse($userBanneds->banned_started)->format('d/m/Y')}}
                             </td>
 
                             <td>

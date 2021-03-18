@@ -24,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $dates = [
-        'banned_until'
+        'banned_started', 'banned_until',
     ];
 
     /**

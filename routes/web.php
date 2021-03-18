@@ -40,6 +40,7 @@ Route::get('/sign-in/google/redirect','Auth\LoginController@googleRedirect');
 
 //edit profile route ke halamannya
 Route::get('/profile/edit', 'HomeController@edit_user_profile')->name('profile.edit');
+
 //edit profile buat ngedit datanya kedalam database
 Route::post('/profile/{id}/edit/database_insert','Auth\UserController@edit_profile')->name('profile.confirm_edit');
 

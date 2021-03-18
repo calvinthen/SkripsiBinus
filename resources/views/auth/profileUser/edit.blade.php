@@ -89,8 +89,8 @@
 
 
                             <div class="col-md-12" style="text-align: center">
-                                <button class="btn btn-primary" type="submit">
-                                    Confirm
+                                <button type="submit" class="btn btn-customBlack">
+                                    {{ __('Confirm') }}
                                 </button>
                             </div>
 

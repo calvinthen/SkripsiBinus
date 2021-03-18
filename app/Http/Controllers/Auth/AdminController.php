@@ -43,12 +43,15 @@ class AdminController extends Controller
     public function banned_user(Request $request, $id)
     {
         $hari = $request->input('banned');
+        $hariIni = Carbon::now();
 
         $dateBanned = Carbon::now()->addDays($hari);
 
         $user = DB::table('users')->where('id', 'LIKE' , $id)->first();
 
         DB::table('users')->where('id','LIKE',$id)->update(['banned_until' => $dateBanned]);
+
+        DB::table('users')->where('id','LIKE',$id)->update(['banned_started' => $hariIni]);
 
         return redirect()->back()->with('banned_status', $user->name . ' has been banned for ' . $hari . 'day(s)');
     }
